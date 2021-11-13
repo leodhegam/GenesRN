@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
 </head>
 <body>
 <div class="container">
 <div class="login-content">
     <form th:action="@{/cadastrar}" th:object="${usuario}" method="POST">
         <h2 class="title">Cadastro</h2>
-        <div th:if="${session.message}" th:classaappend="${session.message}" class="alert alert-success" role="alert">-->
+        <div th:if="${session.message}" th:classaappend="${session.message}" class="alert alert-success" role="alert">
             <p th:text="${session.message}"></p>
             <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+        </div>
+        <div th:if="${session.messageError}" th:classaappend="${session.messageError}" class="alert alert-danger" role="alert">
+            <p th:text="${session.messageError}"></p>
+            <th:block th:text="${#session.removeAttribute('messageError')}"></th:block>
         </div>
         <div class="input-div one">
             <div class="i">
