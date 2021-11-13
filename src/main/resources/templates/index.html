@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+<div class="login-content">
+    <form th:action="@{/cadastrar}" th:object="${usuario}" method="POST">
+        <h2 class="title">Cadastro</h2>
+        <div th:if="${session.message}" th:classaappend="${session.message}" class="alert alert-success" role="alert">-->
+            <p th:text="${session.message}"></p>
+            <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+        </div>
+        <div class="input-div one">
+            <div class="i">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="div">
+                <h5>Nome</h5>
+                <input name="nome" id="inputNome" aria-describedby="nomeHelp" type="text" class="input">
+            </div>
+        </div>
+        <div class="input-div one">
+            <div class="i">
+                <i class="fa fa-envelope"></i>
+            </div>
+            <div class="div">
+                <h5>E-mail</h5>
+                <input name="email" id="inputEmail" aria-describedby="emailHelp" type="email" class="input">
+            </div>
+        </div>
+        <div class="input-div one">
+            <div class="i">
+                <i class="fas fa-map-marker"></i>
+            </div>
+            <div class="div">
+                <h5>Endereço</h5>
+                <input name="endereco" id="inputEndereco" aria-describedby="enderecoHelp" type="text" class="input">
+            </div>
+        </div>
+        <div class="input-div pass">
+            <div class="i">
+                <i class="fas fa-lock"></i>
+            </div>
+            <div class="div">
+                <h5  class="font-weight-bold">Senha</h5>
+                <input name="senha" id="inputSenha" type="password" class="input">
+            </div>
+        </div>
+
+        <button type="submit" class="mt-2 btn btn-outline-success btn-block" value="cadastrar">Cadastrar</button>
+            <a href="/login" class="">Logar</a>
+        </p>
+    </form>
+</div>
+</div>
+</body>
+</html>
