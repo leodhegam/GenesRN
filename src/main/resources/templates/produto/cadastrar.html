@@ -1,10 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
 </head>
 <body>
 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalCadastroPet">
+    Cadastrar produto
+</button>
+
+<!-- Modal -->
+<div th:fragment="modal-pet" class="modal fade" id="modalCadastroPet" tabindex="-1" role="dialog" aria-labelledby="cadastroPetModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content mt-3">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cadastroPetModalLabel">Cadastrar produto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="col-12" th:action="@{/produto/cadastrar}" th:object="${produto}" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputNome">Nome</label>
+                            <!--                            <input name="id" th:field="${pet.id}" type="hidden" class="form-control" id="idPet">-->
+                            <!--                            <input id="pet-id" type="hidden" th:field="*{id}"/>-->
+                            <input th:if="${usuario} != null" type="hidden"
+                                   th:attr="name='usuario.id'" th:value="${usuario.id}"/>
+                            <!--                            <input name="usuario_id" th:field="${usuario.id}" type="text" class="form-control" id="idUsuario">-->
+                            <input name="nome" type="text" class="form-control" id="inputNome" placeholder="Nome">
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputDescricao">Descricao</label>
+                            <input name="descricao" type="text" class="form-control" id="inputDescricao" placeholder="Descricao">
+                        </div>
+                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <label for="fotoReprodutor">foto Reprodutor</label>-->
+<!--                        <input name="fotoReprodutor" type="text" class="form-control" id="fotoReprodutor" placeholder="Foto ">-->
+<!--                    </div>-->
+                    <div class="form-group">
+                        <label for="valor">Valor</label>
+                        <input name="valor" type="text" class="form-control" id="valor">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputQuantidade">Quantidade</label>
+                        <input name="quantidade" type="number" class="form-control" id="inputQuantidade" placeholder="Quantidade">
+                    </div>
+
+                    <button type="submit" class="justify-content-end btn btn-danger">Cadastrar</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <!--                <button type="submit" class="btn btn-danger">Cadastrar</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 </html>

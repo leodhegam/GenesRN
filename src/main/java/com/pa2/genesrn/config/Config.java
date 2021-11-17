@@ -48,7 +48,7 @@ public class Config extends WebSecurityConfigurerAdapter {
                 .hasRole("USER").antMatchers("/**")
                 .permitAll().and().formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/usuario/home")
+                .defaultSuccessUrl("/home")
                 .and().csrf().disable();
     }
 }

@@ -28,7 +28,7 @@ public class ProdutoController {
 
     @Autowired
     UsuarioRepository usuarioRepository;
-
+//TODO
     @GetMapping("/listar")
     public String listar(Model model, Principal p) {
 
@@ -39,12 +39,12 @@ public class ProdutoController {
         model.addAttribute("usuario", usuario);
 
 
-        return "/pet/listar";
+        return "/produto/listar";
     }
 
     @PostMapping("/cadastrar")
     public String cadastrar(@ModelAttribute Produto produto) {
         produtoRepository.save(produto);
-        return "redirect:/usuario/home";
+        return "redirect:/home";
     }
 }

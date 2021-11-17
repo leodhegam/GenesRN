@@ -29,9 +29,13 @@ public class UsuarioController {
     @Autowired
     private BCryptPasswordEncoder bp;
 
+    @GetMapping("/home")
+    public String home() {
+        return "home";
+    }
 
     @GetMapping("/")
-    public String home(){
+    public String index(){
         return "index";
     }
 
