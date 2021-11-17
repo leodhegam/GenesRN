@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/produto")
@@ -34,8 +35,8 @@ public class ProdutoController {
 
         String nome = p.getName();
         Usuario usuario = usuarioRepository.findByEmail(nome);
-//        List<Produto> produto = produtoService.buscarPets(usuario.getId());
-//        model.addAttribute("pets", pets);
+        List<Produto> produtos = produtoService.buscarProdutos(usuario.getId());
+        model.addAttribute("produtos", produtos);
         model.addAttribute("usuario", usuario);
 
 

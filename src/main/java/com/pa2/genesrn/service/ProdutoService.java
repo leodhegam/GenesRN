@@ -24,7 +24,7 @@ public class ProdutoService {
         produtoRepository.save(produto);
     }
 
-//    public List<Produto> buscarProdutos(Integer idUsuario){
-//        return produtoRepository.findAllById(idUsuario);
-//    }
+    public List<Produto> buscarProdutos(Integer idUsuario){
+        return produtoRepository.listarProdutoPorUsuario(idUsuario);
+    }
 }

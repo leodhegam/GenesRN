@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -35,6 +36,8 @@ public class Usuario {
     public String getNome() {
         return nome;
     }
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "usuario")
+    List<Produto> produtos;
 
     public void setNome(String nome) {
         this.nome = nome;
