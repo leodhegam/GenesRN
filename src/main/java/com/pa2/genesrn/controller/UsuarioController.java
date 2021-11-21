@@ -1,7 +1,9 @@
 package com.pa2.genesrn.controller;
 
+import com.pa2.genesrn.model.Produto;
 import com.pa2.genesrn.model.Usuario;
 import com.pa2.genesrn.repository.UsuarioRepository;
+import com.pa2.genesrn.service.ProdutoService;
 import com.pa2.genesrn.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -29,18 +32,27 @@ public class UsuarioController {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
+    private ProdutoService produtoService;
+
+    @Autowired
     private BCryptPasswordEncoder bp;
 
     @GetMapping("/home")
     public String home(Principal p, Model model) {
         String nome = p.getName();
         Usuario usuario = usuarioRepository.findByEmail(nome);
-        model.addAttribute("usuario",usuario);
+        List<Produto> produtos = produtoService.buscarProdutos(usuario.getId());
+        System.out.println(produtos);
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("produtos", produtos);
+
+
+        model.addAttribute("usuario", usuario);
         return "home";
     }
 
     @GetMapping("/")
-    public String index(){
+    public String index() {
         return "index";
     }
 
@@ -61,7 +73,7 @@ public class UsuarioController {
 //            session.setAttribute("message", "E-mail já existente");
 //        }
         Usuario usuarioExists = usuarioRepository.findByEmail(usuario.getEmail());
-        if(usuarioExists != null){
+        if (usuarioExists != null) {
             session.setAttribute("messageError", "E-mail já existente");
             return "redirect:/";
         }

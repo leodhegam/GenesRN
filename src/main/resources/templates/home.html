@@ -14,6 +14,26 @@
 
 
 <div th:insert="~{/produto/cadastrar}"></div>
+<div class="card">
+    <div class="card-body ">
+        <div th:each="produtos : ${produtos}" class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+
+                    <td>   <img th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produtos.fotoReprodutor})}" class="card-img-top" src="..." alt="Card image cap"></td>
+                </div>
+                <div class="col-md-8">
+                    <div   class="card-body">
+                        <h5 th:text="${produtos.nome}"></h5>
+                        <p class="card-text" th:text="${produtos.descricao}"></p>
+<!--                        <p class="card-text" th:text="${produtos.fotoReprodutor}" ><small class="text-muted"></small></p>-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div>
 </div>
 <!-- Optional JavaScript -->

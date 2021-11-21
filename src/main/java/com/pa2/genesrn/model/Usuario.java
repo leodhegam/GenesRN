@@ -36,6 +36,7 @@ public class Usuario {
     public String getNome() {
         return nome;
     }
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "usuario")
     List<Produto> produtos;
 

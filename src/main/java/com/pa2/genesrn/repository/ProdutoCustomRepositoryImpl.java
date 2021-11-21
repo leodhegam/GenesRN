@@ -39,7 +39,7 @@ public class ProdutoCustomRepositoryImpl implements ProdutoCustomRepository {
                         produto.setNome(rs.getString("nome"));
                         produto.setDescricao(rs.getString("descricao"));
                         produto.setValor(rs.getFloat("valor"));
-//                        produto.setFotoReprodutor(rs.getString("fotoReprodutor"));
+                        produto.setFotoReprodutor(rs.getString("foto_reprodutor"));
                         produto.setQuantidade(rs.getInt("quantidade"));
 
                         return produto;

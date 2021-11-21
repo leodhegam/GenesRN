@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -27,6 +24,26 @@ public class Produto {
     private String fotoReprodutor;
 
     private Integer quantidade;
+
+    @ManyToOne
+    @JoinColumn(name="usuario_id")
+    private Usuario usuario;
+
+    public String getFotoReprodutor() {
+        return fotoReprodutor;
+    }
+
+    public void setFotoReprodutor(String fotoReprodutor) {
+        this.fotoReprodutor = fotoReprodutor;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     public Integer getId() {
         return id;
@@ -58,14 +75,6 @@ public class Produto {
 
     public void setValor(Float valor) {
         this.valor = valor;
-    }
-
-    public String getFotoReprodutor() {
-        return fotoReprodutor;
-    }
-
-    public void setFotoReprodutor(String fotoReprodutor) {
-        this.fotoReprodutor = fotoReprodutor;
     }
 
     public Integer getQuantidade() {
