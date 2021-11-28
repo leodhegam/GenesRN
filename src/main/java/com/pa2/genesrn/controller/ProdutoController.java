@@ -23,7 +23,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/produto")
 public class ProdutoController {
+
     private static String caminhoImagens = "/src/main/resources/static/fotos/";
+
     @Autowired
     ProdutoRepository produtoRepository;
 
@@ -32,22 +34,22 @@ public class ProdutoController {
 
     @Autowired
     UsuarioRepository usuarioRepository;
-//TODO
-    @GetMapping("/listar")
-    public String listar(Model model, Principal p) {
 
+    @GetMapping("/meusProdutos")
+    public String produtos(Principal p, Model model) {
+        System.out.println("meusProdutos");
         String nome = p.getName();
         Usuario usuario = usuarioRepository.findByEmail(nome);
         List<Produto> produtos = produtoService.buscarProdutos(usuario.getId());
-        model.addAttribute("produtos", produtos);
+        System.out.println(produtos);
         model.addAttribute("usuario", usuario);
+        model.addAttribute("produtos", produtos);
 
-
-        return "/produto/listar";
+        return "meusProdutos";
     }
 
-    @PostMapping("/cadastrar")
-    public String cadastrar(@ModelAttribute Produto produto,@RequestParam("imageFile") MultipartFile imageFile) {
+    @PostMapping("/cadastrarProduto")
+    public String cadastrarProduto(@ModelAttribute Produto produto,@RequestParam("imageFile") MultipartFile imageFile) {
 
         produtoRepository.save(produto);
         try {
@@ -65,8 +67,9 @@ public class ProdutoController {
             e.printStackTrace();
         }
 
-        return "redirect:/home";
+        return "redirect:/produto/meusProdutos";
     }
+
     @GetMapping("/mostrarImagem/{imagem}")
     @ResponseBody
     public byte[] retornarImagem(@PathVariable("imagem") String imagem) throws IOException {

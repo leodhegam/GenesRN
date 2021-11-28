@@ -10,7 +10,9 @@
     <title></title>
 </head>
 <body>
-<div> <a href="/produto/meusProdutos"> Meus produtos </a> </div>
+
+<div th:insert="~{/produto/cadastrarProduto}"></div>
+<a href="/home"> Home </a>
 <div class="card">
     <div class="card-body ">
         <div th:each="produto : ${produtos}" class="card mb-3" style="max-width: 540px;">

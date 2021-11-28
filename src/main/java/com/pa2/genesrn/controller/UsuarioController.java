@@ -23,11 +23,11 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/")
-
 public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -41,45 +41,34 @@ public class UsuarioController {
     public String home(Principal p, Model model) {
         String nome = p.getName();
         Usuario usuario = usuarioRepository.findByEmail(nome);
-        List<Produto> produtos = produtoService.buscarProdutos(usuario.getId());
+        List<Produto> produtos = produtoService.findAll();
         System.out.println(produtos);
         model.addAttribute("usuario", usuario);
         model.addAttribute("produtos", produtos);
 
-
-        model.addAttribute("usuario", usuario);
         return "home";
     }
 
     @GetMapping("/")
-    public String index() {
-        return "index";
-    }
-
-    @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-    @GetMapping("/signup")
-    public String signup() {
-        return "signup";
+    @GetMapping("/cadastrarUsuario")
+    public String cadastrar() {
+        return "cadastrarUsuario";
     }
 
-    @PostMapping("/cadastrar")
+    @PostMapping("/cadastrarUsuario")
     public String cadastrar(@ModelAttribute @Valid Usuario usuario, HttpSession session, Errors errors, BindingResult bindingResult) {
-//        Usuario userExists = usuarioService.findUserByEmail(usuario.getEmail());
-//        if(userExists != null){
-//            session.setAttribute("message", "E-mail já existente");
-//        }
         Usuario usuarioExists = usuarioRepository.findByEmail(usuario.getEmail());
         if (usuarioExists != null) {
             session.setAttribute("messageError", "E-mail já existente");
-            return "redirect:/";
+            return "redirect:/cadastrarUsuario";
         }
         if (errors.hasErrors()) {
             session.setAttribute("message", "Verifique os campos");
-            return "/";
+            return "/cadastrarUsuario";
         } else {
             usuario.setSenha(bp.encode(usuario.getSenha()));
             usuarioRepository.save(usuario);

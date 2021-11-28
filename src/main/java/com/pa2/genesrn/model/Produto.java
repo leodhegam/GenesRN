@@ -29,6 +29,7 @@ public class Produto {
     @JoinColumn(name="usuario_id")
     private Usuario usuario;
 
+
     public String getFotoReprodutor() {
         return fotoReprodutor;
     }
@@ -83,5 +84,11 @@ public class Produto {
 
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
+    }
+
+    @Override
+    public String toString() {
+        return "Produto{" +
+                '}';
     }
 }
