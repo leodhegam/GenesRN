@@ -1,6 +1,7 @@
 package com.pa2.genesrn.controller;
 
 
+import com.pa2.genesrn.enums.EnumGenero;
 import com.pa2.genesrn.model.Produto;
 import com.pa2.genesrn.model.Usuario;
 import com.pa2.genesrn.repository.ProdutoRepository;
@@ -18,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
