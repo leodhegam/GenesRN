@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String nome;
 
@@ -46,11 +46,11 @@ public class Produto {
         this.usuario = usuario;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -89,6 +89,13 @@ public class Produto {
     @Override
     public String toString() {
         return "Produto{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", valor=" + valor +
+                ", fotoReprodutor='" + fotoReprodutor + '\'' +
+                ", quantidade=" + quantidade +
+                ", usuario=" + usuario +
                 '}';
     }
 }

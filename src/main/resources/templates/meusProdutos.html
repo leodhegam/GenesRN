@@ -7,32 +7,104 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
-    <title></title>
+    <title>Meus Produtos</title>
+    <style>
+        .texto-top {
+            font-size: 0.8rem;
+            font-family: 'Source Code Pro';
+        }
+        .crop {
+             object-fit: cover;
+             width:100%;
+             height:14rem;
+        }
+
+        .crop-image {
+            object-fit: cover;
+            width:100%;
+            height:24rem;
+        }
+    </style>
 </head>
 <body>
 
-<div th:insert="~{/produto/cadastrarProduto}"></div>
-<a href="/home"> Home </a>
-<div class="card">
-    <div class="card-body ">
-        <div th:each="produto : ${produtos}" class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
+<div
+        class="bg-light w-100 container-fluid border-bottom p-2 texto-top"
+>
+    <span class="ml-4 align-start">TELEFONE: 00 00000-0000</span>
+    <span class="ml-4 mr-4"> | </span>
+    <span>EMAIL: genesrn@email.com</span>
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-white mb-2">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/home"
+           style="display: flex; justify-content: space-between; align-items: center;">
+            <img src="img/boi.png" alt="" style="width: 85px; height: 75px;"/>
+            <h2 style="font-size: 1.4rem">GENES-RN</h2>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" href="/home">Home</a>
+                <a class="nav-link" href="/produto/meusProdutos">Meus produtos</a>
+                <a class="nav-link" href="#">Vitrine</a>
+                <a class="nav-link" href="#">Sobre</a>
+                <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Contato</a>
+            </div>
+        </div>
+    </div>
+</nav>
 
-                    <td>   <img th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.fotoReprodutor})}" class="card-img-top" src="..." alt="Card image cap"></td>
-                </div>
-                <div class="col-md-8">
-                    <div   class="card-body">
+
+<header class="jumbotron mt-4 mb-3">
+    <h2>#Ultimos produtos cadastrados</h2>
+</header>
+<div th:insert="~{/produto/cadastrarProduto}"></div>
+<section class="container m-5">
+    <div class="row">
+        <div th:each="produto : ${produtos}" class="mb-3 col-6">
+            <div class="card w-100">
+                <div class="d-flex justify-content-around align-items-center">
+                    <img
+                            th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.fotoReprodutor})}"
+                            class="card-img-top crop w-50"
+                            src="..."
+                            alt="Card image cap"
+                    >
+                    <div class="card-body">
                         <h5 th:text="${produto.nome}"></h5>
                         <p class="card-text" th:text="${produto.descricao}"></p>
+                        <div class="d-flex justify-content-start align-items-end mt-5">
+                            <br />
+                            <a th:href="@{'/detalhes/'+${produto.nome}}"
+                               data-toggle="tooltip"
+                               data-placement="bottom"
+                               title="Detalhes do produto!"
+                            >
+                                <img
+                                        style="width: 24px"
+                                        src="https://img.icons8.com/material-outlined/50/000000/document--v2.png"/>
+                            </a>
+                            <a
+                                    class="ml-2"
+                                    th:href="@{'/alterar/'+${produto.getNome()}}"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Alterar produto!"
+                            >
+                                <img
+                                        style="width: 24px"
+                                        src="https://img.icons8.com/material-outlined/50/000000/edit--v4.png"/>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div>
-</div>
+</section>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -14,15 +14,23 @@
 <body>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalCadastroProduto">
-    Cadastrar produto
-</button>
+<div class="d-flex justify-content-end mr-4 mb-2">
+    <button
+            type="button"
+            class="btn btn-outline-primary"
+            data-toggle="modal"
+            data-target="#modalCadastroProduto">
+        Cadastrar produto
+    </button>
+</div>
+
 
 <!-- Modal -->
 <div th:fragment="modal-produto" class="modal fade" id="modalCadastroProduto" tabindex="-1" role="dialog"
      aria-labelledby="cadastroProdutoModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content mt-3">
+            <form class="col-12" th:action="@{/produto/cadastrarProduto}" th:object="${produtos}"  enctype="multipart/form-data" method="POST">
             <div class="modal-header">
                 <h5 class="modal-title" id="cadastroProdutoModalLabel">Cadastrar produto</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -30,7 +38,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="col-12" th:action="@{/produto/cadastrarProduto}" th:object="${produtos}"  enctype="multipart/form-data" method="POST">
+
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputNome">Nome</label>
@@ -59,14 +67,13 @@
                         <input name="quantidade" type="number" class="form-control" id="inputQuantidade"
                                placeholder="Quantidade">
                     </div>
-
-                    <button type="submit" class="justify-content-end btn btn-danger">Cadastrar</button>
-                </form>
             </div>
             <div class="modal-footer">
+                <button type="submit" class="justify-content-end btn btn-primary">Salvar</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 <!--                <button type="submit" class="btn btn-danger">Cadastrar</button>-->
             </div>
+            </form>
         </div>
     </div>
 </div>

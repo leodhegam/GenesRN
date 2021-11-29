@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,11 +42,19 @@ public class ProdutoController {
         String nome = p.getName();
         Usuario usuario = usuarioRepository.findByEmail(nome);
         List<Produto> produtos = produtoService.buscarProdutos(usuario.getId());
-        System.out.println(produtos);
+        System.out.println("Produtos antes "+produtos);
         model.addAttribute("usuario", usuario);
         model.addAttribute("produtos", produtos);
-
         return "meusProdutos";
+    }
+
+    @RequestMapping("/alterar/{produto}")
+    public ModelAndView alterarProduto(@PathVariable(name = "produto") String produto){
+        ModelAndView modelAndView = new ModelAndView("alterar");
+        var upProd = produtoService.getProductById(produto);
+        modelAndView.setViewName("alterar");
+        modelAndView.addObject("produto", upProd);
+        return modelAndView;
     }
 
     @PostMapping("/cadastrarProduto")
