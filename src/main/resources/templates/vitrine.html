@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:height="http://www.w3.org/1999/xhtml"
+      xmlns:width="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/loginStyle.css">
+
+    <title></title>
+    <style>
+        .crop {
+            object-fit: cover;
+            width:100%;
+            height:14rem;
+        }
+
+        .crop-image {
+            object-fit: cover;
+            width:100%;
+            height:24rem;
+        }
+    </style>
+
+</head>
+<body>
+<!-- Navbar -->
+<nav class="mb-3 navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Genes RN</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+</nav>
+
+<section class="container">
+    <div class="row">
+        <div th:each="produto : ${produtos}" class="mb-3 col-6">
+            <div class="card w-100">
+                <div class="d-flex justify-content-around ">
+                    <img
+                            th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.fotoReprodutor})}"
+                            class="card-img-top crop w-50"
+                            src="..."
+                            alt="Card image cap"
+                    >
+                    <div class="card-body font-italic">
+                        <h2 th:text="${produto.nome}"></h2>
+                        <br/>
+                        <p class="card-text" th:text="${produto.descricao}"> </p>
+                        <p class="card-text" th:text="${produto.valor} +' R$'"></p>
+                        <div class="d-flex justify-content-end  align-items-botton ">
+                            <a type="button"
+                               class="btn btn-outline-primary "
+                               data-toggle="modal"
+                               data-target="#modalAlterarProduto"
+                               th:href="@{'/alterar/'+${produto.nome}}"
+                            >Comprar</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="bg-light text-center text-lg-start">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2020 Copyright:
+        <a class="text-dark" href="https://Genes.com/">Genes.com</a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+
+<script type="text/javascript" src="js/main.js"></script>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script type="text/javascript" src="../js/index.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

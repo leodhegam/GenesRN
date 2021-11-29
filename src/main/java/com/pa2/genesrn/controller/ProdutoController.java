@@ -48,6 +48,19 @@ public class ProdutoController {
         return "meusProdutos";
     }
 
+    @GetMapping("/vitrine")
+    public String vitrineProdutos(Principal p, Model model) {
+        System.out.println("meusProdutos");
+        String nome = p.getName();
+        Usuario usuario = usuarioRepository.findByEmail(nome);
+        List<Produto> produtos = produtoService.buscarProdutos(usuario.getId());
+        System.out.println(produtos);
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("produtos", produtos);
+
+        return "vitrine";
+    }
+
     @PostMapping("/cadastrarProduto")
     public String cadastrarProduto(@ModelAttribute Produto produto,@RequestParam("imageFile") MultipartFile imageFile) {
 
