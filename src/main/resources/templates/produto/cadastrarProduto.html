@@ -49,6 +49,14 @@
                             <input name="nome" type="text" class="form-control" id="inputNome" placeholder="Nome">
 
                         </div>
+                        <div class="form-group col-md-12 col-lg-5">
+                            <label class="font-weight-bold" for="tipo">Gênero</label></br>
+                            <select class="form-control validar" id="tipo" required th:name="genero">
+                                <option th:each="t : ${T(com.pa2.genesrn.enums.EnumGenero).values()}"
+                                        th:value="${t}" th:text="${t.getDescricao()}">
+                                </option>
+                            </select>
+                        </div>
                         <div class="form-group col-md-6">
                             <label for="inputDescricao">Descricao</label>
                             <input name="descricao" type="text" class="form-control" id="inputDescricao"

@@ -1,6 +1,7 @@
 package com.pa2.genesrn.controller;
 
 
+import com.pa2.genesrn.enums.EnumGenero;
 import com.pa2.genesrn.model.Produto;
 import com.pa2.genesrn.model.Usuario;
 import com.pa2.genesrn.repository.ProdutoRepository;
@@ -19,6 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -55,6 +57,19 @@ public class ProdutoController {
         modelAndView.setViewName("alterar");
         modelAndView.addObject("produto", upProd);
         return modelAndView;
+    }
+    
+    @GetMapping("/vitrine")
+    public String vitrineProdutos(Principal p, Model model) {
+        System.out.println("meusProdutos");
+        String nome = p.getName();
+        Usuario usuario = usuarioRepository.findByEmail(nome);
+        List<Produto> produtos = produtoService.buscarProdutos(usuario.getId());
+        System.out.println(produtos);
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("produtos", produtos);
+
+        return "vitrine";
     }
 
     @PostMapping("/cadastrarProduto")

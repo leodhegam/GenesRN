@@ -1,10 +1,12 @@
 package com.pa2.genesrn.model;
 
+import com.pa2.genesrn.enums.EnumGenero;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
@@ -25,8 +27,13 @@ public class Produto {
 
     private Integer quantidade;
 
+    @NotNull
+    @Column(name = "genero")
+    @Enumerated(EnumType.STRING)
+    private EnumGenero genero;
+
     @ManyToOne
-    @JoinColumn(name="usuario_id")
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
 
