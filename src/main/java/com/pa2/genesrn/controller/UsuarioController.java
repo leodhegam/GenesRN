@@ -44,12 +44,12 @@ public class UsuarioController {
         model.addAttribute("usuario", usuario);
         model.addAttribute("produtos", produtos);
 
-        return "home";
+        return "/home";
     }
 
     @GetMapping("/")
     public String login() {
-        return "login";
+        return "/login";
     }
 
     @GetMapping("/cadastrarUsuario")
