@@ -54,6 +54,7 @@ public class ProdutoController {
     public ModelAndView alterarProduto(@PathVariable(name = "produto") String produto){
         ModelAndView modelAndView = new ModelAndView("alterar");
         var upProd = produtoService.getProductById(produto);
+        System.out.println(upProd);
         modelAndView.setViewName("alterar");
         modelAndView.addObject("produto", upProd);
         return modelAndView;
@@ -73,11 +74,10 @@ public class ProdutoController {
     }
 
     @PostMapping("/cadastrarProduto")
-    public String cadastrarProduto(@ModelAttribute Produto produto,@RequestParam("imageFile") MultipartFile imageFile) {
-
+    public String cadastrarProduto(@ModelAttribute Produto produto, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
         produtoRepository.save(produto);
         try {
-            if (!imageFile.isEmpty()) {
+            if (produto.getFotoReprodutor() == null && imageFile != null) {
                 byte[] bytes = imageFile.getBytes();
                 Path currentPath = Paths.get(".");
                 Path absolutePath = currentPath.toAbsolutePath();
@@ -86,7 +86,6 @@ public class ProdutoController {
                 produto.setFotoReprodutor(String.valueOf(produto.getId()) + imageFile.getOriginalFilename());
                 produtoRepository.save(produto);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }

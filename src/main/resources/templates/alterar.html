@@ -10,40 +10,61 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <title>Alterar</title>
 </head>
 <body>
-<form class="col-12" th:action="@{/produto/cadastrarProduto}" th:object="${produto}"  enctype="multipart/form-data" method="POST">
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputNome">Nome</label>
+<section class="container mt-2">
+    <h2 class="text-center">Alterar dados do produto</h2>
+    <form class="col-12" th:action="@{/produto/cadastrarProduto}" th:object="${produto}"  enctype="multipart/form-data" method="POST">
+        <div class="form-row">
+            <div class="form-group col-12">
+                <img
+                        th:src="@{/produto/mostrarImagem/{imagem}(imagem=*{fotoReprodutor})}"
+                        class="card-img-top crop w-50"
+                        src="..."
+                        alt="Card image cap"
+                ><br>
+                <input name="imageFile" th:if="*{fotoReprodutor} == null" type="file"/>
+                <input name="fotoReprodutor" th:if="*{fotoReprodutor} != null" type="hidden" th:value="*{fotoReprodutor}">
+            </div>
+            <input name="id" th:value="*{id}" hidden>
+            <div class="form-group col-md-6">
+                <label for="inputNome">Nome</label>
 
-            <input th:if="${usuario} != null" type="hidden"
-                   th:attr="name='usuario.id'" th:value="${usuario.id}"/>
-            <!--                            <input name="usuario_id" th:field="${usuario.id}" type="text" class="form-control" id="idUsuario">-->
-            <input name="nome" type="text" class="form-control" id="inputNome" placeholder="Nome">
+                <input th:if="*{usuario} != null" hidden
+                       th:attr="name='usuario.id'" th:value="*{usuario.id}"/>
+                <input name="nome" th:field="*{nome}" type="text" class="form-control" id="inputNome" placeholder="Nome">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="tipo">Gênero</label></br>
+                <select class="form-control validar" id="tipo" required th:name="genero">
+                    <option th:each="t : ${T(com.pa2.genesrn.enums.EnumGenero).values()}"
+                            th:value="${t}" th:text="${t.getDescricao()}">
+                    </option>
+                </select>
+            </div>
+        </div>
 
-        </div>
-        <div class="form-group col-md-6">
-            <label for="inputDescricao">Descricao</label>
-            <input name="descricao" type="text" class="form-control" id="inputDescricao"
-                   placeholder="Descricao">
-        </div>
-        </div>
-        <div class="form-group">
-            <input type="file" name="imageFile"/>
-        </div>
         <div class="form-group">
             <label for="valor">Valor</label>
-            <input name="valor" type="text" class="form-control" id="valor">
+            <input name="valor" th:field="*{valor}" type="text" class="form-control" id="valor">
         </div>
         <div class="form-group">
             <label for="inputQuantidade">Quantidade</label>
-            <input name="quantidade" type="number" class="form-control" id="inputQuantidade"
+            <input name="quantidade" th:field="*{quantidade}" type="number" class="form-control" id="inputQuantidade"
                    placeholder="Quantidade">
+            <label for="inputDescricao" class="mt-3">Descricao</label>
+            <textarea name="descricao" th:field="*{descricao}" class="form-control" id="inputDescricao"
+                      placeholder="Descricao"></textarea>
         </div>
-        <button type="submit" class="justify-content-end btn btn-primary">Salvar</button>
-    </div>
-</form>
+        <div class="d-flex justify-content-between mb-4">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a th:href="@{/produto/meusProdutos}" type="button" class="btn btn-secondary">Fechar</a>
+        </div>
+        </div>
+    </form>
+</section>
+
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

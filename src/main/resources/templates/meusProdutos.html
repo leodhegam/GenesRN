@@ -78,7 +78,7 @@
                         <p class="card-text" th:text="${produto.descricao}"></p>
                         <div class="d-flex justify-content-start align-items-end mt-5">
                             <br />
-                            <a th:href="@{'/detalhes/'+${produto.nome}}"
+                            <a th:href="@{'/produto/detalhes/'+${produto.nome}+'/'+${usuario.id}}"
                                data-toggle="tooltip"
                                data-placement="bottom"
                                title="Detalhes do produto!"
@@ -89,7 +89,7 @@
                             </a>
                             <a
                                     class="ml-2"
-                                    th:href="@{'/alterar/'+${produto.getNome()}}"
+                                    th:href="@{'/produto/alterar/'+${produto.getNome()}}"
                                     data-toggle="tooltip"
                                     data-placement="bottom"
                                     title="Alterar produto!"
