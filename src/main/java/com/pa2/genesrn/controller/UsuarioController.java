@@ -13,8 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -46,12 +44,12 @@ public class UsuarioController {
         model.addAttribute("usuario", usuario);
         model.addAttribute("produtos", produtos);
 
-        return "home";
+        return "/home";
     }
 
     @GetMapping("/")
     public String login() {
-        return "login";
+        return "/login";
     }
 
     @GetMapping("/cadastrarUsuario")
