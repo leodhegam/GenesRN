@@ -38,6 +38,7 @@ public class ProdutoController {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+
     @GetMapping("/meusProdutos")
     public String produtos(Principal p, Model model) {
         System.out.println("meusProdutos");
@@ -54,7 +55,6 @@ public class ProdutoController {
     public ModelAndView alterarProduto(@PathVariable(name = "produto") String produto){
         ModelAndView modelAndView = new ModelAndView("alterar");
         var upProd = produtoService.getProductById(produto);
-        System.out.println(upProd);
         modelAndView.setViewName("alterar");
         modelAndView.addObject("produto", upProd);
         return modelAndView;

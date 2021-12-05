@@ -23,6 +23,7 @@ public class Usuario {
 
     private String senha;
 
+
     private String endereco;
 
     public Integer getId() {
@@ -37,7 +38,7 @@ public class Usuario {
         return nome;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "usuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     List<Produto> produtos;
 
     public void setNome(String nome) {
