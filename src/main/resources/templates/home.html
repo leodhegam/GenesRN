@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <title>GenesRN</title>
     <style>
@@ -19,50 +20,54 @@
 <!--<a th:href="@{/logout}" class="text-dark  my-2 my-sm-0" type="submit">Logout</a>-->
 
 <div th:insert="~{/navbar.html}"></div>
+<div class="justify-content-center">
+    <div class="mt-4 mb-4 row justify-content-center col-12">
+        <div class="col-lg-2 mt-1">
+            <a type="button" class="btn btn-outline-info  btn-md btn-block">Bovino</a>
+        </div>
+        <div class="col-lg-2 mt-1">
+            <a type="button" class="btn btn-outline-info  btn-md btn-block">Suíno</a>
+        </div>
+        <div class="col-lg-2 mt-1">
+            <a type="button" class="btn btn-outline-info  btn-md btn-block">Equino</a>
+        </div>
+    </div>
+</div>
+    <div class="container col-12 justify-content-center">
+        <div class="row ">
+            <div class="col-sm " th:each="produto : ${produtos}">
+                <div class="card mt-3 " style="width: 22rem;">
+                    <div class="card-body">
+                        <img
+                                th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.fotoReprodutor})}"
+                                class="rounded mx-auto d-block card-img-top" alt="Card image cap" style="width: 15rem;">
+                        <h5 th:text="${produto.nome}" class="text-center card-title"></h5>
+                        <p th:text="${produto.descricao}" class="text-center card-text">
+                        </p>
+                        <button class="float-right btn btn-outline-success" type="button">
+                    <i class=" fa fa-shopping-cart" aria-hidden="true"></i>
+                </button>
+                        <button class="float-left btn btn-outline-info" type="button">
+                            <i class="fa fa-info" aria-hidden="true"></i>
+                        </button>
 
-<!--<ul  class="navbar-nav mr-auto">-->
-<!--    <li class="nav-item ">-->
-<!--        <a th:href="@{/edit/{id}(id=${usuario.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a>-->
-<!--    </li>-->
-<!--</ul>-->
-<!--<div class="card">-->
-<!--    <div class="card-body ">-->
-<!--        <div th:each="produto : ${produtos}" class="card mb-3" style="max-width: 540px;">-->
-<!--            <div class="row g-0">-->
-<!--                <div class="col-md-4">-->
-<!--                    <td>-->
-<!--                        <img-->
-<!--                            th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.fotoReprodutor})}"-->
-<!--                            class="card-img-top"-->
-<!--                            src="..."-->
-<!--                            alt="Card image cap"-->
-<!--                        >-->
-<!--                    </td>-->
-<!--                </div>-->
-<!--                <div class="col-md-8">-->
-<!--                    <div   class="card-body">-->
-<!--                        <h5 th:text="${produto.nome}"></h5>-->
-<!--                        <p class="card-text" th:text="${produto.descricao}"></p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--<div>-->
-<!--</div>-->
-<!--<footer class="bg-light text-center text-lg-start">-->
-<!--    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">-->
-<!--        © 2021 Copyright:-->
-<!--        <a class="text-dark" href="https://Genes.com/">Genes.com</a>-->
-<!--    </div>-->
-<!--    &lt;!&ndash; Copyright &ndash;&gt;-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <!--</footer>-->
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 </html>
