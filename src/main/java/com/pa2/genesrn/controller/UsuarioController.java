@@ -36,15 +36,19 @@ public class UsuarioController {
     @Autowired
     private BCryptPasswordEncoder bp;
 
+    //    @GetMapping("/home")
+//    public String home( Principal p, Model model) {
+//        String nome = p.getName();
+//        Usuario usuario = usuarioRepository.findByEmail(nome);
+//        List<Produto> produtos = produtoService.findAll();
+//        System.out.println(produtos);
+//        model.addAttribute("usuario", usuario);
+//        model.addAttribute("produtos", produtos);
+//
+//        return "/home";
+//    }
     @GetMapping("/home")
-    public String home(Principal p, Model model) {
-        String nome = p.getName();
-        Usuario usuario = usuarioRepository.findByEmail(nome);
-        List<Produto> produtos = produtoService.findAll();
-        System.out.println(produtos);
-        model.addAttribute("usuario", usuario);
-        model.addAttribute("produtos", produtos);
-
+    public String home() {
         return "/home";
     }
 
@@ -82,37 +86,37 @@ public class UsuarioController {
         }
     }
 
-        @GetMapping("edit/{id}")
-        public String showUpdateForm (@PathVariable("id") Integer id, Model model){
-            Usuario usuario = usuarioRepository.findById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid usuario Id:" + id));
-            model.addAttribute("usuario", usuario);
-            return "update-usuario";
-        }
-
-        @PostMapping("update/{id}")
-        public String updateUsuario (@PathVariable("id") Integer id, @Valid Usuario usuario, BindingResult result,
-                Model model, HttpServletRequest httpServletRequest, HttpSession session){
-            if (result.hasErrors()) {
-                usuario.setId(id);
-                return "update-usuario";
-            }
-            String senhaDb = usuario.getSenha();
-            String senhaInformada = httpServletRequest.getParameter("senhaInformada");
-
-            String novaSenha = httpServletRequest.getParameter("novaSenha");
-
-            if (bp.matches(senhaInformada, senhaDb)) {
-                usuario.setSenha(bp.encode(novaSenha));
-            } else if (senhaInformada.isEmpty() && novaSenha.isEmpty()) {
-                usuario.setSenha(usuario.getSenha());
-            } else {
-                session.setAttribute("messageError", "Senhas não coincidem");
-            }
-
-            usuarioService.saveAndFlush(usuario);
-//        model.addAttribute("usuario", usuarioRepository.findAll());
-            return "update-usuario";
-        }
-
+    @GetMapping("edit/{id}")
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid usuario Id:" + id));
+        model.addAttribute("usuario", usuario);
+        return "update-usuario";
     }
+
+    @PostMapping("update/{id}")
+    public String updateUsuario(@PathVariable("id") Integer id, @Valid Usuario usuario, BindingResult result,
+                                Model model, HttpServletRequest httpServletRequest, HttpSession session) {
+        if (result.hasErrors()) {
+            usuario.setId(id);
+            return "update-usuario";
+        }
+        String senhaDb = usuario.getSenha();
+        String senhaInformada = httpServletRequest.getParameter("senhaInformada");
+
+        String novaSenha = httpServletRequest.getParameter("novaSenha");
+
+        if (bp.matches(senhaInformada, senhaDb)) {
+            usuario.setSenha(bp.encode(novaSenha));
+        } else if (senhaInformada.isEmpty() && novaSenha.isEmpty()) {
+            usuario.setSenha(usuario.getSenha());
+        } else {
+            session.setAttribute("messageError", "Senhas não coincidem");
+        }
+
+        usuarioService.saveAndFlush(usuario);
+//        model.addAttribute("usuario", usuarioRepository.findAll());
+        return "update-usuario";
+    }
+
+}
