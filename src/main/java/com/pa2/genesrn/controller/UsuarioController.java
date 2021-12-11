@@ -36,23 +36,23 @@ public class UsuarioController {
     @Autowired
     private BCryptPasswordEncoder bp;
 
-        @GetMapping("/home")
-    public String home( Principal p, Model model) {
-        String nome = p.getName();
-        Usuario usuario = usuarioRepository.findByEmail(nome);
-        List<Produto> produtos = produtoService.findAll();
-        System.out.println(produtos);
-        model.addAttribute("usuario", usuario);
-        model.addAttribute("produtos", produtos);
-
-        return "/home";
-    }
-//    @GetMapping("/home")
+//        @GetMapping("/home")
 //    public String home(Model model) {
+////        String nome = p.getName();
+////        Usuario usuario = usuarioRepository.findByEmail(nome);
 //        List<Produto> produtos = produtoService.findAll();
+//        System.out.println(produtos);
+////        model.addAttribute("usuario", usuario);
 //        model.addAttribute("produtos", produtos);
+//
 //        return "/home";
 //    }
+    @GetMapping("/home")
+    public String home(Model model) {
+        List<Produto> produtos = produtoService.findAll();
+        model.addAttribute("produtos", produtos);
+        return "/home";
+    }
 
     @GetMapping("/")
     public String login() {
