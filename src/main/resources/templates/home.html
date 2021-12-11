@@ -62,7 +62,7 @@
         padding: 0;
         margin: 0;
         position: absolute;
-        bottom: 50px;
+        bottom: 20px;
         right: 25px;
         z-index: 1
     }
@@ -192,12 +192,17 @@
     .product-grid2 .title a:hover {
         color: #3498db
     }
-
-    .product-grid2 .price {
-        color: #303030;
-        font-size: 15px
+    .zoom {
+        /*padding: 50px;*/
+        transition: transform .2s; /* Animation */
+        /*width: 200px;*/
+        /*height: 200px;*/
+        /*margin: 0 auto;*/
     }
 
+    .zoom:hover {
+        transform: scale(1.1); /* (150% zoom)*/
+    }
     @media screen and (max-width:990px) {
         .product-grid2 {
             margin-bottom: 30px
@@ -235,15 +240,15 @@
     <div class="row">
         <div  th:each="produto : ${produtos}" class="col-md-4 col-sm-6">
             <div class="product-grid2">
-                <div class="product-image2"> <a href="#"> <img th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.fotoReprodutor})}"
-                                                 class="rounded mx-auto d-block card-img-top" alt="Card image cap" style="width: 15rem;"> </a>
+                <div class="product-image2"> <a href="#"> <img  th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.fotoReprodutor})}"
+                                                 class="zoom rounded mx-auto d-block card-img-top" alt="Card image cap" style="width: 15rem;"> </a>
                     <ul class="social">
-                        <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
-                        <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="#" data-tip="Ver detalhes"><i class="fa fa-eye"></i></a></li>
+                        <li><a href="#" data-tip="Adicionar"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
-                    <h3 th:text="${produto.descricao}"  class="title"><a href="#"></a></h3> <span th:text="${produto.valor}" class="price"></span>
+                    <h3 class="text-capitalize text-center font-weight-bold" style="font-size:18px" th:text="${produto.descricao}" ><a href="#"></a></h3> <span class="text-right badge badge-pill badge-info font-weight-bold" th:text="${#numbers.formatCurrency(produto.valor)}"></span>
                 </div>
             </div>
         </div>
