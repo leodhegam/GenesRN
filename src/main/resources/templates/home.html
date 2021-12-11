@@ -193,13 +193,8 @@
         color: #3498db
     }
     .zoom {
-        /*padding: 50px;*/
         transition: transform .2s; /* Animation */
-        /*width: 200px;*/
-        /*height: 200px;*/
-        /*margin: 0 auto;*/
     }
-
     .zoom:hover {
         transform: scale(1.1); /* (150% zoom)*/
     }
@@ -241,7 +236,7 @@
         <div  th:each="produto : ${produtos}" class="col-md-4 col-sm-6">
             <div class="product-grid2">
                 <div class="product-image2"> <a href="#"> <img  th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.fotoReprodutor})}"
-                                                 class="zoom rounded mx-auto d-block card-img-top" alt="Card image cap" style="width: 15rem;"> </a>
+                                                 class="zoom rounded mx-auto d-block card-img-top" alt="Card image cap" style="width: 15rem; height:13rem;object-fit: contain"> </a>
                     <ul class="social">
                         <li><a href="#" data-tip="Ver detalhes"><i class="fa fa-eye"></i></a></li>
                         <li><a href="#" data-tip="Adicionar"><i class="fa fa-shopping-cart"></i></a></li>
@@ -254,7 +249,7 @@
         </div>
     </div>
 </div>
-<hr>
+
 <!--</footer>-->
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -267,5 +262,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+
 </body>
 </html>
