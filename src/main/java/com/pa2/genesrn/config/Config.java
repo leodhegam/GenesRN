@@ -23,6 +23,7 @@ public class Config extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder getPassword() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider dao = new DaoAuthenticationProvider();
@@ -44,8 +45,7 @@ public class Config extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/usuario/**")
+        http.authorizeRequests().antMatchers("/usuario/**")
                 .hasRole("USER").antMatchers("/**")
                 .permitAll().and().formLogin()
                 .loginPage("/login")
