@@ -1,0 +1,36 @@
+<xlmns:html lang="en" xmlns:th="http://www.thymeleaf.org"
+            xlmns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5"
+            xmlns:xlmns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <img th:src="@{/img/GenesRN.png}" style="width: 50px">
+        <a class="navbar-brand" href="/home">GenesRN</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto" style="visibility: hidden">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <span sec:authorize="isAuthenticated()" class="navbar-text mr-2">
+                <li class="nav-item dropdown " style="list-style: none;">
+                    <a th:text="${usuario.nome}" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/produto/meusProdutos">Meus produtos</a>
+                         <a th:href="@{/edit/{id}(id=${usuario.id})}" class="dropdown-item" >Editar perfil</a>
+<!--                        <a class="dropdown-item" href="/update-usuario">Editar perfil</a>-->
+                        <a th:href="@{/logout}" class="dropdown-item" type="submit">Logout</a>
+                    </div>
+                </li>
+            </span>
+            <span sec:authorize="isAuthenticated()" class="navbar-text mr-2">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </span>
+        </div>
+    </nav>
+</xlmns:html>

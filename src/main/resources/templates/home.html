@@ -1,144 +1,255 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<style>
+    .container {
+        margin-top: 50px
+    }
+
+    h3.h3 {
+        text-align: center;
+        margin: 1em;
+        text-transform: capitalize;
+        font-size: 1.7em
+    }
+
+    .demo {
+        padding: 45px 0
+    }
+
+    .product-grid2 {
+        font-family: 'Open Sans', sans-serif;
+        position: relative
+    }
+
+    .product-grid2 .product-image2 {
+        overflow: hidden;
+        position: relative
+    }
+
+    .product-grid2 .product-image2 a {
+        display: block
+    }
+
+    .product-grid2 .product-image2 img {
+        width: 100%;
+        height: auto
+    }
+
+    .product-image2 .pic-1 {
+        opacity: 1;
+        transition: all .5s
+    }
+
+    .product-grid2:hover .product-image2 .pic-1 {
+        opacity: 0
+    }
+
+    .product-image2 .pic-2 {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: all .5s
+    }
+
+    .product-grid2:hover .product-image2 .pic-2 {
+        opacity: 1
+    }
+
+    .product-grid2 .social {
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        bottom: 20px;
+        right: 25px;
+        z-index: 1
+    }
+
+    .product-grid2 .social li {
+        margin: 0 0 10px;
+        display: block;
+        transform: translateX(100px);
+        transition: all .5s
+    }
+
+    .product-grid2:hover .social li {
+        transform: translateX(0)
+    }
+
+    .product-grid2:hover .social li:nth-child(2) {
+        transition-delay: .15s
+    }
+
+    .product-grid2:hover .social li:nth-child(3) {
+        transition-delay: .25s
+    }
+
+    .product-grid2 .social li a {
+        color: #505050;
+        background-color: #fff;
+        font-size: 17px;
+        line-height: 45px;
+        text-align: center;
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        display: block;
+        transition: all .3s ease 0s
+    }
+
+    .product-grid2 .social li a:hover {
+        color: #fff;
+        background-color: #3498db;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .5)
+    }
+
+    .product-grid2 .social li a:after,
+    .product-grid2 .social li a:before {
+        content: attr(data-tip);
+        color: #fff;
+        background-color: #000;
+        font-size: 12px;
+        line-height: 22px;
+        border-radius: 3px;
+        padding: 0 5px;
+        white-space: nowrap;
+        opacity: 0;
+        transform: translateX(-50%);
+        position: absolute;
+        left: 50%;
+        top: -30px
+    }
+
+    .product-grid2 .social li a:after {
+        content: '';
+        height: 15px;
+        width: 15px;
+        border-radius: 0;
+        transform: translateX(-50%) rotate(45deg);
+        top: -22px;
+        z-index: -1
+    }
+
+    .product-grid2 .social li a:hover:after,
+    .product-grid2 .social li a:hover:before {
+        opacity: 1
+    }
+
+    .product-grid2 .add-to-cart {
+        color: #fff;
+        background-color: #404040;
+        font-size: 15px;
+        text-align: center;
+        width: 100%;
+        padding: 10px 0;
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: -100%;
+        transition: all .3s
+    }
+
+    .product-grid2 .add-to-cart:hover {
+        background-color: #3498db;
+        text-decoration: none
+    }
+
+    .product-grid2:hover .add-to-cart {
+        bottom: 0
+    }
+
+    .product-grid2 .product-new-label {
+        background-color: #3498db;
+        color: #fff;
+        font-size: 17px;
+        padding: 5px 10px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: all .3s
+    }
+
+    .product-grid2:hover .product-new-label {
+        opacity: 0
+    }
+
+    .product-grid2 .product-content {
+        padding: 20px 10px;
+        text-align: center
+    }
+
+    .product-grid2 .title {
+        font-size: 17px;
+        margin: 0 0 7px
+    }
+
+    .product-grid2 .title a {
+        color: #303030
+    }
+
+    .product-grid2 .title a:hover {
+        color: #3498db
+    }
+    .zoom {
+        transition: transform .2s; /* Animation */
+    }
+    .zoom:hover {
+        transform: scale(1.1); /* (150% zoom)*/
+    }
+    @media screen and (max-width:990px) {
+        .product-grid2 {
+            margin-bottom: 30px
+        }
+    }
+</style>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
-    <title>GenesRN</title>
-    <style>
-        .texto-top {
-            font-size: 0.8rem;
-            font-family: 'Source Code Pro';
-        }
-        .crop-image {
-            object-fit: cover;
-            width:100%;
-            height:60vh;
-        }
-    </style>
+    <title>GenesRN</title>    
 </head>
 <body>
-<div
-        class="bg-light w-100 container-fluid border-bottom p-2 texto-top"
->
-    <span class="ml-4 align-start">TELEFONE: 00 00000-0000</span>
-    <span class="ml-4 mr-4"> | </span>
-    <span>EMAIL: genesrn@email.com</span>
+<!--<a th:href="@{/logout}" class="text-dark  my-2 my-sm-0" type="submit">Logout</a>-->
+
+<div th:insert="~{/navbar.html}"></div>
+<div class="justify-content-center">
+    <div class="mt-4 mb-4 row justify-content-center col-12  pl-0 ml-0 pr-0">
+        <div class="col-lg-2 mt-1">
+            <a type="button" class="btn btn-outline-info  btn-md btn-block">Bovino</a>
+        </div>
+        <div class="col-lg-2 mt-1">
+            <a type="button" class="btn btn-outline-info  btn-md btn-block">Suíno</a>
+        </div>
+        <div class="col-lg-2 mt-1">
+            <a type="button" class="btn btn-outline-info  btn-md btn-block">Equino</a>
+        </div>
+    </div>
 </div>
-<nav class="navbar navbar-expand-lg navbar-light bg-white mb-2">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/home"
-           style="display: flex; justify-content: space-between; align-items: center;">
-            <img th:src="@{/produto/mostrarImagem/{imagem}(imagem='boi.png')}"
-                 alt="" style="width: 85px; height: 75px;"/>
-            <h2 style="font-size: 1.4rem">GENES-RN</h2>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link active" href="/home">Home</a>
-                <a class="nav-link" href="/produto/vitrine">Loja</a>
-                <a class="nav-link" href="/produto/meusProdutos">Meus produtos</a>
-
-            </div>
-        </div>
-    </div>
-</nav>
-<section class="w-100" style="background-color: #3d315b">
-
-
-</section>
-<section class="w-100 p-4 bg-white">
+<section>
+<div class="container">
     <div class="row">
-        <div class="col">
-            <div class="container">
-                <h1
-                        style="
-                        font-size: 2.4rem;
-                        font-weight: bold;
-                        color: #444b6e;
-                        font-family: courier, arial, helvetica;
-                    ">
-                    SOBRE NÓS
-                </h1>
-                <div style="width: 40px; height: 4px; background-color: #9ab87a"></div>
-            </div>
-            <br>
-            <p class="text-dark text-justify container">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Nam rhoncus interdum mauris, at dapibus lorem mollis eu.
-                Vivamus dictum in odio eu commodo. Quisque vitae ornare erat.
-                Morbi vitae auctor nisl. Etiam orci ex, suscipit vitae rutrum sed,
-                placerat eu leo. Morbi nec purus et urna pharetra maximus id nec velit.
-                Donec posuere interdum tortor id sagittis. Ut faucibus turpis sed
-                finibus lacinia. Vestibulum ac odio ac neque fringilla molestie eget
-                eu ligula. Praesent aliquam dui vitae ipsum feugiat, id finibus tortor
-                rhoncus. Nunc commodo egestas nisl non rhoncus. Cras interdum odio odio,
-                sit amet posuere mauris ullamcorper id.
-            </p>
-        </div>
-    </div>
-</section>
-<section class="w-100 p-4 bg-white">
-    <div class="row">
-        <div class="col-12">
-            <div class="container">
-                <h1
-                        style="
-                        font-size: 2.4rem;
-                        font-weight: bold;
-                        color: #444b6e;
-                        font-family: courier, arial, helvetica;
-                    ">
-                    PRODUTO
-                </h1>
-                <div style="width: 40px; height: 4px; background-color: #9ab87a"></div>
-
-            </div>
-            <br>
-            <p class="text-dark text-justify container">
-                Nullam ut velit nunc. Suspendisse feugiat eros
-                facilisis elit facilisis ultricies. Vestibulum
-                turpis eros, condimentum vel sem non, accumsan
-                dictum elit. Vivamus arcu est, imperdiet id enim id,
-                tincidunt rhoncus diam. Vestibulum vitae efficitur
-                felis, ac porttitor nibh. Vestibulum eleifend egestas
-                faucibus. Ut hendrerit, dolor vitae tempor scelerisque,
-                lectus nulla pulvinar sem, et feugiat libero magna eu nulla.
-                Duis at enim lacus.
-            </p>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="card col-4 p-2" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
+        <div  th:each="produto : ${produtos}" class="col-md-4 col-sm-6">
+            <div class="product-grid2">
+                <div class="product-image2"> <a href="#"> <img  th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.fotoReprodutor})}"
+                                                 class="zoom rounded mx-auto d-block card-img-top" alt="Card image cap" style="width: 15rem; height:13rem;object-fit: contain"> </a>
+                    <ul class="social">
+                        <li><a href="#" data-tip="Ver detalhes"><i class="fa fa-eye"></i></a></li>
+                        <li><a href="#" data-tip="Adicionar"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
                 </div>
-                <div class="card col-4 p-2 " style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-                <div class="card col-4 p-2" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="..." >
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
+                <div class="product-content">
+                    <h3 class="text-capitalize text-center font-weight-bold" style="font-size:18px" th:text="${produto.nome}" ><a href="#"></a></h3> <span class="text-right badge badge-pill badge-info font-weight-bold" th:text="${#numbers.formatCurrency(produto.valor)}"></span>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </section>
 <footer class="text-center text-lg-start text-light" style="background-color: #444b6e">
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
@@ -150,8 +261,15 @@
 </footer>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
 </body>
 </html>

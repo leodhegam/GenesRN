@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<style>
+    .texto-top {
+        font-size: 0.8rem;
+        font-family: 'Source Code Pro';
+    }
+    .crop-image {
+        object-fit: cover;
+        width:100%;
+        height:60vh;
+    }
+</style>
+</head>
+<body>
+<div
+    class="bg-light w-100 container-fluid border-bottom p-2 texto-top"
+>
+<span class="ml-4 align-start">TELEFONE: 00 00000-0000</span>
+<span class="ml-4 mr-4"> | </span>
+<span>EMAIL: genesrn@email.com</span>
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-white mb-2">
+<div class="container-fluid">
+    <a class="navbar-brand" href="/home"
+       style="display: flex; justify-content: space-between; align-items: center;">
+        <img th:src="@{/produto/mostrarImagem/{imagem}(imagem='boi.png')}"
+             alt="" style="width: 85px; height: 75px;"/>
+        <h2 style="font-size: 1.4rem">GENES-RN</h2>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-link active" href="/home">Home</a>
+            <a class="nav-link" href="/produto/vitrine">Loja</a>
+            <a class="nav-link" href="/produto/meusProdutos">Meus produtos</a>
+
+        </div>
+    </div>
+</div>
+</nav>
+<section class="w-100" style="background-color: #3d315b">
+
+
+</section>
+<section class="w-100 p-4 bg-white">
+<div class="row">
+    <div class="col">
+        <div class="container">
+            <h1
+                    style="
+                    font-size: 2.4rem;
+                    font-weight: bold;
+                    color: #444b6e;
+                    font-family: courier, arial, helvetica;
+                ">
+                SOBRE NÓS
+            </h1>
+            <div style="width: 40px; height: 4px; background-color: #9ab87a"></div>
+        </div>
+        <br>
+        <p class="text-dark text-justify container">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Nam rhoncus interdum mauris, at dapibus lorem mollis eu.
+            Vivamus dictum in odio eu commodo. Quisque vitae ornare erat.
+            Morbi vitae auctor nisl. Etiam orci ex, suscipit vitae rutrum sed,
+            placerat eu leo. Morbi nec purus et urna pharetra maximus id nec velit.
+            Donec posuere interdum tortor id sagittis. Ut faucibus turpis sed
+            finibus lacinia. Vestibulum ac odio ac neque fringilla molestie eget
+            eu ligula. Praesent aliquam dui vitae ipsum feugiat, id finibus tortor
+            rhoncus. Nunc commodo egestas nisl non rhoncus. Cras interdum odio odio,
+            sit amet posuere mauris ullamcorper id.
+        </p>
+    </div>
+</div>
+</section>
+<section class="w-100 p-4 bg-white">
+<div class="row">
+    <div class="col-12">
+        <div class="container">
+            <h1
+                    style="
+                    font-size: 2.4rem;
+                    font-weight: bold;
+                    color: #444b6e;
+                    font-family: courier, arial, helvetica;
+                ">
+                PRODUTO
+            </h1>
+            <div style="width: 40px; height: 4px; background-color: #9ab87a"></div>
+
+        </div>
+        <br>
+        <p class="text-dark text-justify container">
+            Nullam ut velit nunc. Suspendisse feugiat eros
+            facilisis elit facilisis ultricies. Vestibulum
+            turpis eros, condimentum vel sem non, accumsan
+            dictum elit. Vivamus arcu est, imperdiet id enim id,
+            tincidunt rhoncus diam. Vestibulum vitae efficitur
+            felis, ac porttitor nibh. Vestibulum eleifend egestas
+            faucibus. Ut hendrerit, dolor vitae tempor scelerisque,
+            lectus nulla pulvinar sem, et feugiat libero magna eu nulla.
+            Duis at enim lacus.
+        </p>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="card col-4 p-2" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <div class="card col-4 p-2 " style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <div class="card col-4 p-2" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="..." >
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+<style>
+        .texto-top {
+            font-size: 0.8rem;
+            font-family: 'Source Code Pro';
+        }
+        .crop-image {
+            object-fit: cover;
+            width:100%;
+            height:60vh;
+        }
+    </style>
+</head>
+<body>
+<div
+        class="bg-light w-100 container-fluid border-bottom p-2 texto-top"
+>
+    <span class="ml-4 align-start">TELEFONE: 00 00000-0000</span>
+    <span class="ml-4 mr-4"> | </span>
+    <span>EMAIL: genesrn@email.com</span>
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-white mb-2">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/home"
+           style="display: flex; justify-content: space-between; align-items: center;">
+            <img th:src="@{/produto/mostrarImagem/{imagem}(imagem='boi.png')}"
+                 alt="" style="width: 85px; height: 75px;"/>
+            <h2 style="font-size: 1.4rem">GENES-RN</h2>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" href="/home">Home</a>
+                <a class="nav-link" href="/produto/vitrine">Loja</a>
+                <a class="nav-link" href="/produto/meusProdutos">Meus produtos</a>
+
+            </div>
+        </div>
+    </div>
+</nav>
+<section class="w-100" style="background-color: #3d315b">
+
+
+</section>
+<section class="w-100 p-4 bg-white">
+    <div class="row">
+        <div class="col">
+            <div class="container">
+                <h1
+                        style="
+                        font-size: 2.4rem;
+                        font-weight: bold;
+                        color: #444b6e;
+                        font-family: courier, arial, helvetica;
+                    ">
+                    SOBRE NÓS
+                </h1>
+                <div style="width: 40px; height: 4px; background-color: #9ab87a"></div>
+            </div>
+            <br>
+            <p class="text-dark text-justify container">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Nam rhoncus interdum mauris, at dapibus lorem mollis eu.
+                Vivamus dictum in odio eu commodo. Quisque vitae ornare erat.
+                Morbi vitae auctor nisl. Etiam orci ex, suscipit vitae rutrum sed,
+                placerat eu leo. Morbi nec purus et urna pharetra maximus id nec velit.
+                Donec posuere interdum tortor id sagittis. Ut faucibus turpis sed
+                finibus lacinia. Vestibulum ac odio ac neque fringilla molestie eget
+                eu ligula. Praesent aliquam dui vitae ipsum feugiat, id finibus tortor
+                rhoncus. Nunc commodo egestas nisl non rhoncus. Cras interdum odio odio,
+                sit amet posuere mauris ullamcorper id.
+            </p>
+        </div>
+    </div>
+</section>
+<section class="w-100 p-4 bg-white">
+    <div class="row">
+        <div class="col-12">
+            <div class="container">
+                <h1
+                        style="
+                        font-size: 2.4rem;
+                        font-weight: bold;
+                        color: #444b6e;
+                        font-family: courier, arial, helvetica;
+                    ">
+                    PRODUTO
+                </h1>
+                <div style="width: 40px; height: 4px; background-color: #9ab87a"></div>
+
+            </div>
+            <br>
+            <p class="text-dark text-justify container">
+                Nullam ut velit nunc. Suspendisse feugiat eros
+                facilisis elit facilisis ultricies. Vestibulum
+                turpis eros, condimentum vel sem non, accumsan
+                dictum elit. Vivamus arcu est, imperdiet id enim id,
+                tincidunt rhoncus diam. Vestibulum vitae efficitur
+                felis, ac porttitor nibh. Vestibulum eleifend egestas
+                faucibus. Ut hendrerit, dolor vitae tempor scelerisque,
+                lectus nulla pulvinar sem, et feugiat libero magna eu nulla.
+                Duis at enim lacus.
+            </p>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="card col-4 p-2" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+                <div class="card col-4 p-2 " style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+                <div class="card col-4 p-2" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="..." >
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="text-center text-lg-start text-light" style="background-color: #444b6e">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2021 Copyright:
+        <a class="text-dark" href="https://Genes.com/">Genes.com</a>
+    </div>
+    <!-- Copyright -->
+                    
+</footer>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

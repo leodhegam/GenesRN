@@ -1,5 +1,6 @@
 package com.pa2.genesrn.repository;
 
+import com.pa2.genesrn.enums.EnumGenero;
 import com.pa2.genesrn.model.Produto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -41,8 +42,9 @@ public class ProdutoCustomRepositoryImpl implements ProdutoCustomRepository {
                         produto.setValor(rs.getFloat("valor"));
                         produto.setFotoReprodutor(rs.getString("foto_reprodutor"));
                         produto.setQuantidade(rs.getInt("quantidade"));
-
+                        produto.setGenero(EnumGenero.valueOf(rs.getString("genero")));
                         return produto;
+
                     }
                 });
         return produtos;

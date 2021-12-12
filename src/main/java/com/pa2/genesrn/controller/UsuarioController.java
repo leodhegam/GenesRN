@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
@@ -46,6 +47,12 @@ public class UsuarioController {
 
         return "/home";
     }
+//    @GetMapping("/home")
+//    public String home(Model model) {
+//        List<Produto> produtos = produtoService.findAll();
+//        model.addAttribute("produtos", produtos);
+//        return "/home";
+//    }
 
     @GetMapping("/")
     public String login() {
@@ -58,8 +65,12 @@ public class UsuarioController {
     }
 
     @PostMapping("/cadastrarUsuario")
-    public String cadastrar(@ModelAttribute @Valid Usuario usuario, HttpSession session, Errors errors, BindingResult bindingResult) {
-        Usuario usuarioExists = usuarioRepository.findByEmail(usuario.getEmail());
+    public String cadastrar(@ModelAttribute @Valid Usuario usuario, HttpSession session, Errors errors, HttpServletRequest request) {
+        Usuario usuarioExists = usuarioService.findByEmail(usuario.getEmail());
+
+        String confirmaSenha = request.getParameter("confirmaSenha");
+        String senha = usuario.getSenha();
+
         if (usuarioExists != null) {
             session.setAttribute("messageError", "E-mail já existente");
             return "redirect:/cadastrarUsuario";
@@ -67,14 +78,47 @@ public class UsuarioController {
         if (errors.hasErrors()) {
             session.setAttribute("message", "Verifique os campos");
             return "/cadastrarUsuario";
+        } else if (!senha.equals(confirmaSenha)) {
+            session.setAttribute("messageError", "As senhas não coincidem");
+            return "/cadastrarUsuario";
         } else {
-            usuario.setSenha(bp.encode(usuario.getSenha()));
-            usuarioRepository.save(usuario);
+            usuarioService.save(usuario);
             session.setAttribute("message", "Usuário registrado com sucesso");
             return "redirect:/";
         }
+    }
 
+    @GetMapping("edit/{id}")
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid usuario Id:" + id));
+        model.addAttribute("usuario", usuario);
+        return "update-usuario";
+    }
 
+    @PostMapping("update/{id}")
+    public String updateUsuario(@PathVariable("id") Integer id, @Valid Usuario usuario, BindingResult result,
+                                Model model, HttpServletRequest httpServletRequest, HttpSession session) {
+        if (result.hasErrors()) {
+            usuario.setId(id);
+            return "update-usuario";
+        }
+        String senhaDb = usuario.getSenha();
+        String senhaInformada = httpServletRequest.getParameter("senhaInformada");
+
+        String novaSenha = httpServletRequest.getParameter("novaSenha");
+
+        if (bp.matches(senhaInformada, senhaDb)) {
+            usuario.setSenha(bp.encode(novaSenha));
+        } else if (senhaInformada.isEmpty() && novaSenha.isEmpty()) {
+            usuario.setSenha(usuario.getSenha());
+        } else {
+            session.setAttribute("messageError", "Senhas não coincidem");
+        }
+
+        usuarioService.saveAndFlush(usuario);
+//        model.addAttribute("usuario", usuarioRepository.findAll());
+        return "update-usuario";
     }
 
 }

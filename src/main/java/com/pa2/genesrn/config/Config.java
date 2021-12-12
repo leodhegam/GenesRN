@@ -23,6 +23,7 @@ public class Config extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder getPassword() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider dao = new DaoAuthenticationProvider();
