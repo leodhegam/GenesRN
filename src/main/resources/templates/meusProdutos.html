@@ -39,7 +39,8 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="/home"
            style="display: flex; justify-content: space-between; align-items: center;">
-            <img src="img/boi.png" alt="" style="width: 85px; height: 75px;"/>
+            <img th:src="@{/produto/mostrarImagem/{imagem}(imagem='boi.png')}"
+                    alt="" style="width: 85px; height: 75px;"/>
             <h2 style="font-size: 1.4rem">GENES-RN</h2>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +90,7 @@
                             </a>
                             <a
                                     class="ml-2"
-                                    th:href="@{'/produto/alterar/'+${produto.getNome()}}"
+                                    th:href="@{'/produto/alterar/'+${produto.getId()}}"
                                     data-toggle="tooltip"
                                     data-placement="bottom"
                                     title="Alterar produto!"

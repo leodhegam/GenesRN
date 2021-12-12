@@ -1,6 +1,7 @@
 package com.pa2.genesrn.service;
 
 import com.pa2.genesrn.model.Produto;
+import com.pa2.genesrn.model.Usuario;
 import com.pa2.genesrn.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,11 +24,13 @@ public class ProdutoService {
         produtoRepository.save(produto);
     }
 
-    public Produto getProductById(String nome) {
-        return produtoRepository.findByNome(nome);
+    public Produto getProductById(Long id) {
+        return produtoRepository.findById(id);
     }
 
-    public List<Produto> buscarProdutos(Integer idUsuario){
-        return produtoRepository.listarProdutoPorUsuario(idUsuario);
+    public List<Produto> buscarProdutos(Usuario usuario){
+//        return produtoRepository.listarProdutoPorUsuario(idUsuario);
+        return produtoRepository.findAllByUsuario(usuario);
     }
+
 }

@@ -41,9 +41,8 @@ public class ProdutoController {
     @GetMapping("/meusProdutos")
     public String produtos(Principal p, Model model) {
         System.out.println("meusProdutos");
-        String nome = p.getName();
-        Usuario usuario = usuarioRepository.findByEmail(nome);
-        List<Produto> produtos = produtoService.buscarProdutos(usuario.getId());
+        Usuario usuario = usuarioRepository.findByEmail(p.getName());
+        List<Produto> produtos = produtoService.buscarProdutos(usuario);
         System.out.println("Produtos antes "+produtos);
         model.addAttribute("usuario", usuario);
         model.addAttribute("produtos", produtos);
@@ -51,10 +50,9 @@ public class ProdutoController {
     }
 
     @RequestMapping("/alterar/{produto}")
-    public ModelAndView alterarProduto(@PathVariable(name = "produto") String produto){
+    public ModelAndView alterarProduto(@PathVariable(name = "produto") String idProduto){
         ModelAndView modelAndView = new ModelAndView("alterar");
-        var upProd = produtoService.getProductById(produto);
-        System.out.println(upProd);
+        var upProd = produtoService.getProductById(Long.valueOf(idProduto));
         modelAndView.setViewName("alterar");
         modelAndView.addObject("produto", upProd);
         return modelAndView;
@@ -62,11 +60,9 @@ public class ProdutoController {
     
     @GetMapping("/vitrine")
     public String vitrineProdutos(Principal p, Model model) {
-        System.out.println("meusProdutos");
         String nome = p.getName();
         Usuario usuario = usuarioRepository.findByEmail(nome);
-        List<Produto> produtos = produtoService.buscarProdutos(usuario.getId());
-        System.out.println(produtos);
+        List<Produto> produtos = produtoService.buscarProdutos(usuario);
         model.addAttribute("usuario", usuario);
         model.addAttribute("produtos", produtos);
 
