@@ -59,6 +59,16 @@ public class ProdutoController {
         modelAndView.addObject("produto", upProd);
         return modelAndView;
     }
+
+    @RequestMapping("/detalhesProduto/{produto}")
+    public ModelAndView detalhesProduto(@PathVariable(name = "produto") String idProduto){
+        ModelAndView modelAndView = new ModelAndView("detalhesProduto");
+        var upProd = produtoService.getProductById(Long.valueOf(idProduto));
+
+        modelAndView.setViewName("detalhesProduto");
+        modelAndView.addObject("produto", upProd);
+        return modelAndView;
+    }
     
     @GetMapping("/vitrine")
     public String vitrineProdutos(Principal p, Model model) {

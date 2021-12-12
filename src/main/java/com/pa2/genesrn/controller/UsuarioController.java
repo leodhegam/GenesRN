@@ -118,7 +118,7 @@ public class UsuarioController {
 
         usuarioService.saveAndFlush(usuario);
 //        model.addAttribute("usuario", usuarioRepository.findAll());
-        return "update-usuario";
+        return "redirect:/home";
     }
 
 }
