@@ -214,14 +214,15 @@
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <title>GenesRN</title>
 </head>
-<body>
+<body style="background: rgba(0, 0, 0, 0) url(img/fundo.svg) no-repeat scroll left center;
+    background-size: cover;">
 <!--<a th:href="@{/logout}" class="text-dark  my-2 my-sm-0" type="submit">Logout</a>-->
 
 <div th:insert="~{/navbar.html}"></div>
 <div class="justify-content-center">
     <div class="mt-4 mb-4 row justify-content-center col-12  pl-0 ml-0 pr-0">
         <div class="col-lg-2 mt-1">
-            <a type="button" class="btn btn-outline-info  btn-md btn-block">Bovino</a>
+            <a type="button" class="btn btn-outline-info  btn-md btn-block ">Bovino</a>
         </div>
         <div class="col-lg-2 mt-1">
             <a type="button" class="btn btn-outline-info  btn-md btn-block">Suíno</a>
@@ -243,7 +244,10 @@
                     </ul>
                 </div>
                 <div class="product-content">
-                    <h3 class="text-capitalize text-center font-weight-bold" style="font-size:18px" th:text="${produto.nome}" ><a href="#"></a></h3> <span class="text-right badge badge-pill badge-info font-weight-bold" th:text="${#numbers.formatCurrency(produto.valor)}"></span>
+                    <h3 class="text-capitalize text-center font-weight-bold" style="font-size:18px" th:text="${produto.nome.toLowerCase()}" >
+                        <a href="#"></a></h3>
+                    <span class="text-right badge badge-pill badge-info font-weight-bold" th:text="${#numbers.formatCurrency(produto.valor)}">
+                    </span>
                 </div>
             </div>
         </div>
@@ -262,6 +266,5 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-
 </body>
 </html>
