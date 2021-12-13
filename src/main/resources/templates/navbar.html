@@ -22,9 +22,10 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/produto/meusProdutos">Meus produtos</a>
-                         <a th:href="@{/edit/{id}(id=${usuario.id})}" class="dropdown-item" >Editar perfil</a>
-<!--                        <a class="dropdown-item" href="/update-usuario">Editar perfil</a>-->
+                        <a th:href="@{/edit/{id}(id=${usuario.id})}" class="dropdown-item" >Editar perfil</a>
+                        <a th:href="@{/sobre}" class="dropdown-item">Sobre</a>
                         <a th:href="@{/logout}" class="dropdown-item" type="submit">Logout</a>
+
                     </div>
                 </li>
             </span>
