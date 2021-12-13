@@ -27,38 +27,7 @@
     </style>
 </head>
 <body>
-
-<div
-        class="bg-light w-100 container-fluid border-bottom p-2 texto-top"
->
-    <span class="ml-4 align-start">TELEFONE: 00 00000-0000</span>
-    <span class="ml-4 mr-4"> | </span>
-    <span>EMAIL: genesrn@email.com</span>
-</div>
-<nav class="navbar navbar-expand-lg navbar-light bg-white mb-2">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/home"
-           style="display: flex; justify-content: space-between; align-items: center;">
-            <img th:src="@{/produto/mostrarImagem/{imagem}(imagem='boi.png')}"
-                    alt="" style="width: 85px; height: 75px;"/>
-            <h2 style="font-size: 1.4rem">GENES-RN</h2>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link active" href="/home">Home</a>
-                <a class="nav-link" href="/produto/meusProdutos">Meus produtos</a>
-                <a class="nav-link" href="/produto/vitrine">Vitrine</a>
-                <a class="nav-link" href="#">Sobre</a>
-                <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Contato</a>
-            </div>
-        </div>
-    </div>
-</nav>
-
-
+<div th:insert="~{/navbar.html}"></div>
 <header class="jumbotron mt-4 mb-3">
     <h2>#Meus produtos cadastrados</h2>
 </header>

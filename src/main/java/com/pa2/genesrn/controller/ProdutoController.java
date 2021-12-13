@@ -50,23 +50,25 @@ public class ProdutoController {
         return "meusProdutos";
     }
 
-    @RequestMapping("/alterar/{produto}")
-    public ModelAndView alterarProduto(@PathVariable(name = "produto") String idProduto){
+    @GetMapping("/alterar/{produto}")
+    public ModelAndView alterarProduto(@PathVariable(name = "produto") String idProduto, Principal p){
         ModelAndView modelAndView = new ModelAndView("alterar");
+        Usuario usuario = usuarioRepository.findByEmail(p.getName());
         var upProd = produtoService.getProductById(Long.valueOf(idProduto));
-
         modelAndView.setViewName("alterar");
+        modelAndView.addObject("usuario", usuario);
         modelAndView.addObject("produto", upProd);
         return modelAndView;
     }
 
     @RequestMapping("/detalhesProduto/{produto}")
-    public ModelAndView detalhesProduto(@PathVariable(name = "produto") String idProduto){
+    public ModelAndView detalhesProduto(@PathVariable(name = "produto") String idProduto, Principal p){
         ModelAndView modelAndView = new ModelAndView("detalhesProduto");
         var upProd = produtoService.getProductById(Long.valueOf(idProduto));
-
         modelAndView.setViewName("detalhesProduto");
         modelAndView.addObject("produto", upProd);
+        Usuario usuario = usuarioRepository.findByEmail(p.getName());
+        modelAndView.addObject("usuario", usuario);
         return modelAndView;
     }
     

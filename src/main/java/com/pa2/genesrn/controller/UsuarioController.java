@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -53,6 +54,15 @@ public class UsuarioController {
 //        model.addAttribute("produtos", produtos);
 //        return "/home";
 //    }
+
+    @GetMapping("/sobre")
+    public ModelAndView sobre(Principal principal) {
+        ModelAndView modelAndView = new ModelAndView();
+        Usuario usuario = usuarioRepository.findByEmail(principal.getName());
+        modelAndView.addObject("usuario", usuario);
+        modelAndView.setViewName("sobre");
+        return modelAndView;
+    }
 
     @GetMapping("/")
     public String login() {
