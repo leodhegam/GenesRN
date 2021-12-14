@@ -1,92 +1,289 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<style>
+    .container {
+        margin-top: 50px
+    }
+
+    h3.h3 {
+        text-align: center;
+        margin: 1em;
+        text-transform: capitalize;
+        font-size: 1.7em
+    }
+
+    .demo {
+        padding: 45px 0
+    }
+
+    .product-grid2 {
+        font-family: 'Open Sans', sans-serif;
+        position: relative
+    }
+
+    .product-grid2 .product-image2 {
+        overflow: hidden;
+        position: relative
+    }
+
+    .product-grid2 .product-image2 a {
+        display: block
+    }
+
+    .product-grid2 .product-image2 img {
+        width: 100%;
+        height: auto
+    }
+
+    .product-image2 .pic-1 {
+        opacity: 1;
+        transition: all .5s
+    }
+
+    .product-grid2:hover .product-image2 .pic-1 {
+        opacity: 0
+    }
+
+    .product-image2 .pic-2 {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: all .5s
+    }
+
+    .product-grid2:hover .product-image2 .pic-2 {
+        opacity: 1
+    }
+
+    .product-grid2 .social {
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        bottom: 20px;
+        right: 25px;
+        z-index: 1
+    }
+
+    .product-grid2 .social li {
+        margin: 0 0 10px;
+        display: block;
+        transform: translateX(100px);
+        transition: all .5s
+    }
+
+    .product-grid2:hover .social li {
+        transform: translateX(0)
+    }
+
+    .product-grid2:hover .social li:nth-child(2) {
+        transition-delay: .15s
+    }
+
+    .product-grid2:hover .social li:nth-child(3) {
+        transition-delay: .25s
+    }
+
+    .product-grid2 .social li a {
+        color: #505050;
+        background-color: #fff;
+        font-size: 17px;
+        line-height: 45px;
+        text-align: center;
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        display: block;
+        transition: all .3s ease 0s
+    }
+
+    .product-grid2 .social li a:hover {
+        color: #fff;
+        background-color: #3498db;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .5)
+    }
+
+    .product-grid2 .social li a:after,
+    .product-grid2 .social li a:before {
+        content: attr(data-tip);
+        color: #fff;
+        background-color: #000;
+        font-size: 12px;
+        line-height: 22px;
+        border-radius: 3px;
+        padding: 0 5px;
+        white-space: nowrap;
+        opacity: 0;
+        transform: translateX(-50%);
+        position: absolute;
+        left: 50%;
+        top: -30px
+    }
+
+    .product-grid2 .social li a:after {
+        content: '';
+        height: 15px;
+        width: 15px;
+        border-radius: 0;
+        transform: translateX(-50%) rotate(45deg);
+        top: -22px;
+        z-index: -1
+    }
+
+    .product-grid2 .social li a:hover:after,
+    .product-grid2 .social li a:hover:before {
+        opacity: 1
+    }
+
+    .product-grid2 .add-to-cart {
+        color: #fff;
+        background-color: #404040;
+        font-size: 15px;
+        text-align: center;
+        width: 100%;
+        padding: 10px 0;
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: -100%;
+        transition: all .3s
+    }
+
+    .product-grid2 .add-to-cart:hover {
+        background-color: #3498db;
+        text-decoration: none
+    }
+
+    .product-grid2:hover .add-to-cart {
+        bottom: 0
+    }
+
+    .product-grid2 .product-new-label {
+        background-color: #3498db;
+        color: #fff;
+        font-size: 17px;
+        padding: 5px 10px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: all .3s
+    }
+
+    .product-grid2:hover .product-new-label {
+        opacity: 0
+    }
+
+    .product-grid2 .product-content {
+        padding: 20px 10px;
+        text-align: center
+    }
+
+    .product-grid2 .title {
+        font-size: 17px;
+        margin: 0 0 7px
+    }
+
+    .product-grid2 .title a {
+        color: #303030
+    }
+
+    .product-grid2 .title a:hover {
+        color: #3498db
+    }
+
+    .zoom {
+        transition: transform .2s; /* Animation */
+    }
+    #btn-back-to-top {
+        /*position: fixed;*/
+        bottom: 20px;
+        right: 20px;
+        /*width: 100%;*/
+        position: fixed;
+        z-index: 1051; /* anything above 1050*/
+        /*background: #fff;*/
+        /*box-shadow: 0 5px 20px 4px rgba(0,0,0,.1);*/
+    }
+    .zoom:hover {
+        transform: scale(1.1); /* (150% zoom)*/
+    }
+
+    @media screen and (max-width: 990px) {
+        .product-grid2 {
+            margin-bottom: 30px
+        }
+    }
+</style>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <title>Meus Produtos</title>
-    <style>
-        .texto-top {
-            font-size: 0.8rem;
-            font-family: 'Source Code Pro';
-        }
-        .crop {
-             object-fit: cover;
-             width:100%;
-             height:14rem;
-        }
-
-        .crop-image {
-            object-fit: cover;
-            width:100%;
-            height:24rem;
-        }
-    </style>
 </head>
 <body>
 <div th:insert="~{/navbar.html}"></div>
-<header class="jumbotron mt-4 mb-3">
-    <h2>#Meus produtos cadastrados</h2>
-</header>
-<div th:insert="~{/produto/cadastrarProduto}"></div>
-<section class="container m-5">
-    <div class="row">
-        <div th:each="produto : ${produtos}" class="mb-3 col-6">
-            <div class="card w-100">
-                <div class="d-flex justify-content-around align-items-center">
-                    <img
-                            th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.fotoReprodutor})}"
-                            class="card-img-top crop w-50"
-                            src="..."
-                            alt="Card image cap"
-                    >
-                    <div class="card-body">
-                        <h5 th:text="${produto.nome}"></h5>
-                        <p class="card-text" th:text="${produto.descricao}"></p>
-                        <div class="d-flex justify-content-start align-items-end mt-5">
-                            <br />
-                            <a th:href="@{'/produto/detalhes/'+${produto.nome}+'/'+${usuario.id}}"
-                               data-toggle="tooltip"
-                               data-placement="bottom"
-                               title="Detalhes do produto!"
-                            >
-                                <img
-                                        style="width: 24px"
-                                        src="https://img.icons8.com/material-outlined/50/000000/document--v2.png"/>
-                            </a>
-                            <a
-                                    class="ml-2"
-                                    th:href="@{'/produto/alterar/'+${produto.getId()}}"
-                                    data-toggle="tooltip"
-                                    data-placement="bottom"
-                                    title="Alterar produto!"
-                            >
-                                <img
-                                        style="width: 24px"
-                                        src="https://img.icons8.com/material-outlined/50/000000/edit--v4.png"/>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <h1 class="my-4">Meus produtos
+    </h1>
+    <div class="row  m-3 border p-3" th:each="produto : ${produtos}">
+
+        <div class="col-md-7">
+            <a href="#">
+                <img style="width: 30rem;height: 15rem; object-fit: contain;" th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.fotoReprodutor})}" class="card-img-top"
+                     src="..." alt="Card image cap">
+            </a>
+        </div>
+
+        <div class="col-md-5">
+            <h3 class="text-capitalize" th:text="'Nome: '+ ${produto.nome.toLowerCase()}"></h3>
+            <p th:text="'Gênero: '+ ${produto.genero}"></p>
+            <p class="font-weight-bold" th:text="'Descrição: '+ ${produto.descricao}">
+                <span></span>
+            </p>
+            <p
+            >Preço/Unidade: <span class=" badge badge-pill badge-info font-weight-bold" th:text="${#numbers.formatCurrency(produto.valor)}"></span></p>
+            <p></p>
+            <p th:text="'Quantidade em estoque: ' + ${produto.quantidade}"></p>
+
+            <!--            <a class="btn btn-outline-info m-3" th:href="@{'/produto/detalhes/'+${produto.nome}+'/'+${usuario.id}}"-->
+            <!--               data-toggle="tooltip"-->
+            <!--               data-placement="bottom"-->
+            <!--            >Detalhes </a>-->
+            <a th:href="@{'/produto/alterar/'+${produto.getId()}}" class="btn btn-outline-primary" href="#">Editar
+                produto</a>
         </div>
     </div>
-</section>
-<footer class="bg-light text-center text-lg-start">
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2021 Copyright:
-        <a class="text-dark" href="https://Genes.com/">Genes.com</a>
-    </div>
-    <!-- Copyright -->
 
-</footer>
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</div>
+<div class="float-right">
+    <div  th:insert="~{/produto/cadastrarProduto}"
+          class="btn-floating btn-lg"
+          id="btn-back-to-top">
+        <i class="fa fa-plus"></i>
+    </div>
+</div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<!--<a href="https://wa.me/5584994479140?text=Adorei%20seu%20artigo" style="position:fixed;width:60px;height:60px;bottom:40px;right:40px;background-color:#25d366;color:#FFF;border-radius:50px;text-align:center;font-size:30px;box-shadow: 1px 1px 2px #888;-->
+<!--  z-index:1000;" target="_blank">-->
+<!--    <i style="margin-top:16px" class="fa fa-whatsapp"></i>-->
+<!--</a>-->
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 </html>
