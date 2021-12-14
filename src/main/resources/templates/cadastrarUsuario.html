@@ -23,17 +23,11 @@
     </div>
     <div class="login-content">
         <form class="login" th:action="@{/cadastrarUsuario}" th:object="${usuario}" method="POST">
-            <div th:if="${session.message}" th:classaappend="${session.message}" class="alert alert-success"
-                 role="alert">
-                <p th:text="${session.message}"></p>
-                <th:block th:text="${#session.removeAttribute('message')}"></th:block>
-            </div>
             <div th:if="${session.messageError}" th:classaappend="${session.messageError}" class="alert alert-danger"
                  role="alert">
                 <p th:text="${session.messageError}"></p>
                 <th:block th:text="${#session.removeAttribute('messageError')}"></th:block>
             </div>
-
             <h2 class="title">Cadastro</h2>
 
             <!--            Nome-->
