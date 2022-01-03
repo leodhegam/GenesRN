@@ -13,8 +13,8 @@
     <title>Alterar</title>
 </head>
 <body>
-<div th:insert="~{/navbar.html}"></div>
-<div class="row mt-4">
+<div th:insert="~{/fragments/navbar.html}"></div>
+<div class="row mt-4 mr-0 ml-0">
     <div class="col-md-2"></div>
     <section class="col-md-8 mt-2">
         <h2 class="text-center"
@@ -25,7 +25,8 @@
                 font-family: courier, arial, helvetica;
             "
         >EDITAR PRODUTO</h2>
-        <form class="col-12 mt-2" th:action="@{/produto/cadastrarProduto}" th:object="${produto}"  enctype="multipart/form-data" method="POST">
+        <form class="col-12 mt-2" th:action="@{/produto/cadastrarProduto}" th:object="${produto}"
+              enctype="multipart/form-data" method="POST">
             <div class="mb-2" style="width: 100%; height: 4px; background-color: #9ab87a"></div>
             <div class="form-row">
                 <div class="form-group col-12">
@@ -39,7 +40,8 @@
                         <br>
                     </div>
                     <input class="mt-2" th:if="*{fotoReprodutor} == null" name="imageFile" type="file"/>
-                    <input name="fotoReprodutor" th:if="*{fotoReprodutor} != null" type="hidden" th:value="*{fotoReprodutor}">
+                    <input name="fotoReprodutor" th:if="*{fotoReprodutor} != null" type="hidden"
+                           th:value="*{fotoReprodutor}">
                 </div>
                 <input name="id" th:value="*{id}" hidden>
                 <div class="form-group col-md-6">
@@ -47,7 +49,8 @@
 
                     <input th:if="*{usuario} != null" hidden
                            th:attr="name='usuario.id'" th:value="*{usuario.id}"/>
-                    <input name="nome" th:field="*{nome}" type="text" class="form-control" id="inputNome" placeholder="Nome">
+                    <input name="nome" th:field="*{nome}" type="text" class="form-control" id="inputNome"
+                           placeholder="Nome">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="tipo">Gênero</label></br>
@@ -59,7 +62,8 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputQuantidade">Quantidade</label>
-                    <input name="quantidade" th:field="*{quantidade}" type="number" class="form-control" id="inputQuantidade"
+                    <input name="quantidade" th:field="*{quantidade}" type="number" class="form-control"
+                           id="inputQuantidade"
                            placeholder="Quantidade">
                 </div>
                 <div class="form-group col-md-6">
@@ -73,26 +77,27 @@
                           placeholder="Descricao"></textarea>
             </div>
             <div class="d-flex justify-content-between mb-4">
+                <a th:href="@{/produto/meusProdutos}" type="button" class="btn btn-secondary text-light">Voltar</a>
                 <button type="submit" class="btn btn-success">Atualizar</button>
-                <a th:href="@{/produto/meusProdutos}" type="button" class="btn btn-secondary text-light">Fechar</a>
             </div>
             <div style="width: 100%; height: 4px; background-color: #9ab87a"></div>
+        </form>
+    </section>
+    <div class="col-md-2"></div>
 </div>
-</form>
-</section>
-<div class="col-md-2"></div>
-</div>
-<footer class="text-center text-lg-start text-light mt-5" style="background-color: #444b6e">
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2021 Copyright:
-        <a href="https://Genes.com/">Genes.com</a>
-    </div>
-</footer>
+
+<br>
+<br>
 
 
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 </html>

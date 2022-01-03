@@ -21,7 +21,7 @@
     <title>Sobre nós</title>
 </head>
 <body>
-<div th:insert="~{/navbar.html}"></div>
+<div th:insert="~{/fragments/navbar.html}"></div>
 <section class="w-100" style="background-color: #3d315b">
 
 
@@ -380,12 +380,7 @@
         </div>
     </div>
 </section>
-<footer class="text-center text-lg-start text-light mt-5" style="background-color: #444b6e">
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2021 Copyright:
-        <a href="https://Genes.com/">Genes.com</a>
-    </div>
-</footer>
+<div th:insert="~{/fragments/footer.html}"></div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

@@ -71,7 +71,7 @@ public class UsuarioController {
 
     @GetMapping("/cadastrarUsuario")
     public String cadastrar() {
-        return "cadastrarUsuario";
+        return "/usuario/cadastrarUsuario";
     }
 
     @PostMapping("/cadastrarUsuario")
@@ -103,7 +103,7 @@ public class UsuarioController {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid usuario Id:" + id));
         model.addAttribute("usuario", usuario);
-        return "update-usuario";
+        return "/usuario/editarUsuario";
     }
 
     @PostMapping("update/{id}")
@@ -111,7 +111,7 @@ public class UsuarioController {
                                 Model model, HttpServletRequest httpServletRequest, HttpSession session) {
         if (result.hasErrors()) {
             usuario.setId(id);
-            return "update-usuario";
+            return "/usuario/editarUsuario";
         }
         String senhaDb = usuario.getSenha();
         String senhaInformada = httpServletRequest.getParameter("senhaInformada");

@@ -1,7 +1,6 @@
 package com.pa2.genesrn.controller;
 
 
-import com.pa2.genesrn.enums.EnumGenero;
 import com.pa2.genesrn.model.Produto;
 import com.pa2.genesrn.model.Usuario;
 import com.pa2.genesrn.repository.ProdutoRepository;
@@ -20,7 +19,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -47,15 +45,15 @@ public class ProdutoController {
         System.out.println("Produtos antes "+produtos);
         model.addAttribute("usuario", usuario);
         model.addAttribute("produtos", produtos);
-        return "meusProdutos";
+        return "/produto/meusProdutos";
     }
 
     @GetMapping("/alterar/{produto}")
     public ModelAndView alterarProduto(@PathVariable(name = "produto") String idProduto, Principal p){
-        ModelAndView modelAndView = new ModelAndView("alterar");
+        ModelAndView modelAndView = new ModelAndView("/produto/editarProduto");
         Usuario usuario = usuarioRepository.findByEmail(p.getName());
         var upProd = produtoService.getProductById(Long.valueOf(idProduto));
-        modelAndView.setViewName("alterar");
+        modelAndView.setViewName("/produto/editarProduto");
         modelAndView.addObject("usuario", usuario);
         modelAndView.addObject("produto", upProd);
         return modelAndView;
@@ -63,9 +61,9 @@ public class ProdutoController {
 
     @RequestMapping("/detalhesProduto/{produto}")
     public ModelAndView detalhesProduto(@PathVariable(name = "produto") String idProduto, Principal p){
-        ModelAndView modelAndView = new ModelAndView("detalhesProduto");
+        ModelAndView modelAndView = new ModelAndView("/produto/detalhesProduto");
         var upProd = produtoService.getProductById(Long.valueOf(idProduto));
-        modelAndView.setViewName("detalhesProduto");
+        modelAndView.setViewName("/produto/detalhesProduto");
         modelAndView.addObject("produto", upProd);
         Usuario usuario = usuarioRepository.findByEmail(p.getName());
         modelAndView.addObject("usuario", usuario);

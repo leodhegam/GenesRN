@@ -18,14 +18,19 @@ public class Produto {
     private Long id;
 
     private String nome;
-
     private String descricao;
-
     private Float valor;
-
     private String fotoReprodutor;
-
     private Integer quantidade;
+    private String linhagem;
+    private String registro;
+    private String criador;
+    private String proprietario;
+    private String dataNascimento;
+    private String codigo;
+    private String categoria;
+    private Float peso;
+    private String raca;
 
     @NotNull
     @Column(name = "genero")
