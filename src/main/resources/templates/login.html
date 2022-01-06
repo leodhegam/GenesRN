@@ -23,9 +23,6 @@
         <form class="login" th:action="@{/login}" method="POST">
 
             <h2 class="title">Login</h2>
-            <div th:if="${param.logout}">
-                <h5 class="text-center text-success"> Logout </h5>
-            </div>
 
             <div th:if="${param.error}">
                 <h5 class="text-danger text-success"> E-mail ou senha inválido </h5>

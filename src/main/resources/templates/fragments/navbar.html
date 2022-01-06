@@ -14,16 +14,23 @@
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
+
+            <a th:if="${#authorization.expression('isAnonymous()')}" class="nav-link font-weight-bold text-white"
+               href="/login">Login <span class="sr-only">(current)</span></a>
+
+            <a th:if="${#authorization.expression('isAnonymous()')}" class="nav-link font-weight-bold text-white"
+               href="/cadastrarUsuario">Cadastrar <span class="sr-only">(current)</span></a>
+
             <span sec:authorize="isAuthenticated()" class="navbar-text mr-2">
                 <li class="nav-item dropdown " style="list-style: none;">
-                    <a th:text="${usuario.nome}" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    <a th:text="${usuario.nome}" class="nav-link dropdown-toggle font-weight-bold" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                           <i class="fa fa-user" aria-hidden="true"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/produto/meusProdutos">Meus produtos</a>
                         <a th:href="@{/edit/{id}(id=${usuario.id})}" class="dropdown-item" >Editar perfil</a>
-                        <a th:href="@{/sobre}" class="dropdown-item">Sobre</a>
+<!--                        <a th:href="@{/sobre}" class="dropdown-item">Sobre</a>-->
                         <a th:href="@{/logout}" class="dropdown-item" type="submit">Logout</a>
 
                     </div>

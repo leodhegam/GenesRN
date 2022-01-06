@@ -50,6 +50,10 @@ public class Config extends WebSecurityConfigurerAdapter {
                 .permitAll().and().formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/home")
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
                 .and().csrf().disable();
     }
 }
