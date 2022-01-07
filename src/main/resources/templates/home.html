@@ -261,7 +261,13 @@
                             <ul class="social">
                                 <li><a th:href="@{'produto/detalhesProduto/'+${produto.getId()}}"
                                        data-tip="Ver detalhes"><i class="fa fa-eye"></i></a></li>
-                                <li><a href="#" data-tip="Adicionar"><i class="fa fa-shopping-cart"></i></a></li>
+<!--                                <li>-->
+<!--                                    <button class="btn btn-outline-warning" type="button" th:data-id="${produto.id}"-->
+<!--                                            onclick="addCart(this.getAttribute('data-id'))">Editar-->
+<!--                                        serviço-->
+<!--                                    </button>-->
+<!--                                </li>-->
+                                <li><a data-tip="Adicionar" th:data-id="${produto.id}" onclick="addCart(this.getAttribute('data-id'))"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
 
 
@@ -291,5 +297,71 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="/js/sweetalert2.all.min.js" rel="script"></script>
+<script src="js/main.js"></script>
 </body>
+<script>
+    function addCart(idProduto) {
+        const baseurl = window.location.origin;
+        $.ajax({
+            url : baseurl+"/loja/add-item/"+idProduto,
+            type : 'get',
+            success: function (response){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Produto Adicionado',
+                    text: 'O produto foi adicionado ao seu carrinho!',
+                })
+                countQtdeProdutos()
+            },
+            error: function (xhr, textStatus, error){
+                console.log(xhr)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ooops...',
+                    text: 'Houve um problema interno e o produto não pôde ser adicionado ao carrinho',
+                })
+            }
+        });
+        countQtdeProdutos();
+    }
+    function countQtdeProdutos() {
+        const produtos = getCookie('produtos');
+        const produtosArray = produtos.split("/");
+        let count = 0;
+        produtosArray.forEach((produto) => {
+            if (produto != '') {
+                count++;
+            }
+        });
+
+        const elements = document.getElementsByClassName('qtdProdutos');
+
+        for (let i = 0; i < elements.length; i++) {
+            const element = elements.item(i);
+            element.innerHTML = count;
+        }
+    }
+    function getCookie(cName) {
+        const name = cName + "=";
+        const cDecoded = decodeURIComponent(document.cookie); //to be careful
+        const cArr = cDecoded.split('; ');
+        let res;
+        cArr.forEach(val => {
+            if (val.indexOf(name) === 0) res = val.substring(name.length);
+        })
+        return res
+    }
+    $(document).ready(function () {
+        countQtdeProdutos();
+    });
+</script>
 </html>
