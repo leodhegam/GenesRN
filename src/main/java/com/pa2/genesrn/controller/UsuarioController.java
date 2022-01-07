@@ -113,28 +113,36 @@ public class UsuarioController {
     }
 
     @PostMapping("update/{id}")
-    public String updateUsuario(@PathVariable("id") Integer id, @Valid Usuario usuario, BindingResult result,
-                                Model model, HttpServletRequest httpServletRequest, HttpSession session) {
+    public String updateUsuario(@PathVariable("id") Integer id, @Valid Usuario usuario, BindingResult result, Model model, HttpServletRequest httpServletRequest, HttpSession session) {
         if (result.hasErrors()) {
             usuario.setId(id);
             return "/usuario/editarUsuario";
         }
+
         String senhaDb = usuario.getSenha();
-        String senhaInformada = httpServletRequest.getParameter("senhaInformada");
+        String senha = httpServletRequest.getParameter("inputSenha");
+        String confirmarSenha = httpServletRequest.getParameter("inputConfirmarSenha");
+        String senhaAtual = httpServletRequest.getParameter("inputSenhaAtual");
 
-        String novaSenha = httpServletRequest.getParameter("novaSenha");
-
-        if (bp.matches(senhaInformada, senhaDb)) {
-            usuario.setSenha(bp.encode(novaSenha));
-        } else if (senhaInformada.isEmpty() && novaSenha.isEmpty()) {
-            usuario.setSenha(usuario.getSenha());
+        if (senha.isEmpty() && confirmarSenha.isEmpty() && senhaAtual.isEmpty()) {
+            usuarioService.saveAndFlush(usuario);
+        } else if (senha.isEmpty() && confirmarSenha.isEmpty()) {
+            session.setAttribute("messageError", "Senha invalida");
+            return "/usuario/editarUsuario";
+        } else if (senha.equals(confirmarSenha)) {
+            if (bp.matches(senhaAtual, senhaDb)) {
+                usuario.setSenha(bp.encode(senha));
+                usuarioService.saveAndFlush(usuario);
+            }  else {
+                session.setAttribute("messageError", "Senha atual incorreta");
+                return "/usuario/editarUsuario";
+            }
         } else {
-            session.setAttribute("messageError", "Senhas não coincidem");
+            session.setAttribute("messageError", "As senhas não coincidem");
+            return "/usuario/editarUsuario";
         }
 
-        usuarioService.saveAndFlush(usuario);
-//        model.addAttribute("usuario", usuarioRepository.findAll());
-        return "redirect:/home";
-    }
+            return "redirect:/home";
+        }
 
-}
+    }
