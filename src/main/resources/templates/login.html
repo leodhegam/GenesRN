@@ -13,6 +13,21 @@
     <link rel="stylesheet" type="text/css" href="/css/loginStyle.css">
 
     <title></title>
+
+    <script language=javascript type="text/javascript">
+        function verificarSenha(){
+
+            let senha = document.getElementById("inputSenha");
+            let erroMessage = document.getElementById("errorLogin");
+            if(senha.value.length < 6){
+
+                erroMessage.innerText="digite senha maior que 6 digitos";
+            }
+
+        }
+
+    </script>
+
 </head>
 <body  style="background-color:#9ab87a;">
 <div class="container">
@@ -25,7 +40,7 @@
             <h2 class="title">Login</h2>
 
             <div th:if="${param.error}">
-                <h5 class="text-danger text-success"> E-mail ou senha inválido </h5>
+                <h5 class="text-danger text-success" id="errorLogin"> E-mail ou senha inválido </h5>
             </div>
             <div class="input-div pass">
                 <div class="i">
@@ -42,11 +57,11 @@
                 </div>
                 <div class="div">
                     <h5 class="font-weight-bold">Senha</h5>
-                    <input type="password" class="input" id="inputSenha" name="password" required>
+                    <input type="password" class="input"  id="inputSenha" name="password" required>
                 </div>
             </div>
-<!--            <a th:href="@{/forgetPassword.html}">Esqueceu a senha?</a>-->
-            <button type="submit" class="mt-2 btn btn-block text-white" style="background-color: #3D315B;"  value="Login">Login</button>
+
+            <button type="submit"  class="mt-2 btn btn-block text-white" style="background-color: #3D315B;"  value="Login">Login</button>
             <p class="mt-2"> Não possui conta?
                 <a href="/cadastrarUsuario">Cadastre-se</a>
             </p>
