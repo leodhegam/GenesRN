@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse mr-5" id="navbarText">
             <ul class="navbar-nav mr-auto" style="visibility: hidden">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
 
@@ -28,7 +28,9 @@
                           <i class="fa fa-user" aria-hidden="true"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/home">Home</a>
                         <a class="dropdown-item" href="/produto/meusProdutos">Meus produtos</a>
+
                         <a th:href="@{/edit/{id}(id=${usuario.id})}" class="dropdown-item" >Editar perfil</a>
 <!--                        <a th:href="@{/sobre}" class="dropdown-item">Sobre</a>-->
                         <a th:href="@{/logout}" class="dropdown-item" type="submit">Logout</a>
@@ -36,9 +38,9 @@
                     </div>
                 </li>
             </span>
-            <span sec:authorize="isAuthenticated()" class="navbar-text mr-2">
+            <a href="/carrinho" sec:authorize="isAuthenticated()" class="navbar-text mr-2">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            </span>
+            </a>
         </div>
     </nav>
 </xlmns:html>

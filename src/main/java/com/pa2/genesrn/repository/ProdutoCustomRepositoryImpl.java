@@ -39,7 +39,7 @@ public class ProdutoCustomRepositoryImpl implements ProdutoCustomRepository {
                         Produto produto = new Produto();
                         produto.setNome(rs.getString("nome"));
                         produto.setDescricao(rs.getString("descricao"));
-                        produto.setValor(rs.getFloat("valor"));
+                        produto.setValor(rs.getDouble("valor"));
                         produto.setFotoReprodutor(rs.getString("foto_reprodutor"));
                         produto.setQuantidade(rs.getInt("quantidade"));
                         produto.setGenero(EnumGenero.valueOf(rs.getString("genero")));

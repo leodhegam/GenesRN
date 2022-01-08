@@ -39,7 +39,7 @@ public class ProdutoController {
 
     @GetMapping("/meusProdutos")
     public String produtos(Principal p, Model model) {
-        System.out.println("meusProdutos");
+
         Usuario usuario = usuarioRepository.findByEmail(p.getName());
         List<Produto> produtos = produtoService.buscarProdutos(usuario);
         System.out.println("Produtos antes "+produtos);
