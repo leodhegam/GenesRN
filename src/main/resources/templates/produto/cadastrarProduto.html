@@ -36,7 +36,7 @@
                             <input th:if="${usuario} != null" hidden
                                    th:attr="name='usuario.id'" th:value="${usuario.id}"/>
                             <div class="w-100 mb-2">
-                                <input type="file" name="imageFile"/>
+                                <input type="file" required name="imageFile"/>
                             </div>
                             <div class="form-group col-12">
                                 <label for="inputNome">Nome</label>
