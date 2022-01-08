@@ -58,17 +58,6 @@ public class ProdutoController {
         modelAndView.addObject("produto", upProd);
         return modelAndView;
     }
-
-    @RequestMapping("/detalhesProduto/{produto}")
-    public ModelAndView detalhesProduto(@PathVariable(name = "produto") String idProduto, Principal p){
-        ModelAndView modelAndView = new ModelAndView("/produto/detalhesProduto");
-        var upProd = produtoService.getProductById(Long.valueOf(idProduto));
-        modelAndView.setViewName("/produto/detalhesProduto");
-        modelAndView.addObject("produto", upProd);
-        Usuario usuario = usuarioRepository.findByEmail(p.getName());
-        modelAndView.addObject("usuario", usuario);
-        return modelAndView;
-    }
     
     @GetMapping("/vitrine")
     public String vitrineProdutos(Principal p, Model model) {

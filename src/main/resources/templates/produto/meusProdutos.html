@@ -251,8 +251,9 @@
         <div class="col-md-5">
             <h3 class="text-capitalize" th:text="'Nome: '+ ${produto.nome.toLowerCase()}"></h3>
             <p th:text="'Gênero: '+ ${produto.genero}"></p>
-            <p class="font-weight-bold" th:text="'Descrição: '+ ${produto.descricao}">
-                <span></span>
+            <p>
+                <strong class="fw-bold">Descrição: </strong>
+                <span th:text="${produto.descricao}"></span>
             </p>
             <p
             >Preço/Unidade: <span class=" badge badge-pill badge-info font-weight-bold" th:text="${#numbers.formatCurrency(produto.valor)}"></span></p>
@@ -272,7 +273,7 @@
 
 </div>
 <div class="float-right">
-    <div  th:insert="~{/produto/cadastrarProduto}"
+    <div th:insert="~{/produto/cadastrarProduto}"
           class="btn-floating btn-lg"
           id="btn-back-to-top">
         <i class="fa fa-plus"></i>

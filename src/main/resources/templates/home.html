@@ -231,10 +231,16 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <title>GenesRN</title>
+    <script>
+        function ativarModal() {
+            let btn = document.getElementById("btn-detalhes");
+            btn.click();
+        }
+    </script>
 </head>
 <body>
 <!--<a th:href="@{/logout}" class="text-dark  my-2 my-sm-0" type="submit">Logout</a>-->
-
+<div></div>
 <div th:insert="~{/fragments/navbar.html}"></div>
     <div class="justify-content-center">
         <div class="mt-4 mb-4 row justify-content-center col-12  pl-0 ml-0 pr-0">
@@ -253,14 +259,28 @@
         <div class="container">
             <div class="row">
                 <div th:each="produto : ${produtos}" class="col-md-4 col-sm-6">
+                    <div th:insert="~{produto/detalhesFragment}">
+                        <section th:object="${produto}"></section>
+                    </div>
                     <div class="product-grid2">
-                        <div class="product-image2"><a href="#"> <img
-                                th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.fotoReprodutor})}"
-                                class="zoom rounded mx-auto d-block card-img-top" alt="Card image cap"
-                                style="width: 15rem; height:13rem;object-fit: contain"> </a>
+                        <div class="product-image2">
+                            <a th:onclick="ativarModal()" style="cursor: pointer">
+                                <img
+                                    th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.fotoReprodutor})}"
+                                    class="zoom rounded mx-auto d-block card-img-top"
+                                    alt="Card image cap"
+                                    style="width: 15rem; height:13rem; object-fit: contain">
+                            </a>
                             <ul class="social">
-                                <li><a th:href="@{'produto/detalhesProduto/'+${produto.getId()}}"
-                                       data-tip="Ver detalhes"><i class="fa fa-eye"></i></a></li>
+                                <li>
+                                    <a
+                                        style="cursor: pointer"
+                                        data-tip="Ver detalhes"
+                                        th:onclick="ativarModal()"
+                                    >
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                </li>
 <!--                                <li>-->
 <!--                                    <button class="btn btn-outline-warning" type="button" th:data-id="${produto.id}"-->
 <!--                                            onclick="addCart(this.getAttribute('data-id'))">Editar-->
