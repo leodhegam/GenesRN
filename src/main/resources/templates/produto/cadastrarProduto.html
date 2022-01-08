@@ -1,5 +1,10 @@
 
 <!-- Button trigger modal -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+
+
+
 <div class="d-flex justify-content-end mr-4 mb-2">
     <button
             type="button"
@@ -53,7 +58,7 @@
                     </div>
                     <div class="form-group">
                         <label for="valor">Valor</label>
-                        <input name="valor" type="text" class="form-control" id="valor">
+                        <input name="valor" type="number" value="<% valor. %>"data-prefix="R$ " data-thousands="." data-decimal="," min="0.00" max="10000.00" step="0.01" required="required" class="form-control" id="valor">
                     </div>
                     <div class="form-group">
                         <label for="inputQuantidade">Quantidade</label>

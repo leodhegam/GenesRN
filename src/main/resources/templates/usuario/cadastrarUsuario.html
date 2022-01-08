@@ -12,6 +12,48 @@
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
     <title>Hello, world!</title>
+    <script language=javascript type="text/javascript">
+        function verificarSenha(){
+
+            let senha = document.getElementById("inputSenha");
+
+
+            let message = document.getElementById("message");
+            let messageVerde = document.getElementById("messageVerde");
+
+            if(senha.value.length < 6){
+                messageVerde.innerText="";
+                message.innerText = "Senha menor que seis digitos";
+            }
+            if(senha.value.length >= 6){
+                message.innerText ="";
+                messageVerde.innerText="";
+            }
+
+        };
+        function comparacaoSenha(){
+            let senha = document.getElementById("inputSenha");
+            let confirmacao = document.getElementById("inputConfirmacaoSenha");
+
+            let message = document.getElementById("message2");
+            let messageVerde = document.getElementById("messageVerde");
+
+            if(senha.value.length< 1){
+
+            }
+
+            else{
+                if(senha.value ==  confirmacao.value){
+                    message.innerText="";
+                    messageVerde.innerText="";
+                }else{
+                    message.innerText="Senhas não coincidem";
+                    messageVerde.innerText=""
+                }
+            }
+        }
+
+    </script>
 </head>
 <body style="background-color:#9ab87a;">
 <!-- Navbar -->
@@ -83,9 +125,12 @@
                 </div>
                 <div class="div">
                     <h5 class="font-weight-bold">Senha</h5>
-                    <input name="senha" id="inputSenha" type="password" class="input" required>
+                    <input minlength="6" onkeyup="verificarSenha()" name="senha" id="inputSenha" type="password" class="input" required>
                 </div>
+
             </div>
+            <span id="message" class="text-danger text-success"></span>
+            <span id="messageVerde" class="text-sucess text-success"></span>
 
             <!--            Confirma senha-->
             <div class="input-div pass">
@@ -94,10 +139,10 @@
                 </div>
                 <div class="div">
                     <h5 class="font-weight-bold">Confirme a senha</h5>
-                    <input id="inputConfirmacaoSenha" name="confirmaSenha" type="password" class="input" required>
+                    <input minlength="6" onkeyup="comparacaoSenha()" id="inputConfirmacaoSenha" name="confirmaSenha" type="password" class="input" required>
                 </div>
             </div>
-
+            <span id="message2" class="text-danger text-success"></span>
             <button type="submit" class="mt-2 btn btn-block text-white" style="background-color: #3D315B;"
                     value="cadastrar">Cadastrar
             </button>
@@ -106,6 +151,7 @@
             </p>
         </form>
     </div>
+
 </div>
 
 <!-- Optional JavaScript -->
