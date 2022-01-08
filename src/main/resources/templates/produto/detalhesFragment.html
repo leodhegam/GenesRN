@@ -26,6 +26,11 @@
     <section th:object="${produto}">
         <div class="card">
             <div class="card-body">
+                <div class="modal-header">
+                    <a th:href="@{/home}" type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </a>
+                </div>
                 <div class="row">
                     <div class="col-md-6 col-12">
                         <img
@@ -38,11 +43,15 @@
                     <div class="col-md-6 col-12">
                         <h3 th:text="*{nome}"></h3>
                         <div>
-                            <strong>Preço/Unidade: </strong>
-                            <span style="font-size: 1.4rem">
-                                <br />R$
+                            <strong>Preço/Unidade: </strong> <br />
+                            <span
+                                    style="font-size: 1.4rem"
+                                    class="badge badge-pill badge-info font-weight-bold"
+                                    th:text="${#numbers.formatCurrency(produto.valor)}">
                             </span>
-                            <span style="font-size: 1.4rem" th:text="*{valor}"></span>
+                        </div>
+                        <div>
+                            <strong>Gênero: </strong><span th:text="*{genero}"></span>
                         </div>
                         <div>
                             <strong>Estoque: </strong><span th:text="*{quantidade}"></span>
@@ -64,7 +73,7 @@
                 </div>
             </div>
             <div class="container">
-                <h3 style="color: #3D315B" class="text-uppercase">Informações adicionais</h3>
+                <h3 style="color: #3D315B" class="text-uppercase text-center">Informações adicionais</h3>
                 <div style="width: 100%; height: 4px; background-color: #9ab87a"></div>
                 <div class="table-responsive">
                 <table class="table table-striped">

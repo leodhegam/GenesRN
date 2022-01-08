@@ -44,13 +44,52 @@
                            th:value="*{fotoReprodutor}">
                 </div>
                 <input name="id" th:value="*{id}" hidden>
-                <div class="form-group col-md-6">
+                <input th:if="*{usuario} != null" hidden
+                       th:attr="name='usuario.id'" th:value="*{usuario.id}"/>
+                <div class="form-group col-12">
                     <label for="inputNome">Nome</label>
-
-                    <input th:if="*{usuario} != null" hidden
-                           th:attr="name='usuario.id'" th:value="*{usuario.id}"/>
-                    <input name="nome" th:field="*{nome}" type="text" class="form-control" id="inputNome"
-                           placeholder="Nome">
+                    <input name="nome" th:field="*{nome}" type="text" class="form-control"
+                           id="inputNome">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="codigo">Código</label>
+                    <input id="codigo" name="codigo"th:field="*{codigo}" type="number" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputProprietario">Proprietário</label>
+                    <input name="proprietario" th:field="*{proprietario}" type="text" class="form-control"
+                           id="inputProprietario">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputCriador">Criador</label>
+                    <input id="inputCriador" name="criador" th:field="*{criador}" type="text" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputData">Data de Nascimento</label>
+                    <input name="dataNascimento" th:field="*{dataNascimento}" type="text" class="form-control"
+                           id="inputData">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPeso">Peso</label>
+                    <input id="inputPeso" name="peso" th:field="*{peso}" type="number" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputQuantidade">Quantidade</label>
+                    <input name="quantidade" th:field="*{quantidade}" type="number" class="form-control"
+                           id="inputQuantidade">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="valor">Valor</label>
+                    <input name="valor" th:field="*{valor}" type="number" class="form-control" id="valor">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputLinhagem">Linhagem</label>
+                    <input name="linhagem" th:field="*{linhagem}" type="text" class="form-control"
+                           id="inputLinhagem">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputRaca">Raça</label>
+                    <input id="inputRaca" name="raca" th:field="*{raca}" type="text" class="form-control">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="tipo">Gênero</label></br>
@@ -61,14 +100,14 @@
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputQuantidade">Quantidade</label>
-                    <input name="quantidade" th:field="*{quantidade}" type="number" class="form-control"
-                           id="inputQuantidade"
-                           placeholder="Quantidade">
+                    <label for="inputCategoria">Categoria</label>
+                    <input name="categoria" th:field="*{categoria}" type="text" class="form-control"
+                           id="inputCategoria">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="valor">Valor</label>
-                    <input name="valor" th:field="*{valor}" type="text" class="form-control" id="valor">
+                    <label for="inputRegistro">Registro</label>
+                    <input name="registro" th:field="*{registro}" type="text" class="form-control"
+                           id="inputRegistro">
                 </div>
             </div>
             <div class="form-group">

@@ -259,12 +259,12 @@
         <div class="container">
             <div class="row">
                 <div th:each="produto : ${produtos}" class="col-md-4 col-sm-6">
-                    <div th:insert="~{produto/detalhesFragment}">
-                        <section th:object="${produto}"></section>
-                    </div>
                     <div class="product-grid2">
                         <div class="product-image2">
-                            <a th:onclick="ativarModal()" style="cursor: pointer">
+                            <a
+                                th:href="@{'/produto/detalhesProduto/'+${produto.getId()}}"
+                                style="cursor: pointer"
+                            >
                                 <img
                                     th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.fotoReprodutor})}"
                                     class="zoom rounded mx-auto d-block card-img-top"
@@ -276,7 +276,7 @@
                                     <a
                                         style="cursor: pointer"
                                         data-tip="Ver detalhes"
-                                        th:onclick="ativarModal()"
+                                        th:href="@{'/produto/detalhesProduto/'+${produto.getId()}}"
                                     >
                                         <i class="fa fa-eye"></i>
                                     </a>
