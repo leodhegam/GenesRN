@@ -198,7 +198,7 @@
     }
     #btn-back-to-top {
         /*position: fixed;*/
-        bottom: 20px;
+        bottom: 45px;
         right: 20px;
         /*width: 100%;*/
         position: fixed;
@@ -280,12 +280,16 @@
 
 </div>
 <div class="float-right">
-    <div th:insert="~{/produto/cadastrarProduto}"
-          class="btn-floating btn-lg"
-          id="btn-back-to-top">
-        <i class="fa fa-plus"></i>
-    </div>
+    <a th:href="@{/produto/cadastrarNovoProduto}">
+        <div class="btn-floating btn-lg rounded-circle btn btn-outline-primary"
+             id="btn-back-to-top">
+            <i class="fa fa-plus"></i>
+        </div>
+
+
+    </a>
 </div>
+<div th:insert="~{/fragments/footer.html}"></div>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <!--<a href="https://wa.me/5584994479140?text=Adorei%20seu%20artigo" style="position:fixed;width:60px;height:60px;bottom:40px;right:40px;background-color:#25d366;color:#FFF;border-radius:50px;text-align:center;font-size:30px;box-shadow: 1px 1px 2px #888;-->
 <!--  z-index:1000;" target="_blank">-->
