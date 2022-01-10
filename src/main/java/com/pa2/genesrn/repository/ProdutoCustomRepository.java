@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ProdutoCustomRepository {
     public List<Produto> listarProdutoPorUsuario(Integer idUsuario);
+    public List<Produto> listarProduto(Integer idUsuario);
 }

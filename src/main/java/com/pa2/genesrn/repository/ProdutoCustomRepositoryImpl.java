@@ -49,4 +49,37 @@ public class ProdutoCustomRepositoryImpl implements ProdutoCustomRepository {
                 });
         return produtos;
     }
+
+    @Override
+    public List<Produto> listarProduto(Integer idUsuario) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+
+        StringBuilder queryBuilder = new StringBuilder();
+
+        queryBuilder.append("SELECT * FROM produto p JOIN usuario u ON (u.id = p.usuario_id) ");
+
+        if(Objects.nonNull(idUsuario)){
+            String strFiltroUsuario = "AND u.id != :idUsuario ";
+            queryBuilder.append(strFiltroUsuario);
+
+            parameters.addValue("idUsuario", idUsuario);
+        }
+
+        List<Produto> produtos = new NamedParameterJdbcTemplate(dt).query(queryBuilder.toString(), parameters,
+                new RowMapper<Produto>() {
+                    @Override
+                    public Produto mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Produto produto = new Produto();
+                        produto.setNome(rs.getString("nome"));
+                        produto.setDescricao(rs.getString("descricao"));
+                        produto.setValor(rs.getDouble("valor"));
+                        produto.setFotoReprodutor(rs.getString("foto_reprodutor"));
+                        produto.setQuantidade(rs.getInt("quantidade"));
+                        produto.setGenero(EnumGenero.valueOf(rs.getString("genero")));
+                        return produto;
+
+                    }
+                });
+        return produtos;
+    }
 }

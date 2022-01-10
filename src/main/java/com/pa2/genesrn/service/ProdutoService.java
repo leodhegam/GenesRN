@@ -20,6 +20,9 @@ public class ProdutoService {
         List<Produto> produtos = produtoRepository.findAll();
         return produtos;
     }
+    public List<Produto> listarProdutos(Integer idUsuario){
+       return produtoRepository.listarProduto(idUsuario);
+    }
     public void salvar(Produto produto) {
         produtoRepository.save(produto);
     }
