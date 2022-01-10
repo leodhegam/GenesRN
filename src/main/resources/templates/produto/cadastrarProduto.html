@@ -1,35 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Produto</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!--    <script src="../../static/js/utils.js"></script>-->
+    <script>
+        function formatarMoeda(id) {
+            let inputValor = document.getElementById(id);
+            let valor = inputValor.value
+            if(valor.length === 0){
+                return '0'
+            }
 
-<!-- Button trigger modal -->
-<div class="d-flex justify-content-end mr-4 mb-2">
-    <button
-            type="button"
-            class="rounded-circle btn btn-outline-primary"
-            data-toggle="modal"
-            data-target="#modalCadastroProduto">
-        <i class="fa fa-plus"></i>
-    </button>
-</div>
+            valor = valor + '';
+            valor = parseInt(valor.replace(/[\D]+/g,''));
+            valor = valor + '';
+            valor = valor.replace(/([0-9]{2})$/g, ",$1");
 
-<!-- Modal -->
-<div th:fragment="modal-produto" class="modal fade" id="modalCadastroProduto" tabindex="-1" role="dialog"
-     aria-labelledby="cadastroProdutoModalLabel" aria-hidden="true">
-    <div class="container">
-        <div class="card" role="document">
-            <div class="card-body mt-3">
-                <form class="col-12" th:action="@{/produto/cadastrarProduto}" th:object="${produto}" enctype="multipart/form-data" method="POST">
-                    <div class="modal-header">
-                        <a th:href="@{/produto/meusProdutos}" type="button" class="close" aria-label="Close">
-                            <span aria-hidden="true">x</span>
-                        </a>
-                    </div>
-                    <h2 class="text-center"
-                        style="
+            if (valor.length > 6) {
+                valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+            }
+            refazerMoeda(id, valor);
+            inputValor.value = valor;
+
+        }
+
+        function refazerMoeda(id, valor) {
+
+            let inputValor = document.getElementById(id+'Real');
+            if(valor.length === 0){
+                return '0'
+            }
+
+            valor = valor + '';
+            if(valor.includes('.')){
+                let sep = valor.split('.')
+                valor = sep[0] + sep[1]
+            }
+            if(valor.includes(',')) {
+                let vir = valor.split(',')
+                valor = vir[0]+'.'+vir[1]
+            }
+            inputValor.value = valor;
+        }
+    </script>
+</head>
+<boby>
+    <div th:insert="~{/fragments/navbar.html}"></div>
+    <div class="row mt-4 mr-0 ml-0">
+        <div class="col-md-2"></div>
+        <section class="col-md-8 mt-2">
+            <h2 class="text-center"
+                style="
                 font-size: 2.2rem;
                 font-weight: bold;
                 color: #444b6e;
                 font-family: courier, arial, helvetica;
             "
-                    >CADASTRAR PRODUTO</h2>
+            >CADASTRAR PRODUTO</h2>
+                <form class="col-12"
+                      th:action="@{/produto/cadastrarProduto}"
+                      th:object="${produto}"
+                      enctype="multipart/form-data"
+                      method="POST">
                     <div class="mb-2" style="width: 100%; height: 4px; background-color: #9ab87a"></div>
                     <div class="modal-body">
                         <div class="form-row">
@@ -57,9 +92,31 @@
                                 <input name="dataNascimento" type="date" class="form-control"
                                        id="inputData">
                             </div>
+                            <div class="form-group d-none col-md-6">
+                                <input
+                                        name="valor"
+                                        type="text"
+                                        class="form-control"
+                                        id="valorReal"
+                                >
+                            </div>
+                            <div class="form-group d-none col-md-6">
+                                <input
+                                        name="peso"
+                                        type="text"
+                                        class="form-control"
+                                        id="inputPesoReal"
+                                >
+                            </div>
                             <div class="form-group col-md-6">
                                 <label for="inputPeso">Peso</label>
-                                <input id="inputPeso" name="peso" type="number" class="form-control">
+                                <input
+                                        id="inputPeso"
+                                        name="inputPeso"
+                                        type="text"
+                                        class="form-control"
+                                        onkeyup="formatarMoeda('inputPeso')"
+                                >
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputQuantidade">Quantidade</label>
@@ -68,7 +125,13 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="valor">Valor</label>
-                                <input name="valor" type="number" class="form-control" id="valor">
+                                <input
+                                        name="inputValor"
+                                        type="text"
+                                        class="form-control"
+                                        id="valor"
+                                        onkeyup="formatarMoeda('valor')"
+                                >
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputLinhagem">Linhagem</label>
@@ -110,7 +173,26 @@
                     </div>
                     <div class="mb-2" style="width: 100%; height: 4px; background-color: #9ab87a"></div>
                 </form>
-            </div>
-        </div>
+            </section>
+        <div class="col-md-2"></div>
     </div>
-</div>
+    <div th:insert="~{/fragments/footer.html}"></div>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!--<a href="https://wa.me/5584994479140?text=Adorei%20seu%20artigo" style="position:fixed;width:60px;height:60px;bottom:40px;right:40px;background-color:#25d366;color:#FFF;border-radius:50px;text-align:center;font-size:30px;box-shadow: 1px 1px 2px #888;-->
+    <!--  z-index:1000;" target="_blank">-->
+    <!--    <i style="margin-top:16px" class="fa fa-whatsapp"></i>-->
+    <!--</a>-->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</boby>
+</html>
+
