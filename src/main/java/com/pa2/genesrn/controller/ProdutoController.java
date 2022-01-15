@@ -9,9 +9,11 @@ import com.pa2.genesrn.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
@@ -89,7 +91,22 @@ public class ProdutoController {
     }
 
     @PostMapping("/cadastrarProduto")
-    public String cadastrarProduto(@ModelAttribute Produto produto, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
+    public String cadastrarProduto(
+            @ModelAttribute Produto produto,
+            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
+            BindingResult result,
+            RedirectAttributes redirectAttributes) {
+
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("message", "Falha ao tentar salvar os dados.");
+            redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
+            redirectAttributes.addFlashAttribute("produto", produto);
+            if(produto.getId() != null) {
+                return "redirect:/produto/alterar/"+ produto.getId();
+            }
+            return "redirect:/produto/cadastrarNovoProduto";
+        }
+
         produtoRepository.save(produto);
         try {
             if (produto.getFotoReprodutor() == null && imageFile != null) {
@@ -105,6 +122,8 @@ public class ProdutoController {
             e.printStackTrace();
         }
 
+        redirectAttributes.addFlashAttribute("message", "Sucesso ao realizar cadastro!");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
         return "redirect:/produto/meusProdutos";
     }
 
