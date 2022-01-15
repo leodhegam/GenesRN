@@ -75,9 +75,14 @@ public class ProdutoController {
     @RequestMapping("/detalhesProduto/{produto}")
     public ModelAndView detalhesProduto(@PathVariable(name = "produto") String idProduto, Principal p){
         ModelAndView modelAndView = new ModelAndView("/produto/detalhesProduto");
-        var upProd = produtoService.getProductById(Long.valueOf(idProduto));
-        modelAndView.addObject("produto", upProd);
+
         Usuario usuario = usuarioRepository.findByEmail(p.getName());
+        var produto = produtoService.getProductById(Long.valueOf(idProduto));
+        if(usuario.getId().equals(produto.getUsuario().getId())){
+            return new ModelAndView("redirect:/home");
+        }
+
+        modelAndView.addObject("produto", produto);
         modelAndView.addObject("usuario", usuario);
         return modelAndView;
     }
