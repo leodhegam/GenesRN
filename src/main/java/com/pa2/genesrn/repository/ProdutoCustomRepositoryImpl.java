@@ -70,6 +70,7 @@ public class ProdutoCustomRepositoryImpl implements ProdutoCustomRepository {
                     @Override
                     public Produto mapRow(ResultSet rs, int rowNum) throws SQLException {
                         Produto produto = new Produto();
+                        produto.setId(rs.getLong("id"));
                         produto.setNome(rs.getString("nome"));
                         produto.setDescricao(rs.getString("descricao"));
                         produto.setValor(rs.getDouble("valor"));
