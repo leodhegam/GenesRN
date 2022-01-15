@@ -49,9 +49,10 @@
 </head>
 <boby>
     <div th:insert="~{/fragments/navbar.html}"></div>
-    <div class="row mt-4 mr-0 ml-0">
+    <div class="row mt-2 mr-0 ml-0">
         <div class="col-md-2"></div>
         <section class="col-md-8 mt-2">
+
             <h2 class="text-center"
                 style="
                 font-size: 2.2rem;
@@ -60,12 +61,17 @@
                 font-family: courier, arial, helvetica;
             "
             >CADASTRAR PRODUTO</h2>
+            <div class="mb-2" style="width: 100%; height: 4px; background-color: #9ab87a"></div>
+            <div class="mt-2 mb-2" id="alertId">
+                <div th:if="${message}" th:class="${'alert-dismissible fade show alert ' + alertClass}">
+                    <span th:text="${message}" id="message"></span>
+                </div>
+            </div>
                 <form class="col-12"
                       th:action="@{/produto/cadastrarProduto}"
                       th:object="${produto}"
                       enctype="multipart/form-data"
                       method="POST">
-                    <div class="mb-2" style="width: 100%; height: 4px; background-color: #9ab87a"></div>
                     <div class="modal-body">
                         <div class="form-row">
                             <input th:if="${usuario} != null" hidden
@@ -75,27 +81,30 @@
                             </div>
                             <div class="form-group col-12">
                                 <label for="inputNome">Nome</label>
-                                <input name="nome" type="text" class="form-control"
+                                <input name="nome"
+                                       required
+                                       type="text"
+                                       class="form-control"
                                        id="inputNome">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputProprietario">Proprietário</label>
-                                <input name="proprietario" type="text" class="form-control"
+                                <input name="proprietario" required type="text" class="form-control"
                                        id="inputProprietario">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCriador">Criador</label>
-                                <input id="inputCriador" name="criador" type="text" class="form-control">
+                                <input id="inputCriador" name="criador" required type="text" class="form-control">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputData">Data de Nascimento</label>
-                                <input name="dataNascimento" type="date" class="form-control"
+                                <input name="dataNascimento" required type="date" class="form-control"
                                        id="inputData">
                             </div>
                             <div class="form-group d-none col-md-6">
                                 <input
                                         name="valor"
-                                        type="text"
+                                        required type="text"
                                         class="form-control"
                                         id="valorReal"
                                 >
@@ -103,7 +112,7 @@
                             <div class="form-group d-none col-md-6">
                                 <input
                                         name="peso"
-                                        type="text"
+                                        required type="text"
                                         class="form-control"
                                         id="inputPesoReal"
                                 >
@@ -113,21 +122,21 @@
                                 <input
                                         id="inputPeso"
                                         name="inputPeso"
-                                        type="text"
+                                        required type="text"
                                         class="form-control"
                                         onkeyup="formatarMoeda('inputPeso')"
                                 >
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputQuantidade">Quantidade</label>
-                                <input name="quantidade" type="number" class="form-control"
+                                <input name="quantidade" required type="number" class="form-control"
                                        id="inputQuantidade">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="valor">Valor</label>
                                 <input
                                         name="inputValor"
-                                        type="text"
+                                        required type="text"
                                         class="form-control"
                                         id="valor"
                                         onkeyup="formatarMoeda('valor')"
@@ -135,12 +144,12 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputLinhagem">Linhagem</label>
-                                <input name="linhagem" type="text" class="form-control"
+                                <input name="linhagem" required type="text" class="form-control"
                                        id="inputLinhagem">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputRaca">Raça</label>
-                                <input id="inputRaca" name="raca" type="text" class="form-control">
+                                <input id="inputRaca" name="raca" required type="text" class="form-control">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="tipo">Gênero</label><br />
@@ -152,12 +161,12 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCategoria">Categoria</label>
-                                <input name="categoria" type="text" class="form-control"
+                                <input name="categoria" required type="text" class="form-control"
                                        id="inputCategoria">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputRegistro">Registro</label>
-                                <input name="registro" type="text" class="form-control"
+                                <input name="registro" required type="text" class="form-control"
                                        id="inputRegistro">
                             </div>
                             <div class="w-100">

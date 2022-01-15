@@ -40,6 +40,11 @@
                 font-family: courier, arial, helvetica;
             ">EDITAR PERFIL</h2>
             <div style="width: 100%; height: 4px; background-color: #9ab87a"></div>
+            <div class="mt-2 mb-1" id="alertId">
+                <div th:if="${message}" th:class="${'alert-dismissible fade show alert ' + alertClass}">
+                    <span th:text="${message}" id="message"></span>
+                </div>
+            </div>
             <br/>
             <div class="form-group">
                 <label class="font-weight-bold" for="inputNome">Nome</label>

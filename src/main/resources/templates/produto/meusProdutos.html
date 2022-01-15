@@ -239,6 +239,11 @@
             ">MEUS PRODUTOS
     </h1>
     <div style="width: 40px; height: 4px; background-color: #9ab87a"></div>
+    <div class="container mt-2 mb-2" id="alertId">
+        <div th:if="${message}" th:class="${'alert-dismissible fade show alert ' + alertClass}">
+            <span th:text="${message}" id="message"></span>
+        </div>
+    </div>
     <div class="row m-3 border p-3" th:each="produto : ${produtos}">
         <div class="card-body" th:object="${produto}">
             <div class="row">
@@ -275,9 +280,6 @@
             </div>
         </div>
     </div>
-
-
-
 </div>
 <div class="float-right">
     <a th:href="@{/produto/cadastrarNovoProduto}">
@@ -285,11 +287,17 @@
              id="btn-back-to-top">
             <i class="fa fa-plus"></i>
         </div>
-
-
     </a>
 </div>
 <div th:insert="~{/fragments/footer.html}"></div>
+
+<script>
+    function desativarAlert(){
+        let alert = document.getElementById("alertId");
+        alert.hidden = false;
+    }
+</script>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <!--<a href="https://wa.me/5584994479140?text=Adorei%20seu%20artigo" style="position:fixed;width:60px;height:60px;bottom:40px;right:40px;background-color:#25d366;color:#FFF;border-radius:50px;text-align:center;font-size:30px;box-shadow: 1px 1px 2px #888;-->
 <!--  z-index:1000;" target="_blank">-->

@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -113,36 +114,37 @@ public class UsuarioController {
     }
 
     @PostMapping("update/{id}")
-    public String updateUsuario(@PathVariable("id") Integer id, @Valid Usuario usuario, BindingResult result, Model model, HttpServletRequest httpServletRequest, HttpSession session) {
-        if (result.hasErrors()) {
-            usuario.setId(id);
-            return "/usuario/editarUsuario";
-        }
-
-        String senhaDb = usuario.getSenha();
-        String senha = httpServletRequest.getParameter("inputSenha");
-        String confirmarSenha = httpServletRequest.getParameter("inputConfirmarSenha");
-        String senhaAtual = httpServletRequest.getParameter("inputSenhaAtual");
-
-        if (senha.isEmpty() && confirmarSenha.isEmpty() && senhaAtual.isEmpty()) {
-            usuarioService.saveAndFlush(usuario);
-        } else if (senha.isEmpty() && confirmarSenha.isEmpty()) {
-            session.setAttribute("messageError", "Senha invalida");
-            return "/usuario/editarUsuario";
-        } else if (senha.equals(confirmarSenha)) {
-            if (bp.matches(senhaAtual, senhaDb)) {
-                usuario.setSenha(bp.encode(senha));
-                usuarioService.saveAndFlush(usuario);
-            }  else {
-                session.setAttribute("messageError", "Senha atual incorreta");
+    public String updateUsuario(@PathVariable("id") Integer id, @Valid Usuario usuario, BindingResult result, Model model, HttpServletRequest httpServletRequest, HttpSession session, RedirectAttributes redirectAttributes) {
+            if (result.hasErrors()) {
+                usuario.setId(id);
                 return "/usuario/editarUsuario";
             }
-        } else {
-            session.setAttribute("messageError", "As senhas não coincidem");
-            return "/usuario/editarUsuario";
-        }
 
-            return "redirect:/home";
+            String senhaDb = usuario.getSenha();
+            String senha = httpServletRequest.getParameter("inputSenha");
+            String confirmarSenha = httpServletRequest.getParameter("inputConfirmarSenha");
+            String senhaAtual = httpServletRequest.getParameter("inputSenhaAtual");
+
+            if (senha.isEmpty() && confirmarSenha.isEmpty() && senhaAtual.isEmpty()) {
+                usuarioService.saveAndFlush(usuario);
+            } else if (senha.isEmpty() && confirmarSenha.isEmpty()) {
+                session.setAttribute("messageError", "Senha invalida");
+                return "/usuario/editarUsuario";
+            } else if (senha.equals(confirmarSenha)) {
+                if (bp.matches(senhaAtual, senhaDb)) {
+                    usuario.setSenha(bp.encode(senha));
+                    usuarioService.saveAndFlush(usuario);
+                }  else {
+                    session.setAttribute("messageError", "Senha atual incorreta");
+                    return "/usuario/editarUsuario";
+                }
+            } else {
+                session.setAttribute("messageError", "As senhas não coincidem");
+                return "/usuario/editarUsuario";
+            }
+            model.addAttribute("message", "Atualização de dados realizada com sucesso!");
+            model.addAttribute("alertClass", "alert-success");
+            return "/usuario/editarUsuario";
         }
 
     }
