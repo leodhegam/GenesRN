@@ -43,7 +43,6 @@ public class UsuarioController {
         String nome = p.getName();
         Usuario usuario = usuarioRepository.findByEmail(nome);
         List<Produto> produtos = produtoService.listarProdutos(usuario.getId());
-        System.out.println(produtos);
         model.addAttribute("usuario", usuario);
         model.addAttribute("produtos", produtos);
 

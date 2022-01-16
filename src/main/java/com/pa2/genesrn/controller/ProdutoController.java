@@ -1,6 +1,7 @@
 package com.pa2.genesrn.controller;
 
 
+import com.pa2.genesrn.enums.EnumGenero;
 import com.pa2.genesrn.model.Produto;
 import com.pa2.genesrn.model.Usuario;
 import com.pa2.genesrn.repository.ProdutoRepository;
@@ -21,7 +22,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/produto")
@@ -61,15 +66,31 @@ public class ProdutoController {
         return modelAndView;
     }
     
-    @GetMapping("/vitrine")
-    public String vitrineProdutos(Principal p, Model model) {
+    @GetMapping("/filtro/{nomeFiltro}")
+    public ModelAndView vitrineProdutos(
+            @PathVariable String nomeFiltro,
+            Principal p) {
+
         String nome = p.getName();
         Usuario usuario = usuarioRepository.findByEmail(nome);
-        List<Produto> produtos = produtoService.buscarProdutos(usuario);
-        model.addAttribute("usuario", usuario);
-        model.addAttribute("produtos", produtos);
+        List<Produto> prod = produtoService.findAll();
+        List<Produto> produtos = new ArrayList<>();
+        System.out.println(prod);
+        prod.forEach(e -> {
+            System.out.println(e.getGenero().getDescricao());
+            if(
+                    e.getUsuario().getId() != usuario.getId() &&
+                    e.getGenero().getDescricao().equals(nomeFiltro)
+            ){
+                produtos.add(e);
+            }
+        });
+        ModelAndView model = new ModelAndView("/filtro");
+        model.addObject("usuario", usuario);
+        model.addObject("produtos", produtos);
+        System.out.println("Coleta de produtos " +produtos);
 
-        return "vitrine";
+        return model;
     }
 
     @RequestMapping("/detalhesProduto/{produto}")

@@ -2,6 +2,7 @@ package com.pa2.genesrn.repository;
 
 import com.pa2.genesrn.enums.EnumGenero;
 import com.pa2.genesrn.model.Produto;
+import com.pa2.genesrn.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -83,4 +84,6 @@ public class ProdutoCustomRepositoryImpl implements ProdutoCustomRepository {
                 });
         return produtos;
     }
+
+
 }

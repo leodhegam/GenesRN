@@ -1,5 +1,6 @@
 package com.pa2.genesrn.service;
 
+import com.pa2.genesrn.enums.EnumGenero;
 import com.pa2.genesrn.model.Produto;
 import com.pa2.genesrn.model.Usuario;
 import com.pa2.genesrn.repository.ProdutoRepository;
@@ -33,7 +34,7 @@ public class ProdutoService {
 
     public List<Produto> buscarProdutos(Usuario usuario){
 //        return produtoRepository.listarProdutoPorUsuario(idUsuario);
-        return produtoRepository.findAllByUsuario(usuario);
+        return produtoRepository.findAll();
     }
 
 }

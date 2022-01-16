@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<style>
+  .container {
+    margin-top: 50px;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+  }
+
+  h3.h3 {
+    text-align: center;
+    margin: 1em;
+    text-transform: capitalize;
+    font-size: 1.7em
+  }
+
+  .demo {
+    padding: 45px 0
+  }
+
+  .product-grid2 {
+    font-family: 'Open Sans', sans-serif;
+    position: relative
+  }
+
+  .product-grid2 .product-image2 {
+    overflow: hidden;
+    position: relative
+  }
+
+  .product-grid2 .product-image2 a {
+    display: block
+  }
+
+  .product-grid2 .product-image2 img {
+    width: 100%;
+    height: auto
+  }
+
+  .product-image2 .pic-1 {
+    opacity: 1;
+    transition: all .5s
+  }
+
+  .product-grid2:hover .product-image2 .pic-1 {
+    opacity: 0
+  }
+
+  .product-image2 .pic-2 {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all .5s
+  }
+
+  .product-grid2:hover .product-image2 .pic-2 {
+    opacity: 1
+  }
+
+  .product-grid2 .social {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    bottom: 20px;
+    right: 25px;
+    z-index: 1
+  }
+
+  .product-grid2 .social li {
+    margin: 0 0 10px;
+    display: block;
+    transform: translateX(100px);
+    transition: all .5s
+  }
+
+  .product-grid2:hover .social li {
+    transform: translateX(0)
+  }
+
+  .product-grid2:hover .social li:nth-child(2) {
+    transition-delay: .15s
+  }
+
+  .product-grid2:hover .social li:nth-child(3) {
+    transition-delay: .25s
+  }
+
+  .product-grid2 .social li a {
+    color: #505050;
+    background-color: #fff;
+    font-size: 17px;
+    line-height: 45px;
+    text-align: center;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    display: block;
+    transition: all .3s ease 0s
+  }
+
+  .product-grid2 .social li a:hover {
+    color: #fff;
+    background-color: #3498db;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5)
+  }
+
+  .product-grid2 .social li a:after,
+  .product-grid2 .social li a:before {
+    content: attr(data-tip);
+    color: #fff;
+    background-color: #000;
+    font-size: 12px;
+    line-height: 22px;
+    border-radius: 3px;
+    padding: 0 5px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(-50%);
+    position: absolute;
+    left: 50%;
+    top: -30px
+  }
+
+  .product-grid2 .social li a:after {
+    content: '';
+    height: 15px;
+    width: 15px;
+    border-radius: 0;
+    transform: translateX(-50%) rotate(45deg);
+    top: -22px;
+    z-index: -1
+  }
+
+  .product-grid2 .social li a:hover:after,
+  .product-grid2 .social li a:hover:before {
+    opacity: 1
+  }
+
+  .product-grid2 .add-to-cart {
+    color: #fff;
+    background-color: #404040;
+    font-size: 15px;
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -100%;
+    transition: all .3s
+  }
+
+  .product-grid2 .add-to-cart:hover {
+    background-color: #3498db;
+    text-decoration: none
+  }
+
+  .product-grid2:hover .add-to-cart {
+    bottom: 0
+  }
+
+  .product-grid2 .product-new-label {
+    background-color: #3498db;
+    color: #fff;
+    font-size: 17px;
+    padding: 5px 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all .3s
+  }
+
+  .product-grid2:hover .product-new-label {
+    opacity: 0
+  }
+
+  .product-grid2 .product-content {
+    padding: 20px 10px;
+    text-align: center
+  }
+
+  .product-grid2 .title {
+    font-size: 17px;
+    margin: 0 0 7px
+  }
+
+  .product-grid2 .title a {
+    color: #303030
+  }
+
+  .product-grid2 .title a:hover {
+    color: #3498db
+  }
+
+  .zoom {
+    transition: transform .2s; /* Animation */
+  }
+
+  .zoom:hover {
+    transform: scale(1.1); /* (150% zoom)*/
+  }
+
+  body {
+    background: rgba(0, 0, 0, 0) url(img/fundo.svg) no-repeat scroll left center;
+    background-size: cover;
+  }
+
+  @media screen and (max-width: 990px) {
+    .product-grid2 {
+      margin-bottom: 30px
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    body {
+      background: none;
+    }
+  }
+</style>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+  <title>GenesRN</title>
+</head>
+<body>
+<!--<a th:href="@{/logout}" class="text-dark  my-2 my-sm-0" type="submit">Logout</a>-->
+<div></div>
+<div th:insert="~{/fragments/navbar.html}"></div>
+<div class="justify-content-center">
+  <div class="mt-4 mb-4 row justify-content-center col-12  pl-0 ml-0 pr-0">
+    <div class="col-lg-2 mt-1">
+      <a type="button" th:href="@{'/produto/filtro/Bovino'}" class="btn btn-outline-info  btn-md btn-block ">Bovino</a>
+    </div>
+    <div class="col-lg-2 mt-1">
+      <a type="button" th:href="@{'/produto/filtro/Suino'}" class="btn btn-outline-info  btn-md btn-block">Suíno</a>
+    </div>
+    <div class="col-lg-2 mt-1">
+      <a type="button" th:href="@{'/produto/filtro/Equino'}" class="btn btn-outline-info  btn-md btn-block">Equino</a>
+    </div>
+  </div>
+</div>
+<section>
+  <div class="container">
+    <div class="row">
+      <div th:each="produto : ${produtos}" class="col-md-4 col-sm-6">
+        <div class="product-grid2" th:object="${produto}">
+          <div class="product-image2">
+            <a
+                    th:href="@{'/produto/detalhesProduto/'+${id}}"
+                    style="cursor: pointer"
+            >
+              <img
+                      th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.fotoReprodutor})}"
+                      class="zoom rounded mx-auto d-block card-img-top"
+                      alt="Card image cap"
+                      style="width: 15rem; height:13rem; object-fit: contain">
+            </a>
+            <ul class="social">
+              <li>
+                <a
+                        style="cursor: pointer"
+                        data-tip="Ver detalhes"
+                        th:href="@{'/produto/detalhesProduto/'+*{id}}"
+                >
+                  <i class="fa fa-eye"></i>
+                </a>
+              </li>
+              <!--                                <li>-->
+              <!--                                    <button class="btn btn-outline-warning" type="button" th:data-id="${produto.id}"-->
+              <!--                                            onclick="addCart(this.getAttribute('data-id'))">Editar-->
+              <!--                                        serviço-->
+              <!--                                    </button>-->
+              <!--                                </li>-->
+              <!--                                <li><a data-tip="Adicionar" th:data-id="${produto.id}" onclick="addCart(this.getAttribute('data-id'))"><i class="fa fa-shopping-cart"></i></a></li>-->
+              <li><a data-tip="Adicionar" th:href="@{'/adicionarCarrinho/'+${produto.getId()}}" ><i class="fa fa-shopping-cart"></i></a></li>
+            </ul>
+          </div>
+          <div class="product-content">
+            <h3 class="text-capitalize text-center font-weight-bold" style="font-size:18px"
+                th:text="${produto.nome.toLowerCase()}">
+              <a href="#"></a></h3>
+            <span class="text-right badge badge-pill badge-info font-weight-bold"
+                  th:text="${#numbers.formatCurrency(produto.valor)}">
+                        </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div th:insert="~{/fragments/footer.html}"></div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="/js/sweetalert2.all.min.js" rel="script"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
