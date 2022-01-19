@@ -257,6 +257,9 @@
     </div>
     <section>
         <div class="container">
+            <h3 class="text-secondary" th:if="${produtos.isEmpty()}">
+                Nenhum produto encontrado.
+            </h3>
             <div class="row">
                 <div th:each="produto : ${produtos}" class="col-md-4 col-sm-6">
                     <div class="product-grid2" th:object="${produto}">
@@ -276,7 +279,7 @@
                                     <a
                                         style="cursor: pointer"
                                         data-tip="Ver detalhes"
-                                        th:href="@{'/produto/detalhesProduto/'+*{id}}"
+                                        th:href="@{'/produto/detalhesProduto/'+${produto.getId()}}"
                                     >
                                         <i class="fa fa-eye"></i>
                                     </a>
