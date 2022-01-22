@@ -31,7 +31,8 @@
                     </thead>
                     <tbody>
                     <tr th:each="item : ${listaItens}">
-                        <td><img style="width: 75px;height:75px"
+                        <td>
+                            <img style="width: 75px;height:75px"
                                  th:src="@{/produto/mostrarImagem/{imagem}(imagem=${item.produto.fotoReprodutor})}"/>
                         </td>
                         <td th:text="${item.produto.descricao}"></td>
