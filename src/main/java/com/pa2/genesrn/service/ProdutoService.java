@@ -32,9 +32,9 @@ public class ProdutoService {
         return produtoRepository.findById(id);
     }
 
-    public List<Produto> buscarProdutos(Usuario usuario){
-//        return produtoRepository.listarProdutoPorUsuario(idUsuario);
-        return produtoRepository.findAll();
+    public List<Produto> buscarProdutos(Integer id){
+        return produtoRepository.listarProdutoPorUsuario(id);
+//        return produtoRepository.findAll();
     }
 
 }
