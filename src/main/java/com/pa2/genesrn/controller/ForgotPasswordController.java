@@ -57,7 +57,7 @@ public class ForgotPasswordController {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        helper.setFrom("no-reply@-doesangupet.com", "DoeSanguePet suporte");
+        helper.setFrom("no-reply@-genes-rn.com", "Genes-RN suporte");
         helper.setTo(recipientEmail);
 
         String subject = "Aqui está o link para redefinir sua senha";
