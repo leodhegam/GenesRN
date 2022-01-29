@@ -10,7 +10,7 @@
     }
 
 
-    h3.h3 {
+    h3 {
         text-align: center;
         margin: 1em;
         text-transform: capitalize;
@@ -232,12 +232,6 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <title>GenesRN</title>
-    <script>
-        function ativarModal() {
-            let btn = document.getElementById("btn-detalhes");
-            btn.click();
-        }
-    </script>
 </head>
 <body>
 <!--<a th:href="@{/logout}" class="text-dark  my-2 my-sm-0" type="submit">Logout</a>-->
@@ -266,7 +260,7 @@
                     <div class="product-grid2" th:object="${produto}">
                         <div class="product-image2">
                             <a
-                                th:href="@{'/produto/detalhesProduto/'+${id}}"
+                                th:href="@{'/produto/detalhesProduto/'+${produto.getId()}}"
                                 style="cursor: pointer"
                             >
                                 <img
