@@ -32,11 +32,17 @@ public class Usuario {
     @NotNull
     private String senha;
 
+    private String fotoPessoa;
+
     @NotNull
     private String endereco;
 
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     List<Produto> produtos;
+
 
     @Override
     public String toString() {

@@ -13,7 +13,16 @@
 </head>
 <body>
 <div th:insert="~{/fragments/navbar.html}"></div>
-<div class="container">
+
+<div th:if="${listaItens.size()==0}">
+    <h3 class="m-5 text-secondary">
+        Nenhum produto foi adicionado ao carrinho.
+    </h3>
+    <div class="col-sm-6  col-md-6">
+        <a type="button" href="/home" class="ml-4 btn btn-outline-info">Voltar para home</a>
+    </div>
+</div>
+<div th:if="${listaItens.size()>0}" class="container">
     <div class="row">
         <div class="col-12">
             <div class="table-responsive">
@@ -36,19 +45,21 @@
                                  th:src="@{/produto/mostrarImagem/{imagem}(imagem=${item.produto.fotoReprodutor})}"/>
                         </td>
                         <td>
-                            <span  th:text="${item.produto.nome}"/><br />
-                            <span style="font-size: 0.8rem; max-width: 150px;" class="text-secondary d-inline-block text-truncate "  th:text="'Produtor '+${item.produto.criador}" />
+                            <span th:text="${item.produto.nome}"/><br/>
+                            <span style="font-size: 0.8rem; max-width: 150px;"
+                                  class="text-secondary d-inline-block text-truncate "
+                                  th:text="'Produtor '+${item.produto.criador}"/>
                         </td>
                         <td th:text="${item.produto.quantidade}"></td>
                         <td class="text-center">
 
-                            <a class="btn btn-success" th:href="@{'/alterarQuantidade/'+${item.produto.id}+'/'+${1}}"><i
-                                    class="fa fa-plus"></i></a>&nbsp;
-                            <label class="text-center" th:text="${item.quantidade}"> &nbsp;&nbsp;</label>
-
                             <a th:disabled="${item.quantidade == 1}" class="btn btn-danger"
                                th:href="@{'/alterarQuantidade/'+${item.produto.id}+'/'+${0}}"><i
                                     class="fa fa-minus"></i></a>
+                            <label class="text-center" th:text="${item.quantidade}"> &nbsp;&nbsp;</label>
+                            <a class="btn btn-success" th:href="@{'/alterarQuantidade/'+${item.produto.id}+'/'+${1}}"><i
+                                    class="fa fa-plus"></i></a>&nbsp;
+
 
                         </td>
                         <td class="text-right" th:text="${#numbers.formatCurrency(item.valorUnitario)}"></td>
@@ -85,7 +96,8 @@
                         <td></td>
                         <td></td>
                         <td><strong>Total</strong></td>
-                        <td class="text-right"><strong th:text="${#numbers.formatCurrency(compra.valorTotal)}"></strong></td>
+                        <td class="text-right"><strong th:text="${#numbers.formatCurrency(compra.valorTotal)}"></strong>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -99,7 +111,6 @@
                 <div class="col-sm-12 col-md-6 text-right">
                     <a th:href="finalizar" role="button" class="btn btn-success text-uppercase">
                         Finalizar compra</a>
-                    <!--                    <button class="btn btn-lg btn-block btn-success text-uppercase">Finalizar compra</button>-->
                 </div>
             </div>
         </div>

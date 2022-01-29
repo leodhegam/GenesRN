@@ -39,6 +39,7 @@
                 </li>
             </span>
             <a href="/carrinho" sec:authorize="isAuthenticated()" class="navbar-text mr-2">
+                <span th:text="${count}"></span>
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             </a>
         </div>
