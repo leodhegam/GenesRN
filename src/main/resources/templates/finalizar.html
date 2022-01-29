@@ -70,10 +70,9 @@
                                 <label class="text-center" th:text="${item.quantidade}"> &nbsp;&nbsp;</label>
 
                             </td>
-                            <td class="text-right" th:text="${item.valorUnitario}"></td>
-                            <td class="text-right" th:text="${item.valorTotal}"></td>
+                            <td class="text-right" th:text="${#numbers.formatCurrency(item.valorUnitario)}"></td>
+                            <td class="text-right" th:text="${#numbers.formatCurrency(item.valorTotal)}"></td>
                             <td class="text-right">
-
                             </td>
                         </tr>
                         <tr>
@@ -83,7 +82,8 @@
                             <td></td>
                             <td></td>
                             <td>Sub-Total</td>
-                            <td th:text="${compra.valorTotal}" class="text-right"></td>
+
+                            <td th:text="${#numbers.formatCurrency(compra.valorTotal)}" class="text-right"></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -92,7 +92,7 @@
                             <td></td>
                             <td></td>
                             <td>Frete</td>
-                            <td class="text-right">0,00</td>
+                            <td class="text-right">R$ 0,00</td>
                         </tr>
                         <tr>
                             <td></td>
@@ -101,7 +101,8 @@
                             <td></td>
                             <td></td>
                             <td><strong>Total</strong></td>
-                            <td class="text-right"><strong th:text="${compra.valorTotal}"></strong></td>
+
+                            <td class="text-right"><strong th:text="${#numbers.formatCurrency(compra.valorTotal)}"></strong></td>
                         </tr>
                         </tbody>
                     </table>

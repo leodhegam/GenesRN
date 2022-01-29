@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:t="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -35,7 +35,10 @@
                             <img style="width: 75px;height:75px"
                                  th:src="@{/produto/mostrarImagem/{imagem}(imagem=${item.produto.fotoReprodutor})}"/>
                         </td>
-                        <td th:text="${item.produto.nome}"></td>
+                        <td>
+                            <span  th:text="${item.produto.nome}"/><br />
+                            <span style="font-size: 0.8rem; max-width: 150px;" class="text-secondary d-inline-block text-truncate "  th:text="'Produtor '+${item.produto.criador}" />
+                        </td>
                         <td th:text="${item.produto.quantidade}"></td>
                         <td class="text-center">
 
