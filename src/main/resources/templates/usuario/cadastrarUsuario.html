@@ -14,13 +14,9 @@
     <title>Hello, world!</title>
     <script language=javascript type="text/javascript">
         function verificarSenha(){
-
             let senha = document.getElementById("inputSenha");
-
-
             let message = document.getElementById("message");
             let messageVerde = document.getElementById("messageVerde");
-
             if(senha.value.length < 6){
                 messageVerde.innerText="";
                 message.innerText = "Senha menor que seis digitos";
@@ -29,7 +25,6 @@
                 message.innerText ="";
                 messageVerde.innerText="";
             }
-
         };
         function comparacaoSenha(){
             let senha = document.getElementById("inputSenha");
