@@ -66,12 +66,41 @@
                         type="email"
                         class="form-control">
             </div>
+            <hr />
             <div class="form-group">
-                <label class="font-weight-bold" for="inputEndereco">Endereço</label>
-                <input th:field="*{endereco}" name="endereco" id="inputEndereco" aria-describedby="enderecoHelp"
+                <label class="font-weight-bold">Endereço</label><br />
+                <span th:if="*{rua == null}" class="text-warning">Por favor adicionar um endereço</span>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="font-weight-bold" for="inputRua">Rua</label>
+                    <input th:field="*{rua}" name="rua" id="inputRua"
+                           type="text" required class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="font-weight-bold" for="inputNumero">Número</label>
+                    <input th:field="*{numero}" name="numero" id="inputNumero"
+                           type="number" required class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold" for="inputComplemento">Complemento(Opcional)</label>
+                <input th:field="*{complemento}" name="complemento" id="inputComplemento"
                        type="text" class="form-control">
             </div>
-
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="font-weight-bold" for="inputCep">Cep</label>
+                    <input th:field="*{cep}" name="cep" id="inputCep"
+                           type="text" required class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="font-weight-bold" for="inputCidade">Cidade</label>
+                    <input th:field="*{cidade}" name="cidade" id="inputCidade"
+                           type="text" required class="form-control">
+                </div>
+            </div>
+            <hr />
             <div style="display:none" class="form-group col-lg-7">
                 <label for="inputSenha"></label>
                 <input name="senha" th:field="*{senha}" id="inputSenhaDb" aria-describedby="senhaHelp"

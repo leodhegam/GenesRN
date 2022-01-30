@@ -3,6 +3,7 @@ package com.pa2.genesrn.service;
 import com.pa2.genesrn.model.Compra;
 import com.pa2.genesrn.model.ItensCompra;
 import com.pa2.genesrn.model.Pedido;
+import com.pa2.genesrn.model.Produto;
 import com.pa2.genesrn.repository.ItensCompraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,15 @@ public class ItensCompraService {
             pedidos.add(new Pedido(c, itens));
         }
         return pedidos;
+    }
+
+    public List<ItensCompra> getAllByProduto(List<Produto> produtos) {
+        List<ItensCompra> itens = new ArrayList<>();
+
+        for (Produto p : produtos) {
+            var itensComprasList = repository.findAllByProduto(p);
+            itens.addAll(itensComprasList);
+        }
+        return itens;
     }
 }

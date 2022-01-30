@@ -34,7 +34,10 @@ public class ProdutoService {
 
     public List<Produto> buscarProdutos(Integer id){
         return produtoRepository.listarProdutoPorUsuario(id);
-//        return produtoRepository.findAll();
+    }
+
+    public List<Produto> pegarMeusProdutos(Usuario usuario) {
+        return produtoRepository.findAllByUsuario(usuario);
     }
 
 }

@@ -15,5 +15,6 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer>,Produ
 
     List<Produto> findAllByGeneroAndUsuarioNot(EnumGenero genero, Usuario usuario);
 
+
     Produto findByNome(String nome);
 }

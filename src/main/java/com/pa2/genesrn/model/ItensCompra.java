@@ -21,6 +21,8 @@ public class ItensCompra {
     @ManyToOne
     private Compra compra;
 
+    private String status;
+
     private Integer quantidade;
 
     private Double valorUnitario = 0.;

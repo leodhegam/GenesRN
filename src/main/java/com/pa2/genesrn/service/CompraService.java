@@ -1,11 +1,14 @@
 package com.pa2.genesrn.service;
 
 import com.pa2.genesrn.model.Compra;
+import com.pa2.genesrn.model.ItensCompra;
+import com.pa2.genesrn.model.Pedido;
 import com.pa2.genesrn.model.Usuario;
 import com.pa2.genesrn.repository.CompraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service

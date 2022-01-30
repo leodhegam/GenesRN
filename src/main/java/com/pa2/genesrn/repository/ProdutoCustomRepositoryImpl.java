@@ -17,6 +17,7 @@ import java.util.Objects;
 public class ProdutoCustomRepositoryImpl implements ProdutoCustomRepository {
     @Autowired
     private DataSource dt;
+
     @Override
     public List<Produto> listarProdutoPorUsuario(Integer idUsuario) {
 
@@ -59,7 +60,7 @@ public class ProdutoCustomRepositoryImpl implements ProdutoCustomRepository {
 
         queryBuilder.append("SELECT * FROM produto p JOIN usuario u ON (u.id = p.usuario_id) ");
 
-        if(Objects.nonNull(idUsuario)){
+        if (Objects.nonNull(idUsuario)) {
             String strFiltroUsuario = "AND u.id != :idUsuario ";
             queryBuilder.append(strFiltroUsuario);
 
@@ -84,6 +85,4 @@ public class ProdutoCustomRepositoryImpl implements ProdutoCustomRepository {
                 });
         return produtos;
     }
-
-
 }

@@ -3,7 +3,6 @@ package com.pa2.genesrn.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -32,8 +31,18 @@ public class Usuario {
     @NotNull
     private String senha;
 
-    @NotNull
-    private String endereco;
+    private String rua;
+
+    private String complemento;
+
+    private int numero;
+
+    private String cidade;
+
+    private String uf;
+
+
+    private String cep;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     List<Produto> produtos;
