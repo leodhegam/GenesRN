@@ -82,6 +82,7 @@ public class CarrinhoController {
 
         for (ItensCompra c : itensCompra) {
             c.setCompra(compra);
+            c.setStatus("Processando");
             itensCompraRepository.saveAndFlush(c);
         }
         itensCompra = new ArrayList<>();
