@@ -41,6 +41,7 @@ public class Usuario {
 
     private String uf;
 
+    private String fotoPessoa;
 
     private String cep;
 
