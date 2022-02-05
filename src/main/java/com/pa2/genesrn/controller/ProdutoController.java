@@ -150,7 +150,9 @@ public class ProdutoController {
 
         redirectAttributes.addFlashAttribute("message", "Sucesso ao realizar cadastro!");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-        return "redirect:/produto/meusProdutos";
+        return "/sweet/sweetCadastrarProduto";
+
+        //"redirect:/produto/meusProdutos"
     }
 
     @GetMapping("/mostrarImagem/{imagem}")

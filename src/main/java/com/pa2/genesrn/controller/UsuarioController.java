@@ -93,7 +93,9 @@ public class UsuarioController {
         } else {
             usuarioService.save(usuario);
             session.setAttribute("message", "Usuário registrado com sucesso");
-            return "redirect:/";
+            return "/sweet/sweetCadastro";
+
+
         }
     }
 
@@ -151,7 +153,9 @@ public class UsuarioController {
         model.addAttribute("message", "Atualização de dados realizada com sucesso!");
         model.addAttribute("alertClass", "alert-success");
         usuarioService.saveAndFlush(usuario);
-        return "/usuario/editarUsuario";
+        return "/sweet/sweetEditar";
+
+        //"/usuario/editarUsuario"
     }
 
 }

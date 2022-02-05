@@ -10,7 +10,6 @@ import com.pa2.genesrn.repository.ProdutoRepository;
 import com.pa2.genesrn.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -74,7 +73,7 @@ public class CarrinhoController {
 
     @PostMapping("/finalizar/confirmar")
     public ModelAndView confirmarCompra(Principal p, String formaPagamento) {
-        ModelAndView mv = new ModelAndView("mensagemFinalizou");
+        ModelAndView mv = new ModelAndView("/sweet/mensagemFinalizou");
         Usuario usuario = usuarioRepository.findByEmail(p.getName());
         compra.setUsuario(usuario);
         compra.setFormaPagamento(formaPagamento);
