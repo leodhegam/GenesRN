@@ -1,13 +1,18 @@
 <xlmns:html lang="en" xmlns:th="http://www.thymeleaf.org"
             xlmns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5"
             xmlns:xlmns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
-
-        <footer class="text-center text-lg-start text-light" style="background-color: #444b6e">
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                © <span id="ano"></span> Copyright:
-                <a class="text-info" th:href="@{/}">Genes.com</a>
-            </div>
-        </footer>
+    <style>
+        footer {
+            bottom:0;
+            left:0;
+        }
+    </style>
+    <footer class="text-center w-100 text-light footer navbar-fixed-bottom" style="background-color: #444b6e">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © <span id="ano"></span> Copyright:
+            <a class="text-info" th:href="@{/}">Genes.com</a>
+        </div>
+    </footer>
     <script>
         const date = new Date().getFullYear();
         document.getElementById("ano").innerText = date;

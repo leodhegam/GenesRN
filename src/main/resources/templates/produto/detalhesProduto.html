@@ -14,6 +14,12 @@
       width: 100vw;
     }
   </style>
+  <script>
+    let data = document.getElementById('dataNascimento');
+    data.value.addEventListener('change', () => {
+      document.getElementById("dataResult").innerText = new Data(data.value).toLocaleString()
+    })
+  </script>
 </head>
 <body>
   <div th:insert="~{/fragments/navbar.html}"></div>
@@ -71,11 +77,13 @@
               <th>Registro</th>
               <td th:text="*{registro}"></td>
               <th>Peso</th>
-              <td th:text="*{peso+' Kg'}"></td>
+              <td>
+                <span th:text="${#numbers.formatDecimal(produto.getPeso(),3, 'POINT',2, 'POINT')}"></span> Kg
+              </td>
             </tr>
             <tr>
               <th>Data de Nascimento</th>
-              <td th:text="*{dataNascimento}"></td>
+              <td th:text="${dataNascimento}"></td>
               <th>Linhagem</th>
               <td th:text="*{linhagem}"></td>
             </tr>
