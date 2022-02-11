@@ -1,23 +1,21 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
   .container {
-    margin-top: 50px;
+    height: 100vh;
     position: relative;
-    height: 100%;
-    width: 100%;
-    background-size: cover;
   }
 
-  h3.h3 {
+  h3 {
     text-align: center;
     margin: 1em;
     text-transform: capitalize;
     font-size: 1.7em
-  }
-
-  .demo {
-    padding: 45px 0
   }
 
   .product-grid2 {
@@ -186,7 +184,7 @@
 
   .product-grid2 .title {
     font-size: 17px;
-    margin: 0 0 7px
+    margin: 0 0 7px;
   }
 
   .product-grid2 .title a {
@@ -206,20 +204,12 @@
   }
 
   body {
-    background: rgba(0, 0, 0, 0) url(img/fundo.svg) no-repeat scroll left center;
+    width: 100%;
+  }
+
+  #background-image {
+    background: rgba(0, 0, 0, 0) url(/img/fundo.svg) no-repeat scroll left center;
     background-size: cover;
-  }
-
-  @media screen and (max-width: 990px) {
-    .product-grid2 {
-      margin-bottom: 30px
-    }
-  }
-
-  @media screen and (max-width: 767px) {
-    body {
-      background: none;
-    }
   }
 </style>
 <head>
@@ -234,7 +224,7 @@
 </head>
 <body>
 <!--<a th:href="@{/logout}" class="text-dark  my-2 my-sm-0" type="submit">Logout</a>-->
-<div></div>
+<div id="background-image">
 <div th:insert="~{/fragments/navbar.html}"></div>
 <div class="d-flex justify-content-center">
   <div class="mt-4 mb-4 row col-12 pl-0 ml-0 pr-0">
@@ -287,13 +277,6 @@
                   <i class="fa fa-eye"></i>
                 </a>
               </li>
-              <!--                                <li>-->
-              <!--                                    <button class="btn btn-outline-warning" type="button" th:data-id="${produto.id}"-->
-              <!--                                            onclick="addCart(this.getAttribute('data-id'))">Editar-->
-              <!--                                        serviço-->
-              <!--                                    </button>-->
-              <!--                                </li>-->
-              <!--                                <li><a data-tip="Adicionar" th:data-id="${produto.id}" onclick="addCart(this.getAttribute('data-id'))"><i class="fa fa-shopping-cart"></i></a></li>-->
               <li><a data-tip="Adicionar" th:href="@{'/adicionarCarrinho/'+${produto.getId()}}" ><i class="fa fa-shopping-cart"></i></a></li>
             </ul>
           </div>
@@ -301,9 +284,9 @@
             <h3 class="text-capitalize text-center font-weight-bold" style="font-size:18px"
                 th:text="${produto.nome.toLowerCase()}">
               <a href="#"></a></h3>
-            <span class="text-right badge badge-pill badge-info font-weight-bold"
-                  th:text="${#numbers.formatCurrency(produto.valor)}">
-                        </span>
+              <span class="text-right badge badge-pill badge-info font-weight-bold"
+                    th:text="${#numbers.formatCurrency(produto.valor)}">
+              </span>
           </div>
         </div>
       </div>
@@ -311,6 +294,7 @@
   </div>
 </section>
 <div th:insert="~{/fragments/footer.html}"></div>
+</div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
