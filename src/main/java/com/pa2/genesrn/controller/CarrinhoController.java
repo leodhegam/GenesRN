@@ -10,11 +10,11 @@ import com.pa2.genesrn.repository.ProdutoRepository;
 import com.pa2.genesrn.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,8 @@ public class CarrinhoController {
     }
 
     @GetMapping("/carrinho")
-    public ModelAndView chamarCarrinho(Principal p) {
+    public ModelAndView chamarCarrinho(Principal p, HttpSession session) {
+
         Usuario usuario = usuarioRepository.findByEmail(p.getName());
         ModelAndView mv = new ModelAndView("carrinho");
         calcularTotal();
@@ -55,25 +56,31 @@ public class CarrinhoController {
         mv.addObject("usuario", usuario);
         mv.addObject("listaItens", itensCompra);
         mv.addObject("count", count);
+        session.setAttribute("count", count);
+
         return mv;
     }
 
     @GetMapping("/finalizar")
-    public ModelAndView finalizarCompra(Principal p) {
+    public ModelAndView finalizarCompra(Principal p, HttpSession session) {
         Usuario usuario = usuarioRepository.findByEmail(p.getName());
         ModelAndView mv = new ModelAndView("finalizar");
         calcularTotal();
-        Integer count = itensCompra.size();
         mv.addObject("compra", compra);
         mv.addObject("listaItens", itensCompra);
         mv.addObject("usuario", usuario);
+        Integer count = (Integer)session.getAttribute("count");
+        mv.addObject("count", count);
 
         return mv;
     }
 
     @PostMapping("/finalizar/confirmar")
-    public ModelAndView confirmarCompra(Principal p, String formaPagamento) {
+    public ModelAndView confirmarCompra(Principal p, String formaPagamento, HttpSession session) {
         ModelAndView mv = new ModelAndView("/sweet/mensagemFinalizou");
+
+        session.setAttribute("count", 0);
+
         Usuario usuario = usuarioRepository.findByEmail(p.getName());
         compra.setUsuario(usuario);
         compra.setFormaPagamento(formaPagamento);
@@ -122,7 +129,6 @@ public class CarrinhoController {
 
     @GetMapping("/adicionarCarrinho/{id}")
     public String adicionarCarrinho(@PathVariable Long id) {
-
 
         Optional<Produto> prod = Optional.ofNullable(produtoRepository.findById(id));
         Produto produto = prod.get();

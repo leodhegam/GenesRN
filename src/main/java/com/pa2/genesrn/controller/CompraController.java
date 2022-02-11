@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class CompraController {
     private UsuarioService usuarioService;
 
     @GetMapping("/meusPedidos")
-    public ModelAndView meusPedidos(Principal p) {
+    public ModelAndView meusPedidos(Principal p, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView("/pedido/meusPedidos");
 
         Usuario usuario = usuarioService.findByEmail(p.getName());
@@ -40,11 +41,15 @@ public class CompraController {
 
         modelAndView.addObject("pedidos", pedidos);
         modelAndView.addObject("usuario", usuario);
+
+        Integer count = (Integer)session.getAttribute("count");
+        modelAndView.addObject("count", count);
+
         return modelAndView;
     }
 
     @GetMapping("/minhasVendas")
-    public ModelAndView minhasCompras(Principal p) {
+    public ModelAndView minhasCompras(Principal p, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView("/pedido/minhasVendas");
 
         Usuario usuario = usuarioService.findByEmail(p.getName());
@@ -61,6 +66,10 @@ public class CompraController {
         modelAndView.addObject("compras", itensCompras);
         modelAndView.addObject("usuario", usuario);
         modelAndView.addObject("allStatus", status);
+
+        Integer count = (Integer)session.getAttribute("count");
+        modelAndView.addObject("count", count);
+
         return modelAndView;
     }
 

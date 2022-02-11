@@ -1,5 +1,6 @@
 package com.pa2.genesrn.controller;
 
+import com.pa2.genesrn.model.ItensCompra;
 import com.pa2.genesrn.model.Produto;
 import com.pa2.genesrn.model.Usuario;
 import com.pa2.genesrn.repository.UsuarioRepository;
@@ -25,6 +26,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -46,13 +48,14 @@ public class UsuarioController {
     private BCryptPasswordEncoder bp;
 
     @GetMapping("/home")
-    public String home(Principal p, Model model) {
+    public String home(Principal p, Model model, HttpSession session) {
         String nome = p.getName();
         Usuario usuario = usuarioRepository.findByEmail(nome);
         List<Produto> produtos = produtoService.listarProdutos(usuario.getId());
         model.addAttribute("usuario", usuario);
         model.addAttribute("produtos", produtos);
-
+        Integer count = (Integer)session.getAttribute("count");
+        model.addAttribute("count", count);
         return "/home";
     }
 
@@ -100,12 +103,17 @@ public class UsuarioController {
     }
 
     @GetMapping("edit/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model, HttpSession session) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid usuario Id:" + id));
         model.addAttribute("usuario", usuario);
+        Integer count = (Integer)session.getAttribute("count");
+        model.addAttribute("count", count);
+
         return "/usuario/editarUsuario";
+
     }
+
 
     @PostMapping("update/{id}")
     public String updateUsuario(@PathVariable("id") Integer id, @Valid Usuario usuario, @RequestParam(value = "imageFile") MultipartFile imageFile, BindingResult result, Model model, HttpServletRequest httpServletRequest, HttpSession session, RedirectAttributes redirectAttributes) {
