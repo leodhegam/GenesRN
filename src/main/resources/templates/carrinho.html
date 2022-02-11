@@ -53,11 +53,11 @@
                         <td th:text="${item.produto.quantidade}"></td>
                         <td class="text-center">
 
-                            <a th:disabled="${item.quantidade == 1}" class="btn btn-danger"
+                            <a th:disabled="${item.quantidade == 1}" class="btn"
                                th:href="@{'/alterarQuantidade/'+${item.produto.id}+'/'+${0}}"><i
                                     class="fa fa-minus"></i></a>
-                            <label class="text-center" th:text="${item.quantidade}"> &nbsp;&nbsp;</label>
-                            <a class="btn btn-success" th:href="@{'/alterarQuantidade/'+${item.produto.id}+'/'+${1}}"><i
+                            <label class="text-center font-weight-bold" th:text="${item.quantidade}"> &nbsp;&nbsp;</label>
+                            <a class="btn" th:href="@{'/alterarQuantidade/'+${item.produto.id}+'/'+${1}}"><i
                                     class="fa fa-plus"></i></a>&nbsp;
 
 
