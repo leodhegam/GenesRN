@@ -8,6 +8,12 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <title>Detalhes</title>
+  <style>
+    body section{
+      height: 100vh;
+      width: 100vw;
+    }
+  </style>
 </head>
 <body>
   <div th:insert="~{/fragments/navbar.html}"></div>
@@ -65,7 +71,7 @@
               <th>Registro</th>
               <td th:text="*{registro}"></td>
               <th>Peso</th>
-              <td th:text="*{peso}"></td>
+              <td th:text="*{peso+' Kg'}"></td>
             </tr>
             <tr>
               <th>Data de Nascimento</th>

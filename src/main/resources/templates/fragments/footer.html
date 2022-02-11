@@ -2,10 +2,14 @@
             xlmns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5"
             xmlns:xlmns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 
-        <footer class="text-center text-lg-start text-light mt-5" style="background-color: #444b6e">
+        <footer class="text-center text-lg-start text-light" style="background-color: #444b6e">
             <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                © 2021 Copyright:
+                © <span id="ano"></span> Copyright:
                 <a class="text-info" th:href="@{/}">Genes.com</a>
             </div>
         </footer>
+    <script>
+        const date = new Date().getFullYear();
+        document.getElementById("ano").innerText = date;
+    </script>
 </xlmns:html>

@@ -1,24 +1,21 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <style>
-    .container {
-        margin-top: 50px;
-        position: relative;
-        height: 100%;
-        width: 100%;
-        background-size: cover;
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
     }
-
+    .container {
+        height: 100vh;
+        position: relative;
+    }
 
     h3 {
         text-align: center;
         margin: 1em;
         text-transform: capitalize;
         font-size: 1.7em
-    }
-
-    .demo {
-        padding: 45px 0
     }
 
     .product-grid2 {
@@ -187,7 +184,7 @@
 
     .product-grid2 .title {
         font-size: 17px;
-        margin: 0 0 7px
+        margin: 0 0 7px;
     }
 
     .product-grid2 .title a {
@@ -207,20 +204,12 @@
     }
 
     body {
+        width: 100%;
+    }
+
+    #background-image {
         background: rgba(0, 0, 0, 0) url(img/fundo.svg) no-repeat scroll left center;
         background-size: cover;
-    }
-
-    @media screen and (max-width: 990px) {
-        .product-grid2 {
-            margin-bottom: 30px
-        }
-    }
-
-    @media screen and (max-width: 767px) {
-        body {
-            background: none;
-        }
     }
 </style>
 <head>
@@ -235,18 +224,21 @@
 </head>
 <body>
 <!--<a th:href="@{/logout}" class="text-dark  my-2 my-sm-0" type="submit">Logout</a>-->
-<div></div>
+<div id="background-image">
 <div th:insert="~{/fragments/navbar.html}"></div>
-    <div class="justify-content-center">
-        <div class="mt-4 mb-4 row justify-content-center col-12  pl-0 ml-0 pr-0">
-            <div class="col-lg-2 mt-1">
-                <a type="button" th:href="@{'/produto/filtro/Bovino'}" class="btn btn-outline-info  btn-md btn-block ">Bovino</a>
+    <div class="d-flex justify-content-center">
+        <div class="mt-4 mb-4 row col-12 pl-0 ml-0 pr-0">
+            <div class="col-md-3 col-1"></div>
+            <div class="col-md-2 col-3 mt-1 w-100">
+                <a type="button" th:href="@{'/produto/filtro/Bovino'}" class="btn btn-outline-info w-100 p-1">Bovino</a>
             </div>
-            <div class="col-lg-2 mt-1">
-                <a type="button" th:href="@{'/produto/filtro/Suino'}" class="btn btn-outline-info  btn-md btn-block">Suíno</a>
+            <div class="col-md-2 col-3 mt-1 w-100">
+                <a type="button" th:href="@{'/produto/filtro/Suino'}" class="btn btn-outline-info w-100 p-1">Suíno</a>
             </div>
-            <div class="col-lg-2 mt-1">
-                <a type="button" th:href="@{'/produto/filtro/Equino'}" class="btn btn-outline-info  btn-md btn-block">Equino</a>
+            <div class="col-md-2 col-3 mt-1 w-100">
+                <a type="button" th:href="@{'/produto/filtro/Equino'}" class="btn btn-outline-info w-100 p-1">Equino</a>
+            </div>
+            <div class="col-md-3 col-1">
             </div>
         </div>
     </div>
@@ -303,6 +295,7 @@
         </div>
     </section>
 <div th:insert="~{/fragments/footer.html}"></div>
+</div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
