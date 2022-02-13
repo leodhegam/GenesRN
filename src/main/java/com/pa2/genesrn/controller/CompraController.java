@@ -34,6 +34,9 @@ public class CompraController {
 
     @GetMapping("/meusPedidos")
     public ModelAndView meusPedidos(Principal p, HttpSession session) {
+        if (p == null) {
+            return new ModelAndView("/login");
+        }
         ModelAndView modelAndView = new ModelAndView("/pedido/meusPedidos");
 
         Usuario usuario = usuarioService.findByEmail(p.getName());
@@ -51,6 +54,9 @@ public class CompraController {
 
     @GetMapping("/minhasVendas")
     public ModelAndView minhasCompras(Principal p, HttpSession session) {
+        if (p == null) {
+            return new ModelAndView("/login");
+        }
         ModelAndView modelAndView = new ModelAndView("/pedido/minhasVendas");
 
         Usuario usuario = usuarioService.findByEmail(p.getName());
@@ -77,7 +83,7 @@ public class CompraController {
     @GetMapping(value = "/compra")
     public ModelAndView compra(Principal p) {
         if (p == null) {
-            return new ModelAndView("/home");
+            return new ModelAndView("/login");
         }
 
         ModelAndView modelAndView = new ModelAndView("/pedido/atualizarStatus");

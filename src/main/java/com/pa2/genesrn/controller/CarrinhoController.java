@@ -47,7 +47,9 @@ public class CarrinhoController {
 
     @GetMapping("/carrinho")
     public ModelAndView chamarCarrinho(Principal p, HttpSession session) {
-
+        if (p == null) {
+            return new ModelAndView("/login");
+        }
         Usuario usuario = usuarioRepository.findByEmail(p.getName());
         ModelAndView mv = new ModelAndView("carrinho");
         calcularTotal();
@@ -63,6 +65,9 @@ public class CarrinhoController {
 
     @GetMapping("/finalizar")
     public ModelAndView finalizarCompra(Principal p, HttpSession session) {
+        if (p == null) {
+            return new ModelAndView("/login");
+        }
         Usuario usuario = usuarioRepository.findByEmail(p.getName());
         ModelAndView mv = new ModelAndView("finalizar");
         calcularTotal();
@@ -77,6 +82,9 @@ public class CarrinhoController {
 
     @PostMapping("/finalizar/confirmar")
     public ModelAndView confirmarCompra(Principal p, String formaPagamento, HttpSession session) {
+        if (p == null) {
+            return new ModelAndView("/login");
+        }
         ModelAndView mv = new ModelAndView("/sweet/mensagemFinalizou");
 
         session.setAttribute("count", 0);

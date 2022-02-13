@@ -49,6 +49,9 @@ public class UsuarioController {
 
     @GetMapping("/home")
     public String home(Principal p, Model model, HttpSession session) {
+        if (p == null) {
+            return "redirect:/login";
+        }
         String nome = p.getName();
         Usuario usuario = usuarioRepository.findByEmail(nome);
         List<Produto> produtos = produtoService.listarProdutos(usuario.getId());
@@ -103,7 +106,10 @@ public class UsuarioController {
     }
 
     @GetMapping("edit/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model, HttpSession session) {
+    public String showUpdateForm(Principal p, @PathVariable("id") Integer id, Model model, HttpSession session) {
+        if (p == null) {
+            return "redirect:/login";
+        }
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid usuario Id:" + id));
         model.addAttribute("usuario", usuario);

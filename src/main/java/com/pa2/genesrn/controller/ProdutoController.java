@@ -44,7 +44,9 @@ public class ProdutoController {
 
     @GetMapping("/meusProdutos")
     public String produtos(Principal p, Model model, HttpSession session) {
-
+        if (p == null) {
+            return "redirect:/login";
+        }
         Usuario usuario = usuarioRepository.findByEmail(p.getName());
         List<Produto> produtos = produtoService.pegarMeusProdutos(usuario);
         System.out.println("Produtos antes "+produtos);
@@ -59,6 +61,9 @@ public class ProdutoController {
 
     @GetMapping("/alterar/{produto}")
     public ModelAndView alterarProduto(@PathVariable(name = "produto") String idProduto, Principal p){
+        if (p == null) {
+            return new ModelAndView("/login");
+        }
         ModelAndView modelAndView = new ModelAndView("/produto/editarProduto");
         Usuario usuario = usuarioRepository.findByEmail(p.getName());
         var upProd = produtoService.getProductById(Long.valueOf(idProduto));
@@ -72,7 +77,9 @@ public class ProdutoController {
     public ModelAndView vitrineProdutos(
             @PathVariable String nomeFiltro,
             Principal p) {
-
+        if (p == null) {
+            return new ModelAndView("/login");
+        }
         String nome = p.getName();
         Usuario usuario = usuarioRepository.findByEmail(nome);
         List<Produto> prod = produtoService.findAll();
@@ -97,6 +104,9 @@ public class ProdutoController {
 
     @RequestMapping("/detalhesProduto/{produto}")
     public ModelAndView detalhesProduto(@PathVariable(name = "produto") String idProduto, Principal p){
+        if (p == null) {
+            return new ModelAndView("/login");
+        }
         ModelAndView modelAndView = new ModelAndView("/produto/detalhesProduto");
 
         Usuario usuario = usuarioRepository.findByEmail(p.getName());
@@ -126,6 +136,9 @@ public class ProdutoController {
 
     @RequestMapping("/cadastrarNovoProduto")
     public ModelAndView cadastrarNovoProduto(Principal p, HttpSession session) {
+        if (p == null) {
+            return new ModelAndView("/login");
+        }
         ModelAndView modelAndView = new ModelAndView("/produto/cadastrarProduto");
         modelAndView.addObject("produto", new Produto());
         modelAndView.addObject("usuario", usuarioRepository.findByEmail(p.getName()));
