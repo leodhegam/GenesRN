@@ -98,8 +98,7 @@ public class CompraController {
     public ModelAndView atualizarStatusCompra(Principal p, ItensCompra compra, HttpSession session) {
         ItensCompra novo = itensCompraService.getById(compra.getId());
         novo.setStatus(compra.getStatus());
-        System.out.println(novo.getCompra().getUsuario());
         itensCompraService.save(novo);
-        return minhasCompras(p,session);
+        return new ModelAndView("/sweet/sweetStatus");
     }
 }
