@@ -96,7 +96,7 @@
         <div class="col-2 text-center">
           <span>Status:</span>
           <span th:text="${compra.status}"></span>
-          <div th:insert="~{/pedido/atualizarStatus :: upStatus (${compra})}"></div>
+          <div th:if="${compra.status != 'Entregue'}" th:insert="~{/pedido/atualizarStatus :: upStatus (${compra})}"></div>
         </div>
       </div>
 <!--  Endereço para entrega     -->
