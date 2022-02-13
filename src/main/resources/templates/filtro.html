@@ -205,11 +205,27 @@
 
   body {
     width: 100%;
+    height: 100vh;
+    max-height: 100vh;
   }
 
-  #fundo {
+  #background-image {
+    height: 100%;
+    width: 100%;
     background: rgba(0, 0, 0, 0) url(img/fundo.svg) no-repeat scroll left center;
     background-size: cover;
+  }
+
+  @media (max-width: 576px) {
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    #fundo {
+      background: rgba(0, 0, 0, 0) url(img/fundo.svg) no-repeat scroll left center;
+      background-size: cover;
+    }
   }
 </style>
 <head>
@@ -295,15 +311,13 @@
       </div>
     </div>
   </section>
-  <div th:insert="~{/fragments/footer.html}"></div>
   <script th:inline="javascript">
     /*<![CDATA[*/
     var produtos = /*[[${produtos}]]*/ "produtos";
     /*]]>*/
-    let back = document.getElementById("fundo");
-    console.log(produtos)
-    back.style.height = "75vh";
-    if(produtos.length >= 6) {
+    let back = document.body;
+    let tela = window.screen;
+    if(produtos.length > 6 && tela.width > 576) {
       back.style.height = "100%";
     }
   </script>

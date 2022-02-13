@@ -205,19 +205,29 @@
 
     body {
         width: 100%;
+        height: 100vh;
+        max-height: 100vh;
     }
 
     #background-image {
+        height: 100%;
+        width: 100%;
         background: rgba(0, 0, 0, 0) url(img/fundo.svg) no-repeat scroll left center;
         background-size: cover;
     }
 
-    @media(max-width: 600px) {
+    @media (max-width: 576px) {
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
         #background-image {
             background: rgba(0, 0, 0, 0) url(img/fundo.svg) no-repeat scroll left center;
             background-size: cover;
         }
     }
+
 </style>
 <head>
     <!-- Required meta tags -->
@@ -230,7 +240,6 @@
     <title>GenesRN</title>
 </head>
 <body>
-<!--<a th:href="@{/logout}" class="text-dark  my-2 my-sm-0" type="submit">Logout</a>-->
 <div th:insert="~{/fragments/navbar.html}"></div>
     <div class="d-flex justify-content-center">
         <div class="mt-4 mb-4 row col-12 pl-0 ml-0 pr-0">
@@ -305,11 +314,9 @@
     /*<![CDATA[*/
     var produtos = /*[[${produtos}]]*/ "produtos";
     /*]]>*/
-    let back = document.getElementById("background-image");
-    console.log(produtos)
-    if(produtos.length > 0 && produtos.length < 6) {
-        back.style.height = "76vh";
-    } else {
+    let back = document.body;
+    let tela = window.screen;
+    if(produtos.length > 6 && tela.width > 576) {
         back.style.height = "100%";
     }
 </script>

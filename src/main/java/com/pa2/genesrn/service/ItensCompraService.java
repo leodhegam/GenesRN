@@ -26,6 +26,14 @@ public class ItensCompraService {
         return pedidos;
     }
 
+    public ItensCompra getById(Long id) {
+        return repository.getById(id);
+    }
+
+    public ItensCompra save(ItensCompra compra) {
+        return repository.save(compra);
+    }
+
     public List<ItensCompra> getAllByProduto(List<Produto> produtos) {
         List<ItensCompra> itens = new ArrayList<>();
 

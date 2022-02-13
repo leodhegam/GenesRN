@@ -6,9 +6,10 @@ import com.pa2.genesrn.service.ItensCompraService;
 import com.pa2.genesrn.service.ProdutoService;
 import com.pa2.genesrn.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -59,7 +60,7 @@ public class CompraController {
         List<String> status = new ArrayList<>();
 
         status.add("Processando");
-        status.add("Encaminhado");
+        status.add("Transporte");
         status.add("Enviado");
         status.add("Entregue");
 
@@ -73,4 +74,32 @@ public class CompraController {
         return modelAndView;
     }
 
+    @GetMapping(value = "/compra")
+    public ModelAndView compra(Principal p) {
+        if (p == null) {
+            return new ModelAndView("/home");
+        }
+
+        ModelAndView modelAndView = new ModelAndView("/pedido/atualizarStatus");
+
+        List<String> status = new ArrayList<>();
+
+        status.add("Processando");
+        status.add("Transporte");
+        status.add("Enviado");
+        status.add("Entregue");
+
+        modelAndView.addObject("compra", new ItensCompra());
+        modelAndView.addObject("allStatus", status);
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/atualizarStatus", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ModelAndView atualizarStatusCompra(Principal p, ItensCompra compra, HttpSession session) {
+        ItensCompra novo = itensCompraService.getById(compra.getId());
+        novo.setStatus(compra.getStatus());
+        System.out.println(novo.getCompra().getUsuario());
+        itensCompraService.save(novo);
+        return minhasCompras(p,session);
+    }
 }

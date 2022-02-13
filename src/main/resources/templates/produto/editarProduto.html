@@ -151,7 +151,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="tipo">Gênero</label></br>
-                    <select class="form-control validar" id="tipo" required th:name="genero">
+                    <select class="form-control validar" id="tipo" required th:field="*{genero}">
                         <option th:each="t : ${T(com.pa2.genesrn.enums.EnumGenero).values()}"
                                 th:value="${t}" th:text="${t.getDescricao()}">
                         </option>

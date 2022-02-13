@@ -49,7 +49,7 @@
         <div class="col-4">
           <p style="font-size: 0.8rem" class="text-center mt-2">
             <span class="text-uppercase">compra realizado</span><br />
-            <span th:text="${compra.getCompra().getDataCompra()}"></span>
+            <span th:text="${#dates.format(compra.getCompra().getDataCompra(), 'dd/MM/yyyy')}"></span>
           </p>
         </div>
         <div class="col-4">
@@ -94,11 +94,9 @@
           <span th:text="${#numbers.formatCurrency(compra.getValorUnitario())}"></span>
         </div>
         <div class="col-2 text-center">
-          <span th:if="${compra.status == null}">
-            Processando..<br /><span style="font-size: 0.8rem" class="text-secondary">
-            Seu produto está sendo preparado
-          </span>
-          </span>
+          <span>Status:</span>
+          <span th:text="${compra.status}"></span>
+          <div th:insert="~{/pedido/atualizarStatus :: upStatus (${compra})}"></div>
         </div>
       </div>
 <!--  Endereço para entrega     -->
@@ -108,11 +106,10 @@
           <hr />
           <span class="text-capitalize" th:text="${compra.getCompra().getUsuario().getRua()+' - '}"></span>
           <span th:text="${compra.getCompra().getUsuario().getNumero()}">Rua são felipe</span><br />
-          <p th:if="${compra.getCompra().getUsuario().complemento != ''}">
-              <span
+          <span
+                  th:if="${compra.getCompra().getUsuario().complemento != ''}"
                   th:text="${compra.getCompra().getUsuario().getComplemento()}">Complemento
-              </span>
-          </p>
+          </span><br />
           <span class="text-capitalize" th:text="${compra.getCompra().getUsuario().getCidade()}">Macaíba/RN</span><br />
           <span th:text="${compra.getCompra().getUsuario().getCep()}">59280000</span><br /><br />
         </div>
@@ -126,7 +123,6 @@
     </div>
   </div>
 </section>
-<!--<div th:insert="~{/fragments/footer.html}"></div>-->
 <!--<div th:insert="~{/fragments/footer.html}"></div>-->
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
