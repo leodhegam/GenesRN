@@ -48,7 +48,7 @@
                 <div class="col-3">
                     <p style="font-size: 0.8rem" class="text-center mt-2">
                         <span class="text-uppercase">pedido realizado</span><br />
-                        <span th:text="${pedido.getCompra().getDataCompra()}"></span>
+                        <span th:text="${#dates.format(pedido.getCompra().getDataCompra(), 'dd/MM/yyyy')}"></span>
                     </p>
                 </div>
                 <div class="col-2">
@@ -79,13 +79,14 @@
                     class="row mt-3 mb-2 bg-light"
                     style="padding: 24px"
                     th:each="item : ${pedido.getItens()}">
-                <div class="col-3">
+                <div class="col-md-2 col-12">
                     <img
-                            style="width: 10rem"
+                            style="width: 100%"
                             th:src="@{/produto/mostrarImagem/{imagem}(imagem=${item.produto.fotoReprodutor})}"
                     />
                 </div>
-                <div class="col-3">
+                <div class="col-1 d-md-none"></div>
+                <div class="col-md-3 col-6">
                     <a
                             th:href="@{'/produto/detalhesProduto/'+${item.getProduto().getId()}}"
                             class="text-capitalize" th:text="${item.getProduto().getNome()}">
@@ -96,15 +97,15 @@
                         <button class="btn btn-outline-success fw-bold">Comprar novamente</button>
                     </a>
                 </div>
-                <div class="col-2 text-center">
+                <div class="col-md-2 col-6">
                     <span>Quantidade</span><br />
                     <span th:text="${item.getQuantidade()}"></span>
                 </div>
-                <div class="col-2 text-center">
+                <div class="col-md-2 col-6">
                     <span>Valor unitário</span><br />
                     <span th:text="${#numbers.formatCurrency(item.getValorUnitario())}"></span>
                 </div>
-                <div class="col-2 text-center">
+                <div class="col-md-2 col-12">
                     <span th:if="${item.status == null}">
                         Processando..<br />
                     </span>
@@ -115,7 +116,7 @@
                     <span style="font-size: 0.8rem" class="text-secondary" th:if="${item.status.equals('Transporte')}">
                         Seu pedido foi enviado para a transportadora.
                     </span>
-                    <span style="font-size: 0.8rem" class="text-secondary" th:if="${item.status.equals('A caminho')}">
+                    <span style="font-size: 0.8rem" class="text-secondary" th:if="${item.status.equals('Enviado')}">
                         Seu pedido está a caminho da sua residência.
                     </span>
                     <span style="font-size: 0.8rem" class="text-secondary" th:if="${item.status.equals('Entregue')}">
@@ -129,10 +130,10 @@
                     <hr />
                     <span class="text-capitalize" th:text="${pedido.getCompra().getUsuario().getRua()+' - '}"></span>
                     <span th:text="${pedido.getCompra().getUsuario().getNumero()}">Rua são felipe</span><br />
-                    <p th:if="${pedido.getCompra().getUsuario().complemento != ''}">
-                        <span
-                                th:text="${pedido.getCompra().getUsuario().getComplemento()}">Complemento</span>
-                    </p>
+                    <span
+                            th:if="${pedido.getCompra().getUsuario().complemento != ''}"
+                            th:text="${pedido.getCompra().getUsuario().getComplemento()}">
+                    </span><br />
                     <span class="text-capitalize" th:text="${pedido.getCompra().getUsuario().getCidade()}">Macaíba/RN</span><br />
                     <span th:text="${pedido.getCompra().getUsuario().getCep()}">59280000</span><br /><br />
                 </div>

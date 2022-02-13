@@ -8,6 +8,18 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <title>Detalhes</title>
+  <style>
+    body section{
+      height: 100vh;
+      width: 100vw;
+    }
+  </style>
+  <script>
+    let data = document.getElementById('dataNascimento');
+    data.value.addEventListener('change', () => {
+      document.getElementById("dataResult").innerText = new Data(data.value).toLocaleString()
+    })
+  </script>
 </head>
 <body>
   <div th:insert="~{/fragments/navbar.html}"></div>
@@ -62,20 +74,16 @@
           <table class="table table-striped">
             <tbody >
             <tr>
-              <th>Codigo</th>
-              <td th:text="*{codigo}"></td>
               <th>Registro</th>
               <td th:text="*{registro}"></td>
-            </tr>
-            <tr>
               <th>Peso</th>
-              <td th:text="*{peso}"></td>
-              <th>Data de Nascimento</th>
-              <td th:text="*{dataNascimento}"></td>
+              <td>
+                <span th:text="${#numbers.formatDecimal(produto.getPeso(),3, 'POINT',2, 'POINT')}"></span> Kg
+              </td>
             </tr>
             <tr>
-              <th>Criador</th>
-              <td th:text="*{criador}"></td>
+              <th>Data de Nascimento</th>
+              <td th:text="${dataNascimento}"></td>
               <th>Linhagem</th>
               <td th:text="*{linhagem}"></td>
             </tr>
@@ -84,6 +92,12 @@
               <td th:text="*{categoria}"></td>
               <th>Raça</th>
               <td th:text="*{raca}"></td>
+            </tr>
+            <tr>
+              <th>Criador</th>
+              <td th:text="*{criador}"></td>
+              <th>Produtor</th>
+              <td th:text="*{proprietario}"></td>
             </tr>
             </tbody>
           </table>

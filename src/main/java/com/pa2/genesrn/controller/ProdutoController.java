@@ -1,7 +1,6 @@
 package com.pa2.genesrn.controller;
 
 
-import com.pa2.genesrn.enums.EnumGenero;
 import com.pa2.genesrn.model.Produto;
 import com.pa2.genesrn.model.Usuario;
 import com.pa2.genesrn.repository.ProdutoRepository;
@@ -16,17 +15,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 @RequestMapping("/produto")
@@ -45,13 +43,17 @@ public class ProdutoController {
 
 
     @GetMapping("/meusProdutos")
-    public String produtos(Principal p, Model model) {
+    public String produtos(Principal p, Model model, HttpSession session) {
 
         Usuario usuario = usuarioRepository.findByEmail(p.getName());
         List<Produto> produtos = produtoService.pegarMeusProdutos(usuario);
         System.out.println("Produtos antes "+produtos);
         model.addAttribute("usuario", usuario);
         model.addAttribute("produtos", produtos);
+
+        Integer count = (Integer)session.getAttribute("count");
+        model.addAttribute("count", count);
+
         return "/produto/meusProdutos";
     }
 
@@ -102,17 +104,34 @@ public class ProdutoController {
         if(usuario.getId().equals(produto.getUsuario().getId())){
             return new ModelAndView("redirect:/home");
         }
-
+        Date date1= null;
+        try {
+            date1 = new SimpleDateFormat("yyyy-MM-dd").parse(produto.getDataNascimento());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (date1 != null) {
+            String[] data = date1.toLocaleString().split(" ");
+            StringBuilder result = new StringBuilder();
+            for(int i = 0; i<data.length-1; i++) {
+                result.append(data[i]+" ");
+            }
+            System.out.println(result);
+            modelAndView.addObject("dataNascimento", result);
+        }
         modelAndView.addObject("produto", produto);
         modelAndView.addObject("usuario", usuario);
         return modelAndView;
     }
 
     @RequestMapping("/cadastrarNovoProduto")
-    public ModelAndView cadastrarNovoProduto(Principal p) {
+    public ModelAndView cadastrarNovoProduto(Principal p, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView("/produto/cadastrarProduto");
         modelAndView.addObject("produto", new Produto());
         modelAndView.addObject("usuario", usuarioRepository.findByEmail(p.getName()));
+
+        Integer count = (Integer)session.getAttribute("count");
+        modelAndView.addObject("count", count);
         return modelAndView;
     }
 

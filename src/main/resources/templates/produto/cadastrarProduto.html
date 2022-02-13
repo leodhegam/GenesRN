@@ -45,6 +45,16 @@
             }
             inputValor.value = valor;
         }
+
+        function validardataDeNascimento(data){
+
+            var ano = new Date().getFullYear()
+            var mes = new Date().getMonth()
+            var dia = new Date().getDay()
+
+            var dataLimite = ano + "-0" + mes + "-0" + dia
+            document.getElementsByName("dataNascimento")[0].setAttribute("max", dataLimite);
+        }
     </script>
 </head>
 <boby>
@@ -99,7 +109,7 @@
                             <div class="form-group col-md-6">
                                 <label for="inputData">Data de Nascimento</label>
                                 <input name="dataNascimento" required type="date" class="form-control"
-                                       id="inputData">
+                                       id="inputData" onclick="validardataDeNascimento(this.value);">
                             </div>
                             <div class="form-group d-none col-md-6">
                                 <input
@@ -118,13 +128,12 @@
                                 >
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputPeso">Peso</label>
+                                <label for="inputPeso">Peso (KG)</label>
                                 <input
                                         id="inputPeso"
                                         name="inputPeso"
-                                        required type="text"
+                                        required type="number"
                                         class="form-control"
-                                        onkeyup="formatarMoeda('inputPeso')"
                                 >
                             </div>
                             <div class="form-group col-md-6">

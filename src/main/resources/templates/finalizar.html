@@ -60,11 +60,11 @@
                         <thead>
                         <tr>
                             <th scope="col"></th>
-                            <th scope="col">Produto</th>
-                            <th scope="col">Estoque</th>
+                            <th scope="col" class="text-center">Produto</th>
+                            <th scope="col" class="text-center">Estoque</th>
                             <th scope="col" class="text-center">Quantidade</th>
-                            <th scope="col" class="text-right">Valor Unitário</th>
-                            <th scope="col" class="text-right">Valor Total</th>
+                            <th scope="col" class="text-center">Valor Unitário</th>
+                            <th scope="col" class="text-center">Valor Total</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -73,14 +73,13 @@
                             <td><img style="width: 75px;height:75px"
                                      th:src="@{/produto/mostrarImagem/{imagem}(imagem=${item.produto.fotoReprodutor})}"/>
                             </td>
-                            <td th:text="${item.produto.nome}"></td>
-                            <td>Em estoque</td>
-                            <td>
-                                <label class="text-center" th:text="${item.quantidade}"> &nbsp;&nbsp;</label>
-
+                            <td style="text-align: center;" th:text="${item.produto.nome}"></td>
+                            <td style="text-align: center;">Em estoque</td>
+                            <td style="text-align: center;" >
+                                <label th:text="${item.quantidade}"></label>
                             </td>
-                            <td class="text-right" th:text="${#numbers.formatCurrency(item.valorUnitario)}"></td>
-                            <td class="text-right" th:text="${#numbers.formatCurrency(item.valorTotal)}"></td>
+                            <td style="text-align: center;" th:text="${#numbers.formatCurrency(item.valorUnitario)}"></td>
+                            <td style="text-align: center;" th:text="${#numbers.formatCurrency(item.valorTotal)}"></td>
                             <td class="text-right">
                             </td>
                         </tr>

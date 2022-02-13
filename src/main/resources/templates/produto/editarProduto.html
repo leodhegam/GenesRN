@@ -34,7 +34,6 @@
         }
 
         function refazerMoeda(id, valor) {
-
             let inputValor = document.getElementById(id+'Real');
             if(valor.length === 0){
                 return '0'
@@ -80,19 +79,18 @@
                         >
                         <br>
                     </div>
-                    <input class="mt-2" th:if="*{fotoReprodutor} == null" name="imageFile" type="file"/>
-                    <input name="fotoReprodutor" th:if="*{fotoReprodutor} != null" type="hidden"
+                    <input class="mt-2" th:if="*{fotoReprodutor == null}" name="imageFile" type="file"/>
+                    <input name="fotoReprodutor" th:if="*{fotoReprodutor != null}" type="hidden"
                            th:value="*{fotoReprodutor}">
                 </div>
                 <input name="id" th:value="*{id}" hidden>
-                <input th:if="*{usuario} != null" hidden
+                <input th:if="*{usuario != null}" hidden
                        th:attr="name='usuario.id'" th:value="*{usuario.id}"/>
                 <div class="form-group col-12">
                     <label for="inputNome">Nome</label>
                     <input name="nome" th:field="*{nome}" type="text" class="form-control"
                            id="inputNome">
                 </div>
-
                 <div class="form-group col-md-6">
                     <label for="inputProprietario">Proprietário</label>
                     <input name="proprietario" th:field="*{proprietario}" type="text" class="form-control"
@@ -108,24 +106,14 @@
                            id="inputData">
                 </div>
 
-                <div class="form-group d-none col-md-6">
-                    <input
-                            name="peso"
-                            required type="text"
-                            class="form-control"
-                            id="inputPesoReal"
-                            th:field="*{peso}"
-                    >
-                </div>
                 <div class="form-group col-md-6">
-                    <label for="inputPeso">Peso</label>
+                    <label for="inputPeso">Peso (KG)</label>
                     <input
                             id="inputPeso"
                             name="inputPeso"
-                            required type="text"
+                            required type="number"
                             class="form-control"
                             th:field="*{peso}"
-                            onkeyup="formatarMoeda('inputPeso')"
                     >
                 </div>
                 <div class="form-group col-md-6">
@@ -163,7 +151,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="tipo">Gênero</label></br>
-                    <select class="form-control validar" id="tipo" required th:name="genero">
+                    <select class="form-control validar" id="tipo" required th:field="*{genero}">
                         <option th:each="t : ${T(com.pa2.genesrn.enums.EnumGenero).values()}"
                                 th:value="${t}" th:text="${t.getDescricao()}">
                         </option>

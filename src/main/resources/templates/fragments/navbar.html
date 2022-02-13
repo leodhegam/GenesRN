@@ -40,7 +40,7 @@
                 </li>
             </span>
             <a href="/carrinho" sec:authorize="isAuthenticated()" class="navbar-text mr-2">
-                <span th:text="${count}"></span>
+                <span th:if="${count} != null" th:text="${count} >= 1 ? ${count} : '' "></span>
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             </a>
         </div>
