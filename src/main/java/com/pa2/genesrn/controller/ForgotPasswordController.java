@@ -42,9 +42,6 @@ public class ForgotPasswordController {
             sendEmail(email, resetPasswordLink);
             model.addAttribute("message", "Enviamos um link de redefinição de senha para o seu e-mail. Por favor, verifique.");
 
-//        }
-//        catch (CustomerNotFoundException ex) {
-//            model.addAttribute("error", ex.getMessage());
         } catch (UnsupportedEncodingException | MessagingException e) {
             model.addAttribute("error", "Error while sending email");
         }

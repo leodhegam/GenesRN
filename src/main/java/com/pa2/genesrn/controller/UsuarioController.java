@@ -153,19 +153,16 @@ public class UsuarioController {
             if (imageFile.isEmpty()) {
                 usuario.setFotoPessoa(usuario.getFotoPessoa());
             } else {
-
                 Path currentPath = Paths.get(".");
                 Path absolutePath = currentPath.toAbsolutePath();
                 Path caminho = Paths.get(absolutePath + caminhoImagens + String.valueOf(usuario.getId()) + imageFile.getOriginalFilename());
                 Files.copy(imageFile.getInputStream(), caminho, StandardCopyOption.REPLACE_EXISTING);
                 usuario.setFotoPessoa(String.valueOf(usuario.getId()) + imageFile.getOriginalFilename());
-                usuarioService.saveAndFlush(usuario);
+//                usuarioService.saveAndFlush(usuario);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        model.addAttribute("message", "Atualização de dados realizada com sucesso!");
-        model.addAttribute("alertClass", "alert-success");
         usuarioService.saveAndFlush(usuario);
         return "/sweet/sweetEditar";
 
